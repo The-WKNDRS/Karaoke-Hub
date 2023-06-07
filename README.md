@@ -1,6 +1,5 @@
 # Karaoke-Hub
 
-# Heirloom
 ## Table of Contents
 
 * [Description](#description)
