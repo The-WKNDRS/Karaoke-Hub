@@ -1,0 +1,9 @@
+.register-box {
+    border: 1px solid black;
+    width: 600px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+}

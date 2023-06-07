@@ -2,9 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Register</title>
+    <link rel="stylesheet" href="/static/css/register.css">
 </head>
 <body>
-
+<div class="page-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="column align-center">
+                <div class="register-box">
+                    <form class="register-form" th:action="@{/register}" th:method="@{post}">
+                        <label for="username">Username</label>
+                        <input id="username" name="username">
+                        <label for="email">Email</label>
+                        <input id="email" name="email">
+                        <label for="password">Password</label>
+                        <input id="password" name="password">
+                    </form>
+                </div>
+            </div>
+            <div class="column align-center">
+                <div class="image-display"></div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
