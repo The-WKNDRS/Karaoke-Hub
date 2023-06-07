@@ -30,6 +30,36 @@ The objective of the Karaoke Hub project is to develop a full stack web applicat
 7. As a user, I can choose to create a venue profile in order to create events.
 8. As a singer, I can give ratings to venues.
 
+## Feature List
+
+MVP
+
+-Register users and login authentication.
+-Ensure usernames are unique
+-Users can create, edit, and delete their own events
+-Ensure there are no duplicate venue creations
+-implement MapBox Api
+-implement HTML geolocation Api
+-Dynamic navbar
+-Logout page
+-Error messages
+-Sticky forms
+-Users can update profile
+-Users can rate the venue
+-Users can search for events near them
+-grab user’s location and show events near them
+-Mobile responsiveness
+
+MMP
+
+-Allows users to opt in to email reminders for events
+-Split users into different roles (Singer, DJ, Venue)
+-Only DJs and Venues can create, edit, and delete 
+-Users can add favorite venues and events to their profile
+-implement ChatGPT Api to generate random songs to sing
+-implement Yelp api
+
+
 
 ## Usage
 
