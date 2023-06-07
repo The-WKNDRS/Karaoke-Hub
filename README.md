@@ -21,14 +21,16 @@ The objective of the Karaoke Hub project is to develop a full stack web applicat
 2. Opened the clone project with Intellij
 
 ## User Story
-1. Visitors have the least privileges. Singers, and venues have access to all visitor functionality. Functionality that only singers and venues have access to will be assigned to the name “user”.
+1. Visitors have the least privileges. Users have access to all visitor functionality. 
 2. As a visitor, when I complete the registration form I expect/want to be told that I have successfully registered and be directed to a welcome screen
-3. As a visitor, I can view all karaoke venues and events and search for nearby karaoke venues based on their current  location or a specified locations. I can choose a set radius to pull results from.
-4. As a user, I can set preferences for karaoke genres, days of the week, and time slots.
-5. As a user, I can save my favourite venues and events, manage preferences, and update my profile.
-6. As a user, I can create, edit, and delete my comments.
-7. As a user, I can choose to create a venue profile in order to create events.
-8. As a singer, I can give ratings to venues.
+3. As a visitor, I can view all karaoke venues and events and search for nearby karaoke venues based on their current location or a specified locations. I can choose a set radius to pull results from.
+5. As a visitor, I can view the venue profile page with Yelp reviews and comments.
+6. As a user, I can set preferences for karaoke genres, days of the week, and time slots.
+7. As a user, I can save my favorite venues and events, manage preferences, and update my profile.
+8. As a user, I can create, edit, and delete my comments.
+9. As a user, I can create, edit, and delete my events.
+10. As a user, I can choose to create a venue profile in order to create events.
+11. As a singer, I can give ratings to venues.
 
 ## Feature List
 
