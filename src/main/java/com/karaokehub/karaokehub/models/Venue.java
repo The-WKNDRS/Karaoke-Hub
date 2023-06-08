@@ -10,8 +10,11 @@ public class Venue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(nullable = false, length=100)
+    @Column(nullable = false, length = 100)
     private String name;
+
+    @Column(nullable = false, length = 100)
+    private String location;
 
     @OneToOne
     private User user;
@@ -43,6 +46,5 @@ public class Venue {
         this.location = location;
     }
 
-    @Column(nullable=false, length=100)
-    private String location;
+
 }
