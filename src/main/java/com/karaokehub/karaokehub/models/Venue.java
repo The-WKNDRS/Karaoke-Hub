@@ -5,19 +5,20 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="venues")
+@Table(name="venue")
 public class Venue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(nullable = false, length = 100)
     private String name;
 
     @Column(nullable = false, length = 100)
     private String location;
 
-    @OneToOne
-    private User user;
+    public Venue() {
+    }
 
     public long getId() {
         return id;
@@ -29,9 +30,6 @@ public class Venue {
 
     public String getName() {
         return name;
-    }
-
-    public Venue() {
     }
 
     public void setName(String name) {

@@ -1,6 +1,6 @@
 package com.karaokehub.karaokehub.controllers;
 
-import com.karaokehub.karaokehub.models.VenueRepository;
+import com.karaokehub.karaokehub.repository.VenueRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
