@@ -16,8 +16,33 @@ public class Venue {
     @Column(nullable = false, length = 100)
     private String location;
 
+    @Column(nullable = true, length = 100, unique = true)
+    private long yelp_id;
+
     @OneToOne
     private User user;
+
+    public Venue() {
+    }
+
+    public Venue(String name, String location){
+        this.name = name;
+        this.location = location;
+    }
+    public Venue(long id, String name, String location, User user){
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.user = user;
+    }
+
+    public Venue(long id, String name, String location, long yelp_id, User user) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.yelp_id = yelp_id;
+        this.user = user;
+    }
 
     public long getId() {
         return id;
@@ -31,9 +56,14 @@ public class Venue {
         return name;
     }
 
-    public Venue() {
+
+    public long getYelp_id() {
+        return yelp_id;
     }
 
+    public void setYelp_id(long yelp_id) {
+        this.yelp_id = yelp_id;
+    }
     public void setName(String name) {
         this.name = name;
     }
