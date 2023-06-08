@@ -19,6 +19,14 @@ public class Venue {
     @Column(nullable = true, length = 100, unique = true)
     private long yelp_id;
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @OneToOne
     private User user;
 
