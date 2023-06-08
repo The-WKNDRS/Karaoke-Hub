@@ -23,16 +23,19 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String registerUsers(Model model, @ModelAttribute User user) {
+    public String registerUsers(Model model) {
         model.addAttribute("user", new User());
         return "/register";
     }
 
     @PostMapping("/register")
-    public String registerUsers(@RequestParam(name="username") String username, @RequestParam(name = "email") String email, @RequestParam(name = "password") String password) {
-//        password = passwordEncoder.encode(password);
-        User user = new User(username, email, password);
-        userDao.save(user);
+    public String registerUsers(@ModelAttribute User user, @RequestParam(name = "confirmPassword") String confirmPassword) {
+        System.out.println(user.getUsername());
+        if (user.getPassword().equals(confirmPassword)) {
+//            password = passwordEncoder.encode(password);
+            user.setPassword(confirmPassword);
+            userDao.save(user);
+        }
         return "redirect:/index";
     }
 

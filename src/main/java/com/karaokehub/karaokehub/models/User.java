@@ -18,19 +18,18 @@ public class User {
 	@Column(nullable = false)
 	private String password;
 
-	@Column
-	@OneToOne
-	private Venue venue;
+//	@OneToOne()
+//	private Venue venue;
 
-	@Override
-	public String toString() {
-		return "User{" +
-				"username='" + username + '\'' +
-				", email='" + email + '\'' +
-				", id='" + id + '\'' +
-				", venue_id='" + venue + '\'' +
-				'}';
-	}
+//	@Override
+//	public String toString() {
+//		return "User{" +
+//				"username='" + username + '\'' +
+//				", email='" + email + '\'' +
+//				", id='" + id + '\'' +
+//				", venue_id='" + venue + '\'' +
+//				'}';
+//	}
 
 	public User() {
 	}
@@ -53,7 +52,7 @@ public class User {
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		this.venue = venue;
+//		this.venue = venue;
 	}
 
 	public long getId() {
@@ -88,11 +87,11 @@ public class User {
 		this.password = password;
 	}
 
-	public Venue getVenue() {
-		return venue;
-	}
-
-	public void setVenue(Venue venue) {
-		this.venue = venue;
-	}
+//	public Venue getVenue() {
+//		return venue;
+//	}
+//
+//	public void setVenue(Venue venue) {
+//		this.venue = venue;
+//	}
 }
