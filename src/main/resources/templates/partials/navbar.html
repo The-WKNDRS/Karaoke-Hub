@@ -1,0 +1,57 @@
+<head th:fragment="head (title)">
+<link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+</head>
+
+<nav>
+  <ul>
+    <li><a class="navbar-links" href="#">Home</a></li>
+    <li><a class="navbar-links" href="#">About</a></li>
+    <li><a class="navbar-links" href="#">Contact</a></li>
+    <li>
+      <a class="navbar-links" href="#">Sign In</a>
+      <div class="dropdown">
+        <form>
+          <h1>Registered Users</h1>
+          <input type="text" placeholder="Username" />
+          <input type="password" placeholder="Password" />
+          <button type="submit">Login</button>
+        </form>
+        <hr class="dropdown-divider"> <!-- Add the horizontal rule element -->
+        <p class="account-text">Don't have an account? </p>
+        <a class="signup-link" href="#">Sign Up!</a>
+      </div>
+    </li>
+    <li><a class="navbar-links right-link" href="#">Find Karaoke!!</a>
+      <div class="dropdown">
+        <h3 class="dropdown-title">Find Karaoke!</h3>
+        <form>
+          <input class="form-input" type="text" placeholder="Enter Zip Code" />
+          <div class="form-entry">
+            <label for="travel-distance">Travel Distance:</label>
+            <select id="travel-distance" class="form-input">
+              <option value="5">5 miles</option>
+              <option value="10">10 miles</option>
+              <option value="15">15 miles</option>
+              <option value="20">20 miles</option>
+              <option value="25">25 miles</option>
+              <option value="30">30 miles</option>
+            </select>
+          </div>
+          <div class="form-entry">
+            <label for="weekday">Day of the Week:</label>
+            <select id="weekday" class="form-input">
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+              <option value="Saturday">Saturday</option>
+              <option value="Sunday">Sunday</option>
+            </select>
+          </div>
+          <button class="form-button" type="submit">Search</button>
+        </form>
+      </div>
+    </li>
+  </ul>
+</nav>

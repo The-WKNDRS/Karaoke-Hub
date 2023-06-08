@@ -1,0 +1,53 @@
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    position: relative;
+}
+
+nav ul li a {
+    display: block;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+}
+
+.dropdown {
+    position: absolute;
+    display: none;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    padding: 10px;
+}
+
+nav ul li:hover .dropdown {
+    display: block;
+}
+
+.dropdown input,
+.dropdown button {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.dropdown p {
+    margin: 0;
+}
+
+.dropdown a {
+    color: blue;
+    text-decoration: underline;
+}
+
+.form-input {
+    margin-bottom: 10px; /* Add margin-bottom for spacing between inputs */
+}
+
+.form-button {
+    margin-top: 10px; /* Add margin-top for spacing above the button */
+}
