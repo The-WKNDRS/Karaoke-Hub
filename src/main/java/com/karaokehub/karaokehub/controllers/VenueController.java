@@ -2,8 +2,10 @@ package com.karaokehub.karaokehub.controllers;
 
 import com.karaokehub.karaokehub.repository.VenueRepository;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+@Controller
 public class VenueController {
     private VenueRepository venueDao;
 
@@ -21,6 +23,5 @@ public class VenueController {
     public String searchVenue() {
         return "/search";
     }
-
 
 }
