@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
 
     private final UserRepository userDao;
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserRepository userDao) {
-//        this.passwordEncoder = passwordEncoder;
+    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
         this.userDao = userDao;
     }
 
@@ -32,11 +32,10 @@ public class UserController {
     public String registerUsers(@ModelAttribute User user, @RequestParam(name = "confirmPassword") String confirmPassword) {
         System.out.println(user.getUsername());
         if (user.getPassword().equals(confirmPassword)) {
-//            password = passwordEncoder.encode(password);
-            user.setPassword(confirmPassword);
+            user.setPassword(passwordEncoder.encode(confirmPassword));
             userDao.save(user);
         }
-        return "redirect:/index";
+        return "redirect:/login";
     }
 
     @GetMapping("/login")
@@ -62,7 +61,7 @@ public class UserController {
         user.setUsername(username);
         user.setEmail(email);
         if (password.equals(confirmPassword)) {
-//            password = passwordEncoder.encode(password);
+            password = passwordEncoder.encode(password);
             user.setPassword(password);
             userDao.save(user);
         }

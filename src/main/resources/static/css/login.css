@@ -1,0 +1,160 @@
+body {
+    font-family: AppleSystemUIFont, sans-serif;
+}
+
+.row {
+    height: 100%;
+}
+
+.login-box {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 60%;
+    height: 100%;
+    margin-top: 30px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo > h3 {
+    font-size: 40px;
+    color: darkslateblue;
+}
+
+.logo-img {
+    width: 40px;
+    height: 40px;
+}
+
+h1 {
+    font-size: 50px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.form-group > label {
+    position: absolute;
+    font-size: 13px;
+    top: 5px;
+    left: 5px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group > input {
+    border: 1px solid black;
+    padding-top: 20px;
+    padding-bottom: 7px;
+    padding-left: 7px;
+    font-size: 20px;
+    width: 300px;
+    border-radius: 10px;
+}
+
+.form-group > input:focus {
+    border: 1px solid orangered;
+}
+
+input[type="submit"] {
+    height: 40px;
+    width: 310px;
+    border: 1px solid black;
+    border-radius: 8px;
+    background-color: darkslateblue;
+    color: whitesmoke;
+    background-size: 400% 400%;
+    transition: all ease .1s;
+}
+
+input[type="submit"]:hover {
+    scale: 1.02;
+}
+
+.account {
+    margin-top: 15px;
+}
+
+.account > a {
+    color: dimgrey;
+}
+
+.image-display {
+    height: 100%;
+    width: 100%;
+}
+.karaoke-img {
+    height: 100%;
+    width: 600px
+}
+
+.notes {
+    position: absolute;
+    top: 0;
+    left: 57%;
+    color: darkslateblue;
+}
+.note-position-1 {
+    top: 150px;
+}
+
+.note-position-2 {
+    top: 180px;
+    left: 50px;
+}
+
+.note-position-3 {
+    top: 160px;
+    left: 100px;
+}
+
+.note-position-4 {
+    top: 155px;
+    left: 75px;
+}
+
+.animation-delay-1 {
+    animation-delay: 1s;
+}
+
+.animation-delay-2 {
+    animation-delay: 2s;
+}
+
+.note-amination {
+    position: absolute;
+    font-size: 25px;
+    animation-name: notes;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    opacity: 0;
+}
+
+@keyframes notes {
+    0% {
+        font-size: 30px;
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        font-size: 60px;
+        margin-top: -150px;
+        margin-left: -200px;
+        opacity: 0;
+    }
+}
