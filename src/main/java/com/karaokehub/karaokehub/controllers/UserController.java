@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
 
     private final UserRepository userDao;
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserRepository userDao) {
-//        this.passwordEncoder = passwordEncoder;
+    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
         this.userDao = userDao;
     }
 
@@ -31,11 +31,10 @@ public class UserController {
     @PostMapping("/register")
     public String registerUsers(@ModelAttribute User user, @RequestParam(name = "confirmPassword") String confirmPassword) {
         if (user.getPassword().equals(confirmPassword)) {
-//            password = passwordEncoder.encode(password);
-            user.setPassword(confirmPassword);
+            user.setPassword(passwordEncoder.encode(confirmPassword));
             userDao.save(user);
         }
-        return "redirect:/index";
+        return "redirect:/login";
     }
 
     @GetMapping("/login")
@@ -59,9 +58,15 @@ public class UserController {
     }
 
     @PostMapping("/profile/edit")
-    public String editProfile(@ModelAttribute User user, @RequestParam(name = "confirmPassword") String confirmPassword) {
-        if (user.getPassword().equals(confirmPassword)) {
-//            password = passwordEncoder.encode(password);
+    public String editProfile(@RequestParam(name="username") String username, @RequestParam(name = "email") String email, @RequestParam(name = "password") String password, @RequestParam(name = "confirmPassword") String confirmPassword) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long id = user.getId();
+        user = userDao.getReferenceById(id);
+        user.setUsername(username);
+        user.setEmail(email);
+        if (password.equals(confirmPassword)) {
+            password = passwordEncoder.encode(password);
+            user.setPassword(password);
             userDao.save(user);
         }
         return "redirect:/profile";
