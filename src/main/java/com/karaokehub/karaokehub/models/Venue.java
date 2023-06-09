@@ -17,6 +17,9 @@ public class Venue {
     @Column(nullable = false, length = 100)
     private String location;
 
+    @Column
+    private long yelp_id;
+
     public Venue() {
     }
 
