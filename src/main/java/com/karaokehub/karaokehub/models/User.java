@@ -18,12 +18,8 @@ public class User {
 	@Column(nullable = false)
 	private String password;
 
-//	@Column(nullable = true)
-//	@OneToOne(cascade = CascadeType.PERSIST, mappedBy = "")
-//	private Venue venue;
-
-
-
+	@OneToOne()
+	private Venue venue;
 
 	@Override
 	public String toString() {
@@ -31,6 +27,7 @@ public class User {
 				"username='" + username + '\'' +
 				", email='" + email + '\'' +
 				", id='" + id + '\'' +
+				", venue_id='" + venue + '\'' +
 				'}';
 	}
 
@@ -48,6 +45,14 @@ public class User {
 		this.username = username;
 		this.email = email;
 		this.password = password;
+	}
+
+	public User(long id, String username, String email, String password, Venue venue) {
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.venue = venue;
 	}
 
 	public long getId() {
@@ -80,5 +85,13 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Venue getVenue() {
+		return venue;
+	}
+
+	public void setVenue(Venue venue) {
+		this.venue = venue;
 	}
 }
