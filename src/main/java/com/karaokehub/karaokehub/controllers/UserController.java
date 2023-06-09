@@ -30,7 +30,6 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUsers(@ModelAttribute User user, @RequestParam(name = "confirmPassword") String confirmPassword) {
-        System.out.println(user.getUsername());
         if (user.getPassword().equals(confirmPassword)) {
 //            password = passwordEncoder.encode(password);
             user.setPassword(confirmPassword);
@@ -45,6 +44,11 @@ public class UserController {
         return "/login";
     }
 
+    @GetMapping("/index")
+    public String index() {
+        return "/index";
+    }
+
     @GetMapping("/profile")
     public String showProfile(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -55,15 +59,9 @@ public class UserController {
     }
 
     @PostMapping("/profile/edit")
-    public String editProfile(@RequestParam(name="username") String username, @RequestParam(name = "email") String email, @RequestParam(name = "password") String password, @RequestParam(name = "confirmPassword") String confirmPassword) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        long id = user.getId();
-        user = userDao.getReferenceById(id);
-        user.setUsername(username);
-        user.setEmail(email);
-        if (password.equals(confirmPassword)) {
+    public String editProfile(@ModelAttribute User user, @RequestParam(name = "confirmPassword") String confirmPassword) {
+        if (user.getPassword().equals(confirmPassword)) {
 //            password = passwordEncoder.encode(password);
-            user.setPassword(password);
             userDao.save(user);
         }
         return "redirect:/profile";
