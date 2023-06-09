@@ -57,16 +57,15 @@ public class UserController {
         return "/user-profile";
     }
 
-    @PostMapping("/profile/edit")
-    public String editProfile(@RequestParam(name="username") String username, @RequestParam(name = "email") String email, @RequestParam(name = "password") String password, @RequestParam(name = "confirmPassword") String confirmPassword) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        long id = user.getId();
-        user = userDao.getReferenceById(id);
-        user.setUsername(username);
-        user.setEmail(email);
-        if (password.equals(confirmPassword)) {
-            password = passwordEncoder.encode(password);
-            user.setPassword(password);
+    @PostMapping("/profile/update")
+    public String editProfile(@ModelAttribute User user, @RequestParam(name = "confirmPassword") String confirmPassword) {
+        User updateUser = userDao.getReferenceById(user.getId());
+        updateUser.setUsername(user.getUsername());
+        updateUser.setEmail(user.getEmail());
+        String newPassword = user.getPassword();
+        if (newPassword.equals(confirmPassword)) {
+            newPassword= passwordEncoder.encode(newPassword);
+            user.setPassword(newPassword);
             userDao.save(user);
         }
         return "redirect:/profile";
