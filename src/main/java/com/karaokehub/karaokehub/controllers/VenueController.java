@@ -45,4 +45,9 @@ public class VenueController {
         model.addAttribute("venue", venue);
         return "/venue-profile";
     }
+
+    @GetMapping("/search-venue")
+    public String searchVenue() {
+        return "/search";
+    }
 }
