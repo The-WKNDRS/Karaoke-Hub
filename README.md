@@ -10,7 +10,7 @@
 * [Contributors](#contributors)
 * [Credits](#credits)
 
-![](src/main/resources/img/karaoke_hub_db.png)
+![](src/main/resources/static/img/karaoke_hub_db.png)
 <br>
 
 ## Description

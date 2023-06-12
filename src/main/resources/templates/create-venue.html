@@ -2,9 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Venue</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/resets.css}">
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/create-venue.css}">
 </head>
 <body>
-
+<div class="page-wrapper">
+    <div th:insert="fragments/navbar.html :: navbar"></div>
+    <div class="container grow">
+        <div class="row grow justify-space-between">
+            <div class="column align-center">
+                <div class="create-box">
+                    <div class="logo">
+                        <img class="logo-img" th:src="@{/img/karaoke-icon.png}" alt="microphone">
+                        <h3>Karaoke Hub</h3>
+                    </div>
+                    <h1>Create Venue</h1>
+                </div>
+                <form class="register-form" th:action="@{/create-venue.html}" th:object="${venue}" th:method="post">
+                    <div class="form-group">
+                        <label for="username">Name</label>
+                        <input id="username" name="username" th:field="*{name}">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Location</label>
+                        <input id="email" name="email" th:field="*{location}">
+                    </div>
+                    <input type="submit" value="Register">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
