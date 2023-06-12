@@ -2,9 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Home</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/resets.css}">
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/register.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+
 </head>
 <body>
+<div class="page-wrapper" style="background-image: url('/img/singers5.png'); background-size: cover; background-position: center;">
+    <div th:insert="fragments/navbar.html :: navbar"></div>
 
+</div>
+<div th:insert="fragments/navbar.html :: footer"></div>
 </body>
 </html>

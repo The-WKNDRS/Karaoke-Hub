@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-<nav th:fragment="navbar" class="navbar" >
+
+Apologies for the confusion. To access the logged-in user information, including the principal, you can use the #authentication object in Thymeleaf instead of #httpServletRequest.userPrincipal. Here's the updated code:
+
+html
+Copy code
+<nav th:fragment="navbar" class="navbar">
   <ul>
     <li><a class="navbar-links" th:href="@{/index}">Home</a></li>
     <li><a class="navbar-links" th:href="@{/about}">About</a></li>
     <li><a class="navbar-links" th:href="@{/contact}">Contact</a></li>
-    <li>
+    <li th:if="${#authentication.principal == null}">
       <a class="navbar-links" th:href="@{/login}">Sign In</a>
       <div class="dropdown">
         <a class="navbar-links" th:href="@{/login}">Sign In</a>
@@ -14,6 +19,9 @@
         <p class="account-text">Don't have an account? </p>
         <a class="signup-link" th:href="@{/register}">Register</a>
       </div>
+    </li>
+    <li th:if="${#authentication.principal != null}">
+      <a class="navbar-links" th:href="@{/logout}">Logout</a>
     </li>
     <li><a class="navbar-links right-link" href="#">Find Karaoke!!</a>
       <div class="dropdown">
