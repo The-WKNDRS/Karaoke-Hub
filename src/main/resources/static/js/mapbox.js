@@ -87,6 +87,11 @@
         center: [-98.495141, 29.4246],
         zoom: 10
     });
+    const markers = []; // Create an array to store the markers
+    const venues = [];
+    const venue = {name : "Dad's Bar",
+        location : "2615 Mossrock, San Antonio, Texas 78230, United States"};
+    venues.push(venue);
 
     map.on('load', () => {
         const geocoder = new MapboxGeocoder({
@@ -96,12 +101,21 @@
             zoom: 13, // Set the zoom level for geocoding results
             placeholder: 'Enter an address or place name', // This placeholder text will display in the search bar
         });
-        // Add the geocoder to the map
         map.addControl(geocoder, 'top-left'); // Add the search box to the top left
+
+
+        // Event listener for when a result is selected
     });
-
-    const markers = []; // Create an array to store the markers
-
+    venues.forEach(venue => async function() {
+        // Add the geocoder to the map
+        let coords = await geocode(venue.location, mapKey).then(async function (result) {
+            map.setCenter(result);
+            map.setZoom(15);
+            console.log(result);
+            return result;
+        });
+        map.on("result", addMarker.bind(map));
+    });
     let addMarker = function (event) {
         let coordinates = event.lngLat;
 
@@ -148,22 +162,5 @@
         marker.on('dragend', dragMarker);
     });
 
-    searchButton.addEventListener('click', async function(event) {
-        event.preventDefault();
-        console.log("button clicked");
-        let location = searchInput.value;
-        let coords = await geocode(searchInput.value, mapKey).then(async function(result) {
-            map.setCenter(result);
-            map.setZoom(15);
-            console.log(result);
-            return result;
-        });
-
-        // Create a new marker and add it to the map
-        const marker = new mapboxgl.Marker().setLngLat(coords).addTo(map);
-
-        // Store the marker in the markers array
-        markers.push(marker);
-    });
 
 })();
