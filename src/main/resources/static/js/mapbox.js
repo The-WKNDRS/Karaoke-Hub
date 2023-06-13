@@ -19,17 +19,34 @@
     };
 
     database = await getVenues();
-    console.log(database);
-
 
     const formatVenues = async function () {
         for (const venue of database) {
             let formattedVenues = {
                 type: "Feature",
                 geometry: {type: "Point", coordinates: []},
-                properties: {id: venue.id, name: venue.name, location: venue.location}
+                properties: {
+                    id: venue.id,
+                    name: venue.name,
+                    address: venue.address,
+                    city: venue.city,
+                    state: venue.state,
+                    zip: venue.zip
+                }
             };
-            let coords = await geocode((formattedVenues.properties.location), mapKey).then(async function(result) {return result;});
+            if (venue.website) {
+                formattedVenues.properties.website = venue.website;
+            } else {
+                formattedVenues.properties.website = "N/A";
+            }
+            if (venue.yelp_id) {
+                formattedVenues.properties.yelp_id = venue.yelp_id;
+            } else {
+                formattedVenues.properties.yelp_id = "N/A";
+            }
+            let addressString = (formattedVenues.properties.address + "," + formattedVenues.properties.city + "," + formattedVenues.properties.state + "," + formattedVenues.properties.zip);
+
+            let coords = await geocode((addressString), mapKey).then(async function(result) {return result;});
             formattedVenues.geometry.coordinates = (coords);
             geoVenues.features.push(formattedVenues);
         }
