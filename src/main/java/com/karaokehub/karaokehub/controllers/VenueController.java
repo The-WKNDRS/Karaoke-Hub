@@ -30,7 +30,7 @@ import java.util.List;
         public String createVenue(Model model) {
             model.addAttribute("venue", new Venue());
             model.addAttribute("event", new Event());
-            return "/create-venue";
+            return "create-venue";
         }
 
         @PostMapping("/create-venue")
@@ -42,7 +42,7 @@ import java.util.List;
 
         @GetMapping("/venue-profile")
         public String venueProfile() {
-            return "/venue-profile";
+            return "venue-profile";
         }
 
 
@@ -50,7 +50,7 @@ import java.util.List;
         public String searchVenue(Model model) {
             List<Venue> venues = venueDao.findAll();
             model.addAttribute("venues", venues);
-            return "/search";
+            return "search";
         }
 
         @GetMapping(value = "/search-venue-json", produces = MediaType.APPLICATION_JSON_VALUE)
