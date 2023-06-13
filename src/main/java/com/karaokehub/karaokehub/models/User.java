@@ -9,17 +9,14 @@ public class User {
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(nullable = false, length = 60, unique = true)
-	private String username;
-
 	@Column(nullable = false)
 	private String email;
 
 	@Column(nullable = false)
 	private String password;
 
-	@OneToOne()
-	private Venue venue;
+	@Column(nullable = false, length = 60, unique = true)
+	private String username;
 
 	@Override
 	public String toString() {
@@ -27,7 +24,6 @@ public class User {
 				"username='" + username + '\'' +
 				", email='" + email + '\'' +
 				", id='" + id + '\'' +
-				", venue_id='" + venue + '\'' +
 				'}';
 	}
 
@@ -45,14 +41,6 @@ public class User {
 		this.username = username;
 		this.email = email;
 		this.password = password;
-	}
-
-	public User(long id, String username, String email, String password, Venue venue) {
-		this.id = id;
-		this.username = username;
-		this.email = email;
-		this.password = password;
-		this.venue = venue;
 	}
 
 	public long getId() {
@@ -87,11 +75,4 @@ public class User {
 		this.password = password;
 	}
 
-	public Venue getVenue() {
-		return venue;
-	}
-
-	public void setVenue(Venue venue) {
-		this.venue = venue;
-	}
 }
