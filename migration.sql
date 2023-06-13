@@ -11,6 +11,19 @@ create table venue
     yelp_id  bigint       null
 );
 
+create table events
+(
+    id          bigint auto_increment
+        primary key,
+    date        varchar(100) null,
+    description varchar(255) not null,
+    dj          varchar(100) null,
+    name        varchar(100) not null,
+    venue_id    bigint       null,
+    constraint FKmfjnq0fk59oupk21owjh7ansi
+        foreign key (venue_id) references venue (id)
+);
+
 create table users
 (
     id       bigint auto_increment
@@ -27,3 +40,8 @@ create table users
         foreign key (venue_id) references venue (id)
 );
 
+INSERT INTO venue (location, name) VALUES ('San Francisco', 'The Mint');
+
+insert into events (date, description, dj, name, venue_id) values ('2019-01-01', 'New Years Eve Karaoke themed blowout! Everyone attending must wear a tuxedo or dress.', 'DJ Khaled', 'New Years Eve Night', 1);
+
+INSERT INTO events (date, description, dj, name, venue_id) VALUES ('2022-01-12', '80\'s Songs only! Be sure to Dress the part.', 'DJ CantLetGo', '80\'s Theme Night', 1);
