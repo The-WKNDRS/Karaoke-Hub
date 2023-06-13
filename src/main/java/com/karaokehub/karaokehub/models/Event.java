@@ -10,13 +10,13 @@ public class Event {
 	private long id;
 
 	@Column(nullable = false, length = 100)
-	private String name;
+	private String day_of_week;
 
-	@Column(length = 100)
-	private String date;
+	@Column(nullable = false, length = 10)
+	private String start_time;
 
-	@Column(nullable = false)
-	private String description;
+	@Column(nullable = false, length = 10)
+	private String end_time;
 
 	@Column(length = 100)
 	private String dj;
@@ -28,22 +28,31 @@ public class Event {
 	public Event() {
 	}
 
-	public Event(String name, String date, String description, String dj, Venue venue) {
-		this.name = name;
-		this.date = date;
-		this.description = description;
+	public Event(String day_of_week, String start_time, String end_time, Venue venue) {
+		this.day_of_week = day_of_week;
+		this.start_time = start_time;
+		this.end_time = end_time;
+		this.venue = venue;
+	}
+
+
+	public Event(String day_of_week, String start_time, String end_time, String dj, Venue venue) {
+		this.day_of_week = day_of_week;
+		this.start_time = start_time;
+		this.end_time = end_time;
 		this.dj = dj;
 		this.venue = venue;
 	}
 
-	public Event(long id, String name, String date, String description, String dj, Venue venue) {
+	public Event(long id, String day_of_week, String start_time, String end_time, String dj, Venue venue) {
 		this.id = id;
-		this.name = name;
-		this.date = date;
-		this.description = description;
+		this.day_of_week = day_of_week;
+		this.start_time = start_time;
+		this.end_time = end_time;
 		this.dj = dj;
 		this.venue = venue;
 	}
+
 
 	public long getId() {
 		return id;
@@ -53,28 +62,36 @@ public class Event {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public Venue getVenue() {
+		return venue;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setVenue(Venue venue) {
+		this.venue = venue;
 	}
 
-	public String getDate() {
-		return date;
+	public String getDay_of_week() {
+		return day_of_week;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setDay_of_week(String day_of_week) {
+		this.day_of_week = day_of_week;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getStart_time() {
+		return start_time;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setStart_time(String start_time) {
+		this.start_time = start_time;
+	}
+
+	public String getEnd_time() {
+		return end_time;
+	}
+
+	public void setEnd_time(String end_time) {
+		this.end_time = end_time;
 	}
 
 	public String getDj() {
@@ -83,13 +100,5 @@ public class Event {
 
 	public void setDj(String dj) {
 		this.dj = dj;
-	}
-
-	public Venue getVenue() {
-		return venue;
-	}
-
-	public void setVenue(Venue venue) {
-		this.venue = venue;
 	}
 }
