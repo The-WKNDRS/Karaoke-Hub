@@ -1,84 +1,42 @@
-// (async () => {
-//
-//     let searchInput = document.getElementById('search-input');
-//     let searchButton = document.getElementById('search-button');
-//
-//     mapboxgl.accessToken = mapKey;
-//     let map = new mapboxgl.Map({
-//         container: 'map',
-//         style: 'mapbox://styles/mapbox/streets-v12',
-//         center: [-98.495141, 29.4246],
-//         zoom: 10
-//     });
-//
-//     const markers = []; // Create an array to store the markers
-//
-//     const marker = new mapboxgl.Marker({
-//         draggable: true
-//     }).setLngLat(coordinates)
-//     .addTo(map);
-//
-//     markers.push(marker); // Add the marker to the array
-//
-// let addMarker = function (event) {
-//         let coordinates = event.lngLat;
-//         //Fly to the marker
-//         map.flyTo({
-//             center: coordinates,
-//             zoom: 13,
-//             speed: 0.8,
-//             curve: 1,
-//             easing: function (t) {
-//                 return t;
-//             }
-//         });
-//     };
-//
-// markers.forEach(marker => {
-//     marker.on('dragend', dragMarker);
-// });
-//
-//
-//     map.on('click', addMarker.bind(map));
-// //after dragging the marker, update the weather data
-//     let dragMarker = function () {
-//         let coordinates = marker.getLngLat();
-//         // geocode the coordinates
-//         //Fly to the marker
-//         map.flyTo({
-//             center: coordinates,
-//             zoom: 13,
-//             speed: 0.8,
-//             curve: 1,
-//             easing: function (t) {
-//                 return t;
-//             }
-//         });
-//     };
-//     marker.on('dragend', dragMarker);
-//
-//
-//     searchButton.addEventListener('click', async function(event) {
-//         event.preventDefault();
-//         console.log("button clicked");
-//         let location = searchInput.value;
-//         let coords = await geocode(searchInput.value , mapKey).then(async function(result) {
-//             map.setCenter(result);
-//             map.setZoom(15);
-//             console.log(result);
-//             return result;
-//         });
-//         const marker =new mapboxgl.Marker().setLngLat(coords).addTo(map);
-//
-//         markers.push(marker);
-//     });
-//
-// })();
-
 (async () => {
 
-    let searchInput = document.getElementById('search-input');
-    let searchButton = document.getElementById('search-button');
+    const geoVenues = {
+        "type": "FeatureCollection",
+        "features": [
+        ]
+    };
+
+    let database= [];
+
+    const getVenues = async function () {
+        try {
+            const response = await fetch('/search-venue-json');
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    database = await getVenues();
+    console.log(database);
+
+
+    const formatVenues = async function () {
+        for (const venue of database) {
+            let formattedVenues = {
+                type: "Feature",
+                geometry: {type: "Point", coordinates: []},
+                properties: {id: venue.id, name: venue.name, location: venue.location}
+            };
+            let coords = await geocode((formattedVenues.properties.location), mapKey).then(async function(result) {return result;});
+            formattedVenues.geometry.coordinates = (coords);
+            geoVenues.features.push(formattedVenues);
+        }
+    };
+
+    await formatVenues();
+    console.log(geoVenues);
 
     mapboxgl.accessToken = mapKey;
     let map = new mapboxgl.Map({
@@ -87,11 +45,6 @@
         center: [-98.495141, 29.4246],
         zoom: 10
     });
-    const markers = []; // Create an array to store the markers
-    const venues = [];
-    const venue = {name : "Dad's Bar",
-        location : "2615 Mossrock, San Antonio, Texas 78230, United States"};
-    venues.push(venue);
 
     map.on('load', () => {
         const geocoder = new MapboxGeocoder({
@@ -102,65 +55,15 @@
             placeholder: 'Enter an address or place name', // This placeholder text will display in the search bar
         });
         map.addControl(geocoder, 'top-left'); // Add the search box to the top left
-
-
-        // Event listener for when a result is selected
-    });
-    venues.forEach(venue => async function() {
-        // Add the geocoder to the map
-        let coords = await geocode(venue.location, mapKey).then(async function (result) {
-            map.setCenter(result);
-            map.setZoom(15);
-            console.log(result);
-            return result;
-        });
-        map.on("result", addMarker.bind(map));
-    });
-    let addMarker = function (event) {
-        let coordinates = event.lngLat;
-
-        // Create a new marker and add it to the map
-        const marker = new mapboxgl.Marker({
-            draggable: true
-        }).setLngLat(coordinates)
-            .addTo(map);
-
-        // Store the marker in the markers array
-        markers.push(marker);
-
-        // Fly to the marker
-        map.flyTo({
-            center: coordinates,
-            zoom: 13,
-            speed: 0.8,
-            curve: 1,
-            easing: function (t) {
-                return t;
+        map.addLayer({
+            id: 'locations',
+            type: 'circle',
+            /* Add a GeoJSON source containing place coordinates and information. */
+            source: {
+                type: 'geojson',
+                data: geoVenues
             }
         });
-    };
-
-    map.on('click', addMarker.bind(map));
-
-    let dragMarker = function () {
-        let coordinates = marker.getLngLat();
-
-        // Fly to the marker
-        map.flyTo({
-            center: coordinates,
-            zoom: 13,
-            speed: 0.8,
-            curve: 1,
-            easing: function (t) {
-                return t;
-            }
-        });
-    };
-
-    // Iterate over the markers array and add the dragend event listener to each marker
-    markers.forEach(marker => {
-        marker.on('dragend', dragMarker);
     });
-
 
 })();
