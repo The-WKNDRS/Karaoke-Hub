@@ -117,3 +117,7 @@ nav ul li:hover .dropdown {
     text-align: center; /* Center the text horizontally */
     border-radius: 5px; /* Add rounded corners to the button */
 }
+
+button.navbar-links {
+    background-color: #483B89;
+}

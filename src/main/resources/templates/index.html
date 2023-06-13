@@ -20,8 +20,12 @@
                     <img class="logo-img" th:src="@{/img/karaoke-icon.png}" alt="microphone">
                     <h3>Karaoke Hub</h3>
                 </div>
-        <a class="index-button" th:href="@{/search}">Browse Karaoke Venues</a>
+        <a class="index-button" th:href="@{/search.html}">Browse Karaoke Venues</a>
             </div>
+    <div th:if="${#authentication.principal != null}">
+        <!-- Content for authenticated users -->
+    </div>
+
 </div>
 <div th:insert="fragments/navbar.html :: footer"></div>
 </body>

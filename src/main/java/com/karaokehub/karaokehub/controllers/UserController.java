@@ -25,7 +25,7 @@ public class UserController {
     @GetMapping("/register")
     public String registerUsers(Model model) {
         model.addAttribute("user", new User());
-        return "/register";
+        return "register";
     }
 
     @PostMapping("/register")
@@ -40,12 +40,12 @@ public class UserController {
     @GetMapping("/login")
     public String loginUsers(Model model) {
         model.addAttribute("user", new User());
-        return "/login";
+        return "login";
     }
 
     @GetMapping("/index")
     public String index() {
-        return "/index";
+        return "index";
     }
 
     @GetMapping("/profile")
@@ -54,7 +54,7 @@ public class UserController {
         long id = user.getId();
         user = userDao.getReferenceById(id);
         model.addAttribute("user", user);
-        return "/user-profile";
+        return "user-profile";
     }
 
     @PostMapping("/profile/update")

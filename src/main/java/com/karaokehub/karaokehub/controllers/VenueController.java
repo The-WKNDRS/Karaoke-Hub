@@ -9,12 +9,12 @@ public class VenueController {
 
     @GetMapping("/create-venue")
     public String createVenue() {
-        return "/create-venue";
+        return "create-venue";
     }
 
     @GetMapping("/venue-profile")
     public String venueProfile() {
-        return "/venue-profile";
+        return "venue-profile";
     }
 
 
