@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Search Page</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/resets.css}">
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+<!--    <link rel="stylesheet" th:href="@{/css/footer.css}">     -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
     <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css' type='text/css' />
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
-    <link rel="stylesheet" href="/css/resets.css">
-    <link rel="stylesheet" href="/css/layout.css">
-
+<!--    <link rel="stylesheet" href="/css/resets.css">-->
+<!--    <link rel="stylesheet" href="/css/layout.css">-->
 </head>
 <body>
 <h1>Here is the map</h1>
-<div class='map' id='map' style='width: 400px; height: 300px;'></div>
-<!--<div class="map" id='map'></div>-->
-<!--<form id="search">-->
-<!--    <input type="search" id="search-input" placeholder="Search for a location">-->
-<!--    <button type="submit" id="search-button" class="btn btn-primary">Search</button>-->
-<!--</form>-->
+    <div class='map' id='map' style='width: 1920px; height: 1080px;'></div>
+
 <script src="/js/keys.js"></script>
 <script src="/js/geocoder-utils.js"></script>
 <script src="/js/mapbox.js"></script>
+
 </body>
 </html>
