@@ -54,8 +54,8 @@ import java.util.List;
         }
 
         @GetMapping(value = "/search-venue-json", produces = MediaType.APPLICATION_JSON_VALUE)
-        public ResponseEntity<List<Venue>> sendVenues() {
-            List<Venue> data = venueDao.findAll();
+        public ResponseEntity<String> sendVenues() {
+            String data = venueDao.findAllValuesNative();
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONNECTION, "close")
                     .body(data);
