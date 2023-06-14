@@ -1,6 +1,7 @@
 package com.karaokehub.karaokehub.controllers;
 import com.karaokehub.karaokehub.models.Event;
 import com.karaokehub.karaokehub.models.Venue;
+import com.karaokehub.karaokehub.models.VenueEventDto;
 import com.karaokehub.karaokehub.repository.EventRepository;
 import com.karaokehub.karaokehub.repository.VenueRepository;
 import org.springframework.http.HttpHeaders;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -45,8 +48,24 @@ import java.util.List;
             return "venue-profile";
         }
 
+    @GetMapping("/browse-venues")
+    public String browseVenues(Model model) {
+        List<Venue> venues = venueDao.findAll();
+        List<VenueEventDto> venueEventList = new ArrayList<>();
 
-        @GetMapping("/search-venue")
+        for (Venue venue : venues) {
+            VenueEventDto venueEventDto = new VenueEventDto();
+            venueEventDto.setVenue(venue);
+            List<Event> events = eventDao.findByVenueId(venue.getId());
+            venueEventDto.setEvents(events);
+            venueEventList.add(venueEventDto);
+        }
+
+        model.addAttribute("venueEventList", venueEventList);
+        return "browse-venues";
+    }
+
+    @GetMapping("/search-venue")
         public String searchVenue(Model model) {
             List<Venue> venues = venueDao.findAll();
             model.addAttribute("venues", venues);

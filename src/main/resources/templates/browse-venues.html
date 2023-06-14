@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+  <link rel="stylesheet" th:href="@{/css/index.css}">
+  <link rel="stylesheet" th:href="@{/css/resets.css}">
+  <link rel="stylesheet" th:href="@{/css/layout.css}">
+  <link rel="stylesheet" th:href="@{/css/register.css}">
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
+
+</head>
+<body>
+<div class="page-wrapper" style="background-image: url('/img/singers5.png'); background-size: cover; background-position: center;">
+  <div th:insert="fragments/navbar.html :: navbar"></div>
+    <div class="index-header">
+      <div class="logo">
+        <img class="logo-img" th:src="@{/img/karaoke-icon.png}" alt="microphone">
+        <h3>Karaoke Hub</h3>
+      </div>
+    </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Venues</h2>
+      <div th:each="venueEventDto : ${venueEventList}">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title" th:text="${venueEventDto.venue.name}"></h5>
+            <p class="card-text">
+              <strong>Location: </strong> <span th:text="${venueEventDto.venue.address}${venueEventDto.venue.city}, ${venueEventDto.venue.state} ${venueEventDto.venue.zip_code}"></span>
+              <br>
+              <strong>Website: </strong> <a th:href="${venueEventDto.venue.website}" th:text="${venueEventDto.venue.website}"></a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h2>Events</h2>
+      <div th:each="venueEventDto : ${venueEventList}">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title" th:text="${venueEventDto.venue.name}"></h5>
+            <p class="card-text">
+              <strong>Day: </strong> <span th:text="${venueEventDto.events[0].day_of_week}"></span>
+              <br>
+              <strong>DJ: </strong> <span th:text="${venueEventDto.events[0].dj}"></span>
+              <br>
+              <strong>Time: </strong> <span th:text="${venueEventDto.events[0].start_time}"></span> - <span th:text="${venueEventDto.events[0].end_time}"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:insert="fragments/navbar.html :: footer"></div>
+</body>
+</html>

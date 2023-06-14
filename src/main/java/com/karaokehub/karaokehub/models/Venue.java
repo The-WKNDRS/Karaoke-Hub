@@ -128,4 +128,16 @@ public class Venue {
     public void setYelp_id(String yelp_id) {
         this.yelp_id = yelp_id;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
