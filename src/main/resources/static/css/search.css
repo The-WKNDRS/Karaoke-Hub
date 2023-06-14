@@ -115,7 +115,7 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
 }
 
 .change-color {
-    background-image: radial-gradient(orange, orange), url(../img/karaoke-icon.png);
+    background-image: url(../img/karaoke-icon-purple.png);
 }
 
 .mapboxgl-popup-close-button {
