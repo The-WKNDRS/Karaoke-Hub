@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Home</title>
@@ -9,51 +9,49 @@
   <link rel="stylesheet" th:href="@{/css/layout.css}">
   <link rel="stylesheet" th:href="@{/css/register.css}">
   <link rel="stylesheet" th:href="@{/css/footer.css}">
-
+  <link rel="stylesheet" th:href="@{/css/browse-venues.css}">
 </head>
 <body>
-<div class="page-wrapper" style="background-image: url('/img/singers5.png'); background-size: cover; background-position: center;">
-  <div th:insert="fragments/navbar.html :: navbar"></div>
-    <div class="index-header">
-      <div class="logo">
-        <img class="logo-img" th:src="@{/img/karaoke-icon.png}" alt="microphone">
-        <h3>Karaoke Hub</h3>
-      </div>
+<div th:insert="~{fragments/navbar.html :: navbar}"></div>
+<div class="venue-page-wrapper">
+  <div class="background-image" style="background-image: url('/img/singers5.png');"></div>
+  <div class="venue-browser-header">
+    <div class="venue-browser-logo">
+      <img class="venue-browser-logo-img" th:src="@{/img/karaoke-icon.png}" alt="microphone">
+      <h3>Karaoke Hub</h3>
     </div>
-  <div class="row">
-    <div class="col-md-6">
-      <h2>Venues</h2>
-      <div th:each="venueEventDto : ${venueEventList}">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title" th:text="${venueEventDto.venue.name}"></h5>
-            <p class="card-text">
-              <strong>Location: </strong> <span th:text="${venueEventDto.venue.address}${venueEventDto.venue.city}, ${venueEventDto.venue.state} ${venueEventDto.venue.zip_code}"></span>
-              <br>
-              <strong>Website: </strong> <a th:href="${venueEventDto.venue.website}" th:text="${venueEventDto.venue.website}"></a>
-            </p>
-          </div>
+    <h3>Karaoke Bars</h3>
+  </div>
+  <div class="venue-browser">
+    <div th:each="venueEventDto : ${venueEventList}" class="card">
+      <div class="card-body">
+        <h5 class="card-title" th:text="${venueEventDto.venue.getName()}"></h5>
+        <p class="card-text">
+          <strong>Location: </strong>
+          <span th:text="${venueEventDto.venue.address} + ', ' + ${venueEventDto.venue.city} + ', ' + ${venueEventDto.venue.state} + ' ' + ${venueEventDto.venue.zip_code}"></span>
+          <br>
+          <span th:if="${venueEventDto.venue.website}">
+            <strong>Website: </strong>
+            <a th:href="${venueEventDto.venue.website}" th:text="${venueEventDto.venue.website}">Website</a>
+            <br>
+          </span>
+          <strong>Karaoke Nights:</strong>
+        <div class="karaoke-nights-row">
+          <span th:text="${venueEventDto.getKaraokeDays()}" th:unless="${venueEventDto.getKaraokeDays()}"></span>
         </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <h2>Events</h2>
-      <div th:each="venueEventDto : ${venueEventList}">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title" th:text="${venueEventDto.venue.name}"></h5>
-            <p class="card-text">
-              <strong>Day: </strong> <span th:text="${venueEventDto.events[0].day_of_week}"></span>
-              <br>
-              <strong>DJ: </strong> <span th:text="${venueEventDto.events[0].dj}"></span>
-              <br>
-              <strong>Time: </strong> <span th:text="${venueEventDto.events[0].start_time}"></span> - <span th:text="${venueEventDto.events[0].end_time}"></span>
-            </p>
-          </div>
+        <div th:each="event : ${venueEventDto.events}" class="karaoke-night">
+          <span th:text="${event.day_of_week}"></span>
+          <br>
+          <span th:if="${event.dj}">
+                <strong>DJ: </strong><span th:text="${event.dj}"></span>
+                <br>
+              </span>
+          <span th:text="${event.start_time}"></span> - <span th:text="${event.end_time}"></span>
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>
 <div th:insert="fragments/navbar.html :: footer"></div>
 </body>
