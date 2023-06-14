@@ -89,6 +89,7 @@ public class Venue {
         this.zip_code = zip_code;
     }
 
+
     public String getAddress() {
         return address;
     }
