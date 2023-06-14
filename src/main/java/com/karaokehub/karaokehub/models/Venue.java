@@ -56,6 +56,14 @@ public class Venue {
         this.yelp_id = yelp_id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Venue(String name, String address, String city, String state, String zip_code, String website) {
         this.name = name;
         this.address = address;
