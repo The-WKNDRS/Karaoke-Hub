@@ -1,5 +1,4 @@
 package com.karaokehub.karaokehub.controllers;
-
 import com.karaokehub.karaokehub.models.Event;
 import com.karaokehub.karaokehub.models.Venue;
 import com.karaokehub.karaokehub.models.VenueEventDto;

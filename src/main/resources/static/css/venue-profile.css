@@ -1,0 +1,42 @@
+.venue-profile-logo {
+    display: flex;
+    align-items: center;
+}
+
+.venue-profile-logo > h3 {
+    font-size: 40px;
+    color: darkslateblue;
+}
+
+.venue-profile-logo-img {
+    width: 40px;
+    height: 40px;
+}
+
+.venue-profile-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.venue-profile-header > h3 {
+    font-size: 40px;
+    color: darkslateblue;
+}
+.venue-profile-page-wrapper {
+    position: relative;
+}
+
+.Venue-profile-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the container takes up at least the full viewport height */
+}
+
+.hidden {
+    display: none;
+}
