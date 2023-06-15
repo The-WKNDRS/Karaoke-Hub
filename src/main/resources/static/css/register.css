@@ -22,12 +22,11 @@ body {
 
 .logo > h3 {
     font-size: 40px;
-    color: darkslateblue;
+    color: #483d8b;
 }
 
 .logo-img {
-    width: 40px;
-    height: 40px;
+
 }
 
 h1 {
