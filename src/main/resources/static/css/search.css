@@ -1,7 +1,4 @@
-.map {
-    height: 400px;
-    width: 300px;
-}
+
 
 * {
     box-sizing: border-box;
@@ -53,7 +50,8 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
 }
 
 .heading {
-    background: #fff;
+    background: darkslateblue;
+    color: white;
     border-bottom: 1px solid #eee;
     height: 60px;
     line-height: 60px;
@@ -76,14 +74,16 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
 
 .listings .item .title {
     display: block;
-    color: #00853e;
+    color: darkslateblue;
     font-weight: 700;
 }
 
 .listings .item .title small { font-weight: 400; }
 
 .listings .item.active .title,
-.listings .item .title:hover { color: #8cc63f; }
+.listings .item .title:hover {
+    color: #9E94F3
+}
 
 .listings .item.active {
     background-color: #f8f8f8;
@@ -111,11 +111,12 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
     width: 40px;
     background-image: url(../img/karaoke-icon.png);
     background-size: contain;
-    transition: .5s all ease;
 }
 
 .change-color {
     background-image: url(../img/karaoke-icon-purple.png);
+    height: 100px;
+    width: 100px;
 }
 
 .mapboxgl-popup-close-button {
@@ -129,7 +130,7 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
 }
 
 .mapboxgl-popup-content h3 {
-    background: #91c949;
+    background: darkslateblue;
     color: #fff;
     margin: 0;
     padding: 10px;
@@ -154,4 +155,15 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
 
 .mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
     border-bottom-color: #91c949;
+}
+
+.mapboxgl-popup {
+    padding-bottom: 50px;
+}
+
+.search-form {
+    position: absolute;
+    z-index: 9;
+    top: 0;
+    left: 70%;
 }

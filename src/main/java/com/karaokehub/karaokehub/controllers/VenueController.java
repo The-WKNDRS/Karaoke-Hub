@@ -8,10 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,8 +37,9 @@ import java.util.List;
             return "redirect:/venue-profile";
         }
 
-        @GetMapping("/venue-profile")
-        public String venueProfile() {
+        @GetMapping("/venue-profile/{id}")
+        public String venueProfile(Model model, @PathVariable long id) {
+            model.addAttribute("venue", venueDao.getReferenceById(id));
             return "venue-profile";
         }
 
@@ -50,6 +48,11 @@ import java.util.List;
         public String searchVenue(Model model) {
             List<Venue> venues = venueDao.findAll();
             model.addAttribute("venues", venues);
+            return "search";
+        }
+
+        @PostMapping("/search-venue")
+        public String showSearch() {
             return "search";
         }
 
