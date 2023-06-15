@@ -33,7 +33,6 @@ import * as mapboxUtils from "./mapbox-utils.js";
         map.getSource('places').setData(geoVenues);
         //Geocode the zipcode
         let newCenter = await geocode(zipValue, mapboxgl.accessToken);
-        console.log(newCenter)
         map.flyTo({
             center: newCenter,
             zoom: 11
