@@ -3,7 +3,7 @@ package com.karaokehub.karaokehub.controllers;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import retrofit2.http.Path;
+
 import java.io.IOException;
 import java.util.Optional;
 
