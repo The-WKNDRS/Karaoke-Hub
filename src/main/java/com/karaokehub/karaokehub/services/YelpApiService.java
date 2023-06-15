@@ -3,20 +3,17 @@ package com.karaokehub.karaokehub.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.karaokehub.karaokehub.Keys;
 import com.squareup.okhttp.*;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.cassandra.CassandraProperties;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 
 
+
 @Service("yelpApiService")
 public class YelpApiService {
-    static String yelpApiKey = Keys.getApiKey();
+    static String yelpApiKey = ApiAccess.getApiKey();
     private static final String yelpBaseUrl = "api.yelp.com/v3";
 
     private static String makeAutoCompleteUrl(String query, String latitude, String longitude){
@@ -50,17 +47,8 @@ public class YelpApiService {
                 .queryParam("term", query)
                 .queryParam("location", location)
                 .queryParam("radius", "40000")
-                .queryParam("categories", "bars")
-                .queryParam("categories", "concert")
-                .queryParam("categories", "venues")
-                .queryParam("categories", "stadiumsarenas")
-                .queryParam("categories", "clubcrawl")
-                .queryParam("categories", "comedyclubs")
-                .queryParam("categories", "danceclubs")
-                .queryParam("categories", "beergardens")
-                .queryParam("categories", "music")
                 .queryParam("sort_by", "rating")
-                .queryParam("limit", "40")
+                .queryParam("limit", "1")
                 .build()
                 .toUriString();
     }
@@ -71,7 +59,6 @@ public class YelpApiService {
         //creating the api endpoint url
         String requestUri = makeAutoCompleteUrl(query, latitude, longitude );
         Request request = new Request.Builder()
-
                 .url(requestUri)
                 .addHeader("Access-Control-Allow-Origin","*")
                 .addHeader("Authorization", "Bearer " + yelpApiKey)

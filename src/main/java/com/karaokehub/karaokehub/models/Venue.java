@@ -69,14 +69,6 @@ public class Venue {
         this.yelp_id = yelp_id;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public Venue(String name, String address, String city, String state, String zip_code, String website, String yelp_id) {
         this.name = name;
         this.address = address;
