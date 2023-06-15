@@ -36,17 +36,8 @@ import {getVenues, formatVenues, addMarkers, buildLocationList} from "/js/mapbox
         await buildLocationList(geoVenues);
         await addMarkers(map);
 
-        // let from = turf.point()
-        // let to = turf.point(77, -108)
-        // let options = {units: 'miles'}
-        //
-        // let distance = turf.distance(from, to, options)
-        // console.log(distance)
 
     });
-
-    let searchBar = document.querySelector(".mapboxgl-ctrl-geocoder--input");
-    console.log(searchBar.value);
 
 
 })();
