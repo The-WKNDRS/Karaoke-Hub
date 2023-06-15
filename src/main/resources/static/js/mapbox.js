@@ -1,4 +1,4 @@
-import {getVenues, formatVenues, addMarkers, buildLocationList} from "/js/mapbox-utils.js";
+import {formatVenues, addMarkers, buildLocationList} from "./mapbox-utils.js";
 
 (async () => {
 
@@ -38,7 +38,6 @@ import {getVenues, formatVenues, addMarkers, buildLocationList} from "/js/mapbox
 
 
     });
-
 
 })();
 

@@ -1,4 +1,5 @@
 
+
 export const getVenues = async function () {
     try {
         const response = await fetch('/search-venue-json');
@@ -156,7 +157,7 @@ export function buildLocationList(geoVenues) {
     }
 }
 
-function flyToStore(currentFeature) {
+function flyToStore (currentFeature) {
     map.flyTo({
         center: currentFeature.geometry.coordinates,
         zoom: 15
