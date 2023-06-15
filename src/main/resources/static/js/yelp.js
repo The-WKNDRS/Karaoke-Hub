@@ -1,4 +1,6 @@
-(async () => {
+// Start async function and use key to access Yelp API
+// async () => {
+const request = async () => {
         const options = {
             method: 'GET',
             headers: {
@@ -6,10 +8,12 @@
                 Authorization: 'Bearer' + yelpKey,
             }
         };
-
-        fetch('https://api.yelp.com/v3/businesses/${venue.yelp_id}/reviews?limit=20&sort_by=yelp_sort', options)
-            .then(response => response.json())
-            .then(response => console.log(response))
+        // Make an API call to the Yelp Fusion API
+        console.log("hello")
+    // https://cors-anywhere.herokuapp.com/ possible cors workaround
+        fetch('https://api.yelp.com/v3/businesses/the-stetson-bar-san-antonio', options)
+            .then(response => response.text())
+            .then((data) => console.log(data))
             .catch(err => console.error(err));
     }
-)
+(async () => {await request();})();
