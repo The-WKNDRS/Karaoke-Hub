@@ -15,13 +15,13 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 
-        http.authorizeHttpRequests((requests) -> requests
-                .requestMatchers( "/create-venue", "/user-profile", "/venue-profile", "/profile", "/profile/update").authenticated()
-                .requestMatchers("/register", "/login", "/index", "/logout", "/search-venue", "/search-venue-json").permitAll()
-                .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
-
-        );
-//       http.authorizeHttpRequests((requests) -> requests.anyRequest().permitAll());
+//        http.authorizeHttpRequests((requests) -> requests
+//                .requestMatchers( "/create-venue", "/user-profile", "/venue-profile", "/profile", "/profile/update", "search-venue").authenticated()
+//                .requestMatchers("/register", "/login", "/index", "/logout", "/search-venue").permitAll()
+//                .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
+//
+//        );
+       http.authorizeHttpRequests((requests) -> requests.anyRequest().permitAll());
 
 
 
