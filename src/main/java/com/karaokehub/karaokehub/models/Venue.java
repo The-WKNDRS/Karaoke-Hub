@@ -47,14 +47,6 @@ public class Venue {
         this.events = events;
     }
 
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
-    }
-
     public Venue() {
     }
 
@@ -67,14 +59,6 @@ public class Venue {
         this.zip_code = zip_code;
         this.website = website;
         this.yelp_id = yelp_id;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public Venue(String name, String address, String city, String state, String zip_code, String website, String yelp_id) {
@@ -166,5 +150,13 @@ public class Venue {
 
     public void setYelp_id(String yelp_id) {
         this.yelp_id = yelp_id;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 }
