@@ -6,7 +6,7 @@ VALUES
     ('Dragon\'s Sports Bar', '1353 Bandera Rd', 'San Antonio', 'TX', '78228', '', 'official-dragons-sports-bar-san-antonio'),
     ('Joint Base Saloon', '5520 Randolph Blvd', 'San Antonio', 'TX', '78233', 'https://joint-base-saloon.business.site/', ''),
     ('Kennedy\'s Public House', '19179 Blanco Rd', 'San Antonio', 'TX', '78258', 'https://www.kennedysirishbar.com/', 'kennedys-public-house-san-antonio'),
-    ('Doc Browns', '6511 TX-1604 Loop', 'San Antonio', 'TX', '78254', '', 'doc-browns-san-antonio-2'),
+    ('Doc Browns', '6511 W Loop 1604 Loop N', 'San Antonio', 'TX', '78254', '', 'doc-browns-san-antonio-2'),
     ('Steely Nevada\'s Bar & Lounge', '7530 Bandera Rd', 'San Antonio', 'TX', '78238', '', 'steely-nevadas-san-antonio'),
     ('The Stetson Bar', '7350 Tezel Rd #108', 'San Antonio', 'TX', '78250', 'https://www.thestetsonbar.com/', 'the-stetson-bar-san-antonio'),
     ('The Stetson Dance Hall', '11881 Bandera Rd', 'Helotes', 'TX', '78023', 'https://www.stetsondancehall.com/', 'the-stetson-bar-san-antonio'),
