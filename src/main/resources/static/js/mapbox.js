@@ -18,15 +18,6 @@ import * as mapboxUtils from "./mapbox-utils.js";
     });
 
     map.on('load', async () => {
-        const geocoder = new MapboxGeocoder({
-            // Initialize the geocoder
-            accessToken: mapboxgl.accessToken, // Set the access token
-            mapboxgl: mapboxgl, // Set the mapbox-gl instance
-            zoom: 13, // Set the zoom level for geocoding results
-            placeholder: 'Enter zipcode', // This placeholder text will display in the search bar
-            limit: 10
-        });
-        map.addControl(geocoder, 'top-left'); // Add the search box to the top left
         map.addSource('places', {
             type: 'geojson',
             data: geoVenues
@@ -40,6 +31,13 @@ import * as mapboxUtils from "./mapbox-utils.js";
         event.preventDefault();
         geoVenues = await mapboxUtils.formatVenues(zipValue);
         map.getSource('places').setData(geoVenues);
+        //Geocode the zipcode
+        let newCenter = await geocode(zipValue, mapboxgl.accessToken);
+        console.log(newCenter)
+        map.flyTo({
+            center: newCenter,
+            zoom: 11
+        });
         mapboxUtils.clearLocationList();
         await mapboxUtils.buildLocationList(map, geoVenues);
         mapboxUtils.clearMarkers();

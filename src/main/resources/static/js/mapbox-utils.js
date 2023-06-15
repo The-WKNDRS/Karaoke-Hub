@@ -22,37 +22,41 @@ export const formatVenues = async function (zipValue) {
         "features": [
         ]
     };
-    for (const venue of await getVenues(zipValue)) {
-        let formattedVenues = {
-            type: "Feature",
-            geometry: {type: "Point", coordinates: []},
-            properties: {
-                id: venue.id,
-                name: venue.name,
-                address: venue.address,
-                city: venue.city,
-                state: venue.state,
-                zip: venue.zip,
-                events: venue.events
+    try {
+        for (const venue of await getVenues(zipValue)) {
+            let formattedVenues = {
+                type: "Feature",
+                geometry: {type: "Point", coordinates: []},
+                properties: {
+                    id: venue.id,
+                    name: venue.name,
+                    address: venue.address,
+                    city: venue.city,
+                    state: venue.state,
+                    zip: venue.zip,
+                    events: venue.events
+                }
+            };
+            if (venue.website) {
+                formattedVenues.properties.website = venue.website;
+            } else {
+                formattedVenues.properties.website = "N/A";
             }
-        };
-        if (venue.website) {
-            formattedVenues.properties.website = venue.website;
-        } else {
-            formattedVenues.properties.website = "N/A";
-        }
-        if (venue.yelp_id) {
-            formattedVenues.properties.yelp_id = venue.yelp_id;
-        } else {
-            formattedVenues.properties.yelp_id = "N/A";
-        }
-        let addressString = (formattedVenues.properties.address + "," + formattedVenues.properties.city + "," + formattedVenues.properties.state + "," + formattedVenues.properties.zip);
+            if (venue.yelp_id) {
+                formattedVenues.properties.yelp_id = venue.yelp_id;
+            } else {
+                formattedVenues.properties.yelp_id = "N/A";
+            }
+            let addressString = (formattedVenues.properties.address + "," + formattedVenues.properties.city + "," + formattedVenues.properties.state + "," + formattedVenues.properties.zip);
 
-        let coords = await geocode((addressString), mapKey).then(async function(result) {return result;});
-        formattedVenues.geometry.coordinates = (coords);
-        geoVenues.features.push(formattedVenues);
+            let coords = await geocode((addressString), mapKey).then(async function(result) {return result;});
+            formattedVenues.geometry.coordinates = (coords);
+            geoVenues.features.push(formattedVenues);
+        }
+        return geoVenues;
+    } catch (error) {
+        alert("No venues found for that zip code. Please try again.");
     }
-    return geoVenues;
 };
 
 export function addMarkers(map, geoVenues) {
@@ -85,67 +89,72 @@ export function addMarkers(map, geoVenues) {
 }
 
 export function buildLocationList(map, geoVenues) {
-    for (const venue of geoVenues.features) {
-        /* Add a new listing section to the sidebar. */
-        const listing = listings.appendChild(document.createElement('div'));
-        /* Assign a unique `id` to the listing. */
-        listing.id = `listing-${venue.properties.id}`;
-        /* Assign the `item` class to each listing for styling. */
-        listing.className = 'item';
+    try {
 
-        /* Add the link to the individual listing created above. */
-        const link = document.createElement('a');
-        const linkTitle = document.createElement('h2');
-        linkTitle.appendChild(link);
-        listing.appendChild(linkTitle);
-        link.href = '#';
-        link.className = 'title';
-        link.id = `link-${venue.properties.id}`;
-        link.innerHTML = `${venue.properties.name}`;
-        // fly to point and pop up
-        link.addEventListener('click', function () {
-            for (const feature of geoVenues.features) {
-                if (this.id === `link-${feature.properties.id}`) {
-                    flyToVenue(map, feature);
-                    createPopUp(map, feature)
+        for (const venue of geoVenues.features) {
+            /* Add a new listing section to the sidebar. */
+            const listing = listings.appendChild(document.createElement('div'));
+            /* Assign a unique `id` to the listing. */
+            listing.id = `listing-${venue.properties.id}`;
+            /* Assign the `item` class to each listing for styling. */
+            listing.className = 'item';
+
+            /* Add the link to the individual listing created above. */
+            const link = document.createElement('a');
+            const linkTitle = document.createElement('h2');
+            linkTitle.appendChild(link);
+            listing.appendChild(linkTitle);
+            link.href = '#';
+            link.className = 'title';
+            link.id = `link-${venue.properties.id}`;
+            link.innerHTML = `${venue.properties.name}`;
+            // fly to point and pop up
+            link.addEventListener('click', function () {
+                for (const feature of geoVenues.features) {
+                    if (this.id === `link-${feature.properties.id}`) {
+                        flyToVenue(map, feature);
+                        createPopUp(map, feature)
+                    }
                 }
-            }
-            const activeItem = document.getElementsByClassName('active');
-            if (activeItem[0]) {
-                activeItem[0].classList.remove('active');
-            }
-            this.parentNode.classList.add('active');
-        });
-
-        // marker color change
-        link.addEventListener('mouseenter', function () {
-            for (const feature of geoVenues.features) {
-                if (this.id === `link-${feature.properties.id}`) {
-                    changeMarkerColor(feature);
+                const activeItem = document.getElementsByClassName('active');
+                if (activeItem[0]) {
+                    activeItem[0].classList.remove('active');
                 }
-            }
-        });
-
-        link.addEventListener('mouseleave', function () {
-            for (const feature of geoVenues.features) {
-                if (this.id === `link-${feature.properties.id}`) {
-                    changeMarkerColor(feature);
-                }
-            }
-        });
-
-        /* Add details to the individual listing. */
-        const details = listing.appendChild(document.createElement('div'));
-        const detailsTitle = document.createElement('h3');
-        detailsTitle.innerHTML = 'Events';
-        details.appendChild(detailsTitle);
-        if (venue.properties.events) {
-            venue.properties.events.forEach((event, index) => {
-                let el = document.createElement('h4');
-                el.innerHTML = `${event.day_of_week} Start: ${event.start_time} End: ${event.end_time}`;
-                details.appendChild(el);
+                this.parentNode.classList.add('active');
             });
+
+            // marker color change
+            link.addEventListener('mouseenter', function () {
+                for (const feature of geoVenues.features) {
+                    if (this.id === `link-${feature.properties.id}`) {
+                        changeMarkerColor(feature);
+                    }
+                }
+            });
+
+            link.addEventListener('mouseleave', function () {
+                for (const feature of geoVenues.features) {
+                    if (this.id === `link-${feature.properties.id}`) {
+                        changeMarkerColor(feature);
+                    }
+                }
+            });
+
+            /* Add details to the individual listing. */
+            const details = listing.appendChild(document.createElement('div'));
+            const detailsTitle = document.createElement('h3');
+            detailsTitle.innerHTML = 'Events';
+            details.appendChild(detailsTitle);
+            if (venue.properties.events) {
+                venue.properties.events.forEach((event, index) => {
+                    let el = document.createElement('h4');
+                    el.innerHTML = `${event.day_of_week} Start: ${event.start_time} End: ${event.end_time}`;
+                    details.appendChild(el);
+                });
+            }
         }
+    } catch (error) {
+        console.log(error);
     }
 }
 
