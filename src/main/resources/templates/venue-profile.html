@@ -1,10 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Venue Profile</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/resets.css}">
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/register.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/browse-venues.css}">
+    <link rel="stylesheet" th:href="@{/css/venue-profile.css}">
 </head>
 <body>
+<div th:insert="~{fragments/navbar.html :: navbar}"></div>
+<div class="Venue-profile-page-wrapper">
+    <div class="background-image" style="background-image: url('/img/singers5.png');"></div>
+    <div class="venue-profile-header">
+        <div class="venue-profile-logo">
+            <img class="venue-profile-logo-img" th:src="@{/img/karaoke-icon.png}" alt="microphone">
+            <h3>Karaoke Hub</h3>
+        </div>
+    </div>
+    <div class="venue-profile-container">
+        <div class="left-column">
+            <!-- Display information from the database -->
+            <div class="card-body">
+                <h5 class="card-title" th:text="${venueEventDto.venue.getName()}"></h5>
+                <p class="card-text">
+                    <strong>Location: </strong>
+                    <span th:text="${venueEventDto.venue.address} + ', ' + ${venueEventDto.venue.city} + ', ' + ${venueEventDto.venue.state} + ' ' + ${venueEventDto.venue.zip_code}"></span>
+                    <br>
+                    <span th:if="${venueEventDto.venue.website}">
+                        <strong>Website: </strong>
+                        <a th:href="${venueEventDto.venue.website}" th:text="${venueEventDto.venue.website}">Website</a>
+                        <br>
+                    </span>
+                    <strong>Yelp ID: </strong>
+                    <span th:text="${venueEventDto.venue.yelp_id}"></span>
+                    <br>
+                    <strong>Karaoke Nights:</strong>
+                <div class="karaoke-nights-row">
+                    <span th:text="${venueEventDto.getKaraokeDays()}" th:unless="${venueEventDto.getKaraokeDays()}"></span>
+                </div>
+                <div th:each="event : ${venueEventDto.events}" class="karaoke-night">
+                    <span th:text="${event.day_of_week}"></span>
+                    <br>
+                    <span th:if="${event.dj}">
+                            <strong>DJ: </strong><span th:text="${event.dj}"></span>
+                            <br>
+                        </span>
+                    <span th:text="${event.start_time}"></span> - <span th:text="${event.end_time}"></span>
+                </div>
+            </div>
+            <div class="edit-buttons">
+                <a class="edit-button" onclick="toggleEditMode()">Edit Venue</a>
+            </div>
+            <div id="editVenueForm" style="display: none;">
+                <form th:action="@{/venue-profile}" method="post">
+                <!-- Venue name -->
+                    <label for="venueName">Name:</label>
+                    <input type="text" id="venueName" name="venueName" th:value="${venueEventDto.venue.name}">
+                    <br>
+                    <!-- Venue address -->
+                    <label for="venueAddress">Address:</label>
+                    <input type="text" id="venueAddress" name="venueAddress" th:value="${venueEventDto.venue.address}">
+                    <br>
+                    <!-- Venue city -->
+                    <label for="venueCity">City:</label>
+                    <input type="text" id="venueCity" name="venueCity" th:value="${venueEventDto.venue.city}">
+                    <br>
+                    <!-- Venue state -->
+                    <label for="venueState">State:</label>
+                    <input type="text" id="venueState" name="venueState" th:value="${venueEventDto.venue.state}">
+                    <br>
+                    <!-- Venue ZIP code -->
+                    <label for="venueZipCode">ZIP Code:</label>
+                    <input type="text" id="venueZipCode" name="venueZipCode" th:value="${venueEventDto.venue.zip_code}">
+                    <br>
+                    <!-- Venue website -->
+                    <label for="venueWebsite">Website:</label>
+                    <input type="text" id="venueWebsite" name="venueWebsite" th:value="${venueEventDto.venue.website}">
+                    <br>
+                    <!-- Submit button -->
+                    <button type="submit">Save</button>
+                    <button type="button" onclick="toggleEditMode()">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="right-column">
+    <!-- Add content for the right column -->
+    <!-- You can include additional information or widgets here -->
+</div>
+</div>
+<div th:insert="fragments/navbar.html :: footer"></div>
+<script>
+    function toggleEditMode() {
+        let venueInfo = document.querySelector('.card-body');
+        let editForm = document.getElementById('editVenueForm');
 
+        if (venueInfo.style.display === 'none') {
+            // Hide the edit form and show the venue information
+            venueInfo.style.display = 'block';
+            editForm.style.display = 'none';
+        } else {
+            // Hide the venue information and show the edit form
+            venueInfo.style.display = 'none';
+            editForm.style.display = 'block';
+        }
+    }
+</script>
 </body>
 </html>

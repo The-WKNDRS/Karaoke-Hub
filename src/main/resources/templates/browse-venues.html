@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Home</title>
+  <title>Browse Venues</title>
   <link rel="stylesheet" th:href="@{/css/navbar.css}">
   <link rel="stylesheet" th:href="@{/css/index.css}">
   <link rel="stylesheet" th:href="@{/css/resets.css}">
@@ -21,6 +21,13 @@
       <h3>Karaoke Hub</h3>
     </div>
     <h3>Karaoke Bars</h3>
+  </div>
+  <div class="venue-create-row">
+    <div class="col-md-12">
+      <div class="venue-create-button">
+        <a href="/create-venue" class="btn">Create a new venue!</a>
+      </div>
+    </div>
   </div>
   <div class="venue-browser">
     <div th:each="venueEventDto : ${venueEventList}" class="card">

@@ -132,5 +132,13 @@ public class Venue {
     public long getId() {
         return id;
     }
-}
 
+    @PrePersist
+    public void generateYelpId() {
+        if (name != null && city != null) {
+            String sanitizedBusinessName = name.toLowerCase().replaceAll("[^a-z0-9]+", "-");
+            String sanitizedCity = city.toLowerCase().replaceAll("[^a-z0-9]+", "-");
+            yelp_id = sanitizedBusinessName + "-" + sanitizedCity;
+        }
+    }
+}
