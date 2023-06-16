@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @Service("yelpApiService")
 public class YelpApiService {
-    static String yelpApiKey = ApiAccess.getApiKey();
+    static String yelpApiKey = yelpKey;
     private static final String yelpBaseUrl = "api.yelp.com/v3";
 
     private static String makeAutoCompleteUrl(String query, String latitude, String longitude){
