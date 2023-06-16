@@ -5,9 +5,7 @@ target/
 !**/src/test/**/target/
 src/main/resources/static/js/keys.js
 src/main/resources/application.properties
-src/main/java/com/karaokehub/karaokehub/services/ApiAccess.java
-com/karaokehub/karaokehub/services/ApiAccess.java
-**/ApiAccess.java
+
 
 ### STS ###
 .apt_generated
