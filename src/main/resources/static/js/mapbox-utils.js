@@ -1,7 +1,6 @@
 const listings = document.getElementById('listings');
 
 export const getVenues = async function (zipValue, weekDay) {
-    console.log(weekDay)
     try {
         let url = '/search-venue-json';
         if (weekDay !== 'Any') {
@@ -206,3 +205,34 @@ function changeMarkerColor(currentFeature) {
         }
     }
 }
+
+export async function searchVenues(event, map, geoVenues, zipcodeInput, weekDay, zipValue) {
+    weekDay = document.querySelector('#weekday').value;
+    zipValue = "";
+    if (zipcodeInput.value != null) {
+        zipValue = zipcodeInput.value;
+    }
+    event.preventDefault();
+    geoVenues = await formatVenues(zipValue, weekDay);
+    map.getSource('places').setData(geoVenues);
+    //Geocode the zipcode
+    let newCenter = [-98.495141, 29.4246];
+    if (zipValue !== '') {
+        newCenter = await geocode(zipValue, mapboxgl.accessToken);
+        map.flyTo({
+            center: newCenter,
+            zoom: 11
+        });
+    } else {
+        map.flyTo({
+            center: newCenter,
+            zoom: 10
+        });
+    };
+    clearLocationList();
+    await buildLocationList(map, geoVenues);
+    clearMarkers();
+    await addMarkers(map, geoVenues);
+}
+
+
