@@ -21,7 +21,7 @@ public class SecurityConfig {
 //                .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
 //
 //        );
-       http.authorizeHttpRequests((requests) -> requests.anyRequest().permitAll());
+        http.authorizeHttpRequests((requests) -> requests.anyRequest().permitAll());
 
 
 
