@@ -19,7 +19,7 @@ public class EmailService {
 
     public void sendEmail(ContactForm form) throws MailException {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo("matthew.lorber@gmail.com"); // Replace with the admin's email address
+        message.setTo("cd1292ad1c-2c11cc@inbox.mailtrap.io"); // Replace with your email address or the desired recipient
         message.setSubject("New Contact Form Submission");
         message.setText(
                 "Name: " + form.getName() +

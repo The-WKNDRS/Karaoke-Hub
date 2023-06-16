@@ -6,17 +6,26 @@ public class ContactForm {
     private String message;
 
     public String getName() {
-        return null;
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
+        return email;
+    }
 
-        return null;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getMessage() {
-        return null;
+        return message;
     }
 
-    // Getters and setters for the properties
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

@@ -16,7 +16,7 @@ public class SecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 
 //        http.authorizeHttpRequests((requests) -> requests
-//                .requestMatchers( "/create-venue", "/user-profile", "/venue-profile", "/profile", "/profile/update", "search-venue").authenticated()
+//                .requestMatchers( "/create-venue", "/user-profile", "/venue-profile", "/profile", "/profile/update", "search-venue", "/contact", "/contact-success" ).authenticated()
 //                .requestMatchers("/register", "/login", "/index", "/logout", "/search-venue").permitAll()
 //                .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
 //

@@ -1,24 +1,30 @@
 package com.karaokehub.karaokehub.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
 @Configuration
 public class MailConfig {
 
+    @Autowired
+    private Environment environment;
+
     @Bean
     public JavaMailSender javaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("smtp.example.com"); // Replace with your SMTP server hostname
-        mailSender.setPort(587); // Replace with the SMTP server port
-        mailSender.setUsername("your-email@example.com"); // Replace with your email address
-        mailSender.setPassword("your-email-password"); // Replace with your email password
-
-        // Additional mail sender configuration
-        // ...
+        mailSender.setHost(environment.getProperty("spring.mail.host"));
+        String portValue = environment.getProperty("spring.mail.port");
+        int port = portValue != null ? Integer.parseInt(portValue) : 0;
+        mailSender.setPort(port);
+        mailSender.setUsername(environment.getProperty("spring.mail.username"));
+        mailSender.setPassword(environment.getProperty("spring.mail.password"));
 
         return mailSender;
     }
 }
+
