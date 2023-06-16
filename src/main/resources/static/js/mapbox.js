@@ -1,44 +1,15 @@
+import * as mapboxUtils from "./mapbox-utils.js";
+
 (async () => {
 
-    const geoVenues = {
-        "type": "FeatureCollection",
-        "features": [
-        ]
-    };
+    const zipcodeForm = document.querySelector('#zipcodeForm');
+    const zipcodeInput = document.querySelector('#zipcode');
 
-    let database= [];
-
-    const getVenues = async function () {
-        try {
-            const response = await fetch('/search-venue-json');
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    database = await getVenues();
-    console.log(database);
-
-
-    const formatVenues = async function () {
-        for (const venue of database) {
-            let formattedVenues = {
-                type: "Feature",
-                geometry: {type: "Point", coordinates: []},
-                properties: {id: venue.id, name: venue.name, location: venue.location}
-            };
-            let coords = await geocode((formattedVenues.properties.location), mapKey).then(async function(result) {return result;});
-            formattedVenues.geometry.coordinates = (coords);
-            geoVenues.features.push(formattedVenues);
-        }
-    };
-
-    await formatVenues();
-    console.log(geoVenues);
+    let zipValue = "";
+    let geoVenues = await mapboxUtils.formatVenues(zipValue);
 
     mapboxgl.accessToken = mapKey;
+
     let map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v12',
@@ -46,24 +17,31 @@
         zoom: 10
     });
 
-    map.on('load', () => {
-        const geocoder = new MapboxGeocoder({
-            // Initialize the geocoder
-            accessToken: mapboxgl.accessToken, // Set the access token
-            mapboxgl: mapboxgl, // Set the mapbox-gl instance
-            zoom: 13, // Set the zoom level for geocoding results
-            placeholder: 'Enter an address or place name', // This placeholder text will display in the search bar
+    map.on('load', async () => {
+        map.addSource('places', {
+            type: 'geojson',
+            data: geoVenues
         });
-        map.addControl(geocoder, 'top-left'); // Add the search box to the top left
-        map.addLayer({
-            id: 'locations',
-            type: 'circle',
-            /* Add a GeoJSON source containing place coordinates and information. */
-            source: {
-                type: 'geojson',
-                data: geoVenues
-            }
-        });
+        await mapboxUtils.buildLocationList(map, geoVenues);
+        await mapboxUtils.addMarkers(map, geoVenues);
     });
 
+    zipcodeForm.addEventListener('submit',  async function (event) {
+        zipValue = zipcodeInput.value;
+        event.preventDefault();
+        geoVenues = await mapboxUtils.formatVenues(zipValue);
+        map.getSource('places').setData(geoVenues);
+        //Geocode the zipcode
+        let newCenter = await geocode(zipValue, mapboxgl.accessToken);
+        map.flyTo({
+            center: newCenter,
+            zoom: 11
+        });
+        mapboxUtils.clearLocationList();
+        await mapboxUtils.buildLocationList(map, geoVenues);
+        mapboxUtils.clearMarkers();
+        await mapboxUtils.addMarkers(map, geoVenues);
+    });
 })();
+
+
