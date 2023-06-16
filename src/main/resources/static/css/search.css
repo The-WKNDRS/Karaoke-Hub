@@ -34,7 +34,7 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
 .sidebar {
     position: absolute;
     width: 33.3333%;
-    height: 100%;
+    height: 90%;
     top: 0;
     left: 0;
     overflow: hidden;
@@ -156,10 +156,6 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
     border-bottom-color: #91c949;
 }
 
-.mapboxgl-marker {
-
-}
-
 .mapboxgl-popup {
     padding-bottom: 50px;
 }
@@ -169,6 +165,33 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
     z-index: 9;
     top: 0;
     left: 70%;
+    margin-top:30px;
+    border-color: black;
+}
+
+.search-page {
+    margin-top: 70px; /* Adjust this value as needed */
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.search-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.search-page {
+    flex: 1;
+}
+
+.zipcode {
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 8px;
 }
 
 @keyframes shake {
@@ -189,3 +212,8 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
     }
 }
 
+
+.sidebar {
+    margin-top: 30px;
+
+}

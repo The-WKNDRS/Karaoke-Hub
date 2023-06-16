@@ -1,5 +1,6 @@
 package com.karaokehub.karaokehub.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,7 +22,7 @@ public class SecurityConfig {
 //                .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
 //
 //        );
-       http.authorizeHttpRequests((requests) -> requests.anyRequest().permitAll());
+        http.authorizeHttpRequests((requests) -> requests.anyRequest().permitAll());
 
 
 
@@ -36,5 +37,11 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    @Value("${YELP_API_KEY}")
+    private String apiKey;
 
+    @Bean
+    public String getApiKey() {
+        return apiKey;
+    }
 }

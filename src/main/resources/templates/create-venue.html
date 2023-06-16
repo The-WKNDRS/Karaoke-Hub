@@ -22,7 +22,7 @@
                     </div>
                     <h1>Create Venue</h1>
                 </div>
-                <form class="register-form" th:action="@{/create-venue.html}" th:object="${venue}" th:method="post">
+                <form class="register-form" th:action="@{/create-venue}" th:object="${venue}" th:method="post">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input id="name" name="name" th:field="*{name}">
