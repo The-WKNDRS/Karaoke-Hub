@@ -32,29 +32,6 @@ public class Venue {
     @Column(length = 100)
     private String yelp_id;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "venue")
-    private List<Event> events;
-
-    public Venue(long id, String name, String address, String city, String state, String zip_code, String website, String yelp_id, List<Event> events) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.zip_code = zip_code;
-        this.website = website;
-        this.yelp_id = yelp_id;
-        this.events = events;
-    }
-
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
-    }
-
     public Venue() {
     }
 
@@ -79,6 +56,14 @@ public class Venue {
         this.yelp_id = yelp_id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Venue(String name, String address, String city, String state, String zip_code, String website) {
         this.name = name;
         this.address = address;
@@ -94,22 +79,6 @@ public class Venue {
         this.city = city;
         this.state = state;
         this.zip_code = zip_code;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getAddress() {
@@ -158,5 +127,18 @@ public class Venue {
 
     public void setYelp_id(String yelp_id) {
         this.yelp_id = yelp_id;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    @PrePersist
+    public void generateYelpId() {
+        if (name != null && city != null) {
+            String sanitizedBusinessName = name.toLowerCase().replaceAll("[^a-z0-9]+", "-");
+            String sanitizedCity = city.toLowerCase().replaceAll("[^a-z0-9]+", "-");
+            yelp_id = sanitizedBusinessName + "-" + sanitizedCity;
+        }
     }
 }
