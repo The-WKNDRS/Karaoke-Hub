@@ -71,5 +71,10 @@ public class UserController {
         return "redirect:/profile";
     }
 
+    @GetMapping("/about")
+    public String about() {
+        return "about";
+    }
+
 
 }

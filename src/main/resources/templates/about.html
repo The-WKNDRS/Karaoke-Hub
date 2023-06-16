@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>About Page</title>
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+  <link rel="stylesheet" th:href="@{/css/resets.css}">
+  <link rel="stylesheet" th:href="@{/css/layout.css}">
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
+  <link rel="stylesheet" th:href="@{/css/about.css}">
+
+</head>
+<body>
+<div class="page-wrapper">
+  <div th:insert="fragments/navbar.html :: navbar"></div>
+  <div class="container grow">
+    <div class="row grow justify-space-between">
+      <div class="column align-center">
+          <div class="logo">
+            <img class="logo-img" th:src="@{/img/karaoke-icon.png}" alt="microphone">
+            <h1>Karaoke Hub</h1>
+          </div>
+          <h3>About Us</h3>
+        <div>
+          <div class="row">
+            <div class="column">
+              <h2>Our Mission</h2>
+              <p>
+                Karaoke Hub is a veteran owned and operated web application that allows users to find karaoke venues in their area. Users can also
+                create an account and add their favorite karaoke venues to their profile. This allows users to
+                keep track of their favorite karaoke venues and find new ones to try.
+              </p>
+            </div>
+            <div class="column">
+              <h2>Our Team</h2>
+<!--              Create a grid of four elements to hold images-->
+              <div class="row">
+                <div class="column">
+                  <div class="matt-container">
+                  <img class="headshot" th:src="@{/img/matt.jpg}" alt="matt">
+                    <div class="matt-text">
+<!--                      <p>Matthew Lorber is full stack web developer with an extensive background in cyber-security</p>-->
+                    </div>
+                  </div>
+                  <img class="headshot" th:src="@{/img/joe.jpg}" alt="joe">
+                </div>
+                <div class="column">
+                  <img class="headshot" th:src="@{/img/isaac.jpg}" alt="microphone">
+                  <img class="headshot" th:src="@{/img/nick.jpg}" alt="microphone">
+                </div>
+<!--              <p>-->
+<!--                Karaoke Hub was created by the WKNDRS team at Codeup.-->
+<!--                The team consists of:-->
+<!--              </p>-->
+<!--              <ul>-->
+<!--                <li>Isaac Achenbach</li>-->
+<!--                <li>Joe Beltran</li>-->
+<!--                <li>Matthew Lorber</li>-->
+<!--                <li>Samuel Kragness</li>-->
+<!--              </ul>-->
+            </div>
+        </div>
+
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</div>
+<div th:insert="fragments/navbar.html :: footer"></div>
+</body>
+</html>
