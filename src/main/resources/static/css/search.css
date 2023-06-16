@@ -111,12 +111,11 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
     width: 40px;
     background-image: url(../img/karaoke-icon.png);
     background-size: contain;
+    transition: all .05s linear;
 }
 
-.change-color {
-    background-image: url(../img/karaoke-icon-purple.png);
-    height: 100px;
-    width: 100px;
+.marker.change {
+    animation: shake .3s 1 linear;
 }
 
 .mapboxgl-popup-close-button {
@@ -157,6 +156,10 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
     border-bottom-color: #91c949;
 }
 
+.mapboxgl-marker {
+
+}
+
 .mapboxgl-popup {
     padding-bottom: 50px;
 }
@@ -167,3 +170,22 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
     top: 0;
     left: 70%;
 }
+
+@keyframes shake {
+    0% {
+        rotate: 15deg;
+    }
+    25% {
+        rotate: -15deg;
+    }
+    50% {
+        rotate: 15deg;
+    }
+    75% {
+        rotate: -15deg;
+    }
+    100% {
+        rotate: 0deg;
+    }
+}
+

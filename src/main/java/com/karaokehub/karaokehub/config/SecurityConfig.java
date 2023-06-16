@@ -26,7 +26,7 @@ public class SecurityConfig {
 
 
         http.formLogin((form) -> form.loginPage("/login").defaultSuccessUrl("/profile"));
-        http.logout((form) -> form.logoutSuccessUrl("/search"));
+        http.logout((form) -> form.logoutSuccessUrl("/logout"));
         http.httpBasic(withDefaults());
         return http.build();
     }
