@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Browse Venues</title>
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+  <link rel="stylesheet" th:href="@{/css/index.css}">
+  <link rel="stylesheet" th:href="@{/css/resets.css}">
+  <link rel="stylesheet" th:href="@{/css/layout.css}">
+  <link rel="stylesheet" th:href="@{/css/register.css}">
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
+  <link rel="stylesheet" th:href="@{/css/browse-venues.css}">
+</head>
+<body>
+<div th:insert="~{fragments/navbar.html :: navbar}"></div>
+<div class="venue-page-wrapper">
+  <div class="background-image" style="background-image: url('/img/singers5.png');"></div>
+  <div class="venue-browser-header">
+    <div class="venue-browser-logo">
+      <img class="venue-browser-logo-img" th:src="@{/img/karaoke-icon.png}" alt="microphone">
+      <h3>Karaoke Hub</h3>
+    </div>
+    <h3>Karaoke Bars</h3>
+  </div>
+  <div class="venue-create-row">
+    <div class="col-md-12">
+      <div class="venue-create-button">
+        <a href="/create-venue" class="btn">Create a new venue!</a>
+      </div>
+    </div>
+  </div>
+  <div class="venue-browser">
+    <div th:each="venueEventDto : ${venueEventList}" class="card">
+      <div class="card-body">
+        <h5 class="card-title" th:text="${venueEventDto.venue.getName()}"></h5>
+        <p class="card-text">
+          <strong>Location: </strong>
+          <span th:text="${venueEventDto.venue.address} + ', ' + ${venueEventDto.venue.city} + ', ' + ${venueEventDto.venue.state} + ' ' + ${venueEventDto.venue.zip_code}"></span>
+          <br>
+          <span th:if="${venueEventDto.venue.website}">
+            <strong>Website: </strong>
+            <a th:href="${venueEventDto.venue.website}" th:text="${venueEventDto.venue.website}">Website</a>
+            <br>
+          </span>
+          <strong>Karaoke Nights:</strong>
+        <div class="karaoke-nights-row">
+          <span th:text="${venueEventDto.getKaraokeDays()}" th:unless="${venueEventDto.getKaraokeDays()}"></span>
+        </div>
+        <div th:each="event : ${venueEventDto.events}" class="karaoke-night">
+          <span th:text="${event.day_of_week}"></span>
+          <br>
+          <span th:if="${event.dj}">
+                <strong>DJ: </strong><span th:text="${event.dj}"></span>
+                <br>
+              </span>
+          <span th:text="${event.start_time}"></span> - <span th:text="${event.end_time}"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div th:insert="fragments/navbar.html :: footer"></div>
+</body>
+</html>
+    </div>
+  </div>
+</div>
+<div th:insert="fragments/navbar.html :: footer"></div>
+</body>
+</html>

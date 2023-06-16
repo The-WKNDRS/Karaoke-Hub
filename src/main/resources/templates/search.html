@@ -7,6 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/resets.css}">
     <link rel="stylesheet" th:href="@{/css/layout.css}">
     <link rel="stylesheet" th:href="@{/css/search.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
 
     <!--    <link rel="stylesheet" th:href="@{/css/footer.css}">     -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
@@ -17,6 +18,9 @@
     <!--    <link rel="stylesheet" href="/css/layout.css">-->
 </head>
 <body>
+<div class="search-container">
+<div th:insert="fragments/navbar.html :: navbar"></div>
+<div class="search-page">
 <form id="zipcodeForm" class="search-form" th:action="@{/search-venue}" th:method="post">
     <input id="zipcode" name="zipcode" class="zipcode" type="text" placeholder="Enter Zip Code"/>
 <!--    <div class="form-group">-->
@@ -56,5 +60,8 @@
 <script src="/js/keys.js"></script>
 <script src="/js/geocoder-utils.js"></script>
 <script src="/js/mapbox.js" type="module"></script>
+</div>
+<div th:insert="fragments/navbar.html :: footer"></div>
+</div>
 </body>
 </html>
