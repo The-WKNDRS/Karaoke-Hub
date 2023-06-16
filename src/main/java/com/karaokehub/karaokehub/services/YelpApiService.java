@@ -3,7 +3,7 @@ package com.karaokehub.karaokehub.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.karaokehub.karaokehub.Keys;
+//import com.karaokehub.karaokehub.Keys;
 import com.squareup.okhttp.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.cassandra.CassandraProperties;
@@ -16,7 +16,7 @@ import java.io.IOException;
 
 @Service("yelpApiService")
 public class YelpApiService {
-    static String yelpApiKey = Keys.getApiKey();
+//    static String yelpApiKey = Keys.getApiKey();
     private static final String yelpBaseUrl = "api.yelp.com/v3";
 
     private static String makeAutoCompleteUrl(String query, String latitude, String longitude){
@@ -74,7 +74,7 @@ public class YelpApiService {
 
                 .url(requestUri)
                 .addHeader("Access-Control-Allow-Origin","*")
-                .addHeader("Authorization", "Bearer " + yelpApiKey)
+//                .addHeader("Authorization", "Bearer " + yelpApiKey)
                 .build();
 
         Response response = client.newCall(request).execute();
@@ -96,7 +96,7 @@ public class YelpApiService {
                         new Request.Builder()
                                 .url(requestUri)
                                 .addHeader("Access-Control-Allow-Origin","*")
-                                .addHeader("Authorization", "Bearer " + yelpApiKey)
+//                                .addHeader("Authorization", "Bearer " + yelpApiKey)
                                 .build())
                 .execute();
 
