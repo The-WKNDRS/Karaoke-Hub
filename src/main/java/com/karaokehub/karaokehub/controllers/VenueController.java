@@ -60,12 +60,17 @@ public class VenueController {
     public String showSearch() { return "search"; }
 
     @GetMapping(value = "/search-venue-json", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> sendVenues(@RequestParam(name = "zipcode") String zipcode) {
+    public ResponseEntity<String> sendVenues(@RequestParam(name = "zipcode") String zipcode, @RequestParam(name = "weekday") String weekday) {
         String data;
-        if (zipcode.equals("null")) {
-            data = venueDao.findAllValuesNative();
-        } else {
+        System.out.println(weekday);
+        if (!zipcode.equals("null") && weekday.equals("Any")) {
             data = venueDao.findVenueByZipcodeNative(zipcode);
+        } else if (!zipcode.equals("null") && !weekday.equals("Any")) {
+            data = venueDao.filterVenueByWeekdayNative(weekday, zipcode);
+        } else if (zipcode.equals("null") && !weekday.equals("Any")) {
+            data = venueDao.filterAllByWeekdayNative(weekday);
+        } else {
+            data = venueDao.findAllValuesNative();
         }
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONNECTION, "close")

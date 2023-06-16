@@ -4,9 +4,10 @@ import * as mapboxUtils from "./mapbox-utils.js";
 
     const zipcodeForm = document.querySelector('#zipcodeForm');
     const zipcodeInput = document.querySelector('#zipcode');
+    let weekDay = document.querySelector('#weekday').value;
 
     let zipValue = "";
-    let geoVenues = await mapboxUtils.formatVenues(zipValue);
+    let geoVenues = await mapboxUtils.formatVenues(zipValue, weekDay);
 
     mapboxgl.accessToken = mapKey;
 
@@ -27,16 +28,28 @@ import * as mapboxUtils from "./mapbox-utils.js";
     });
 
     zipcodeForm.addEventListener('submit',  async function (event) {
-        zipValue = zipcodeInput.value;
+        weekDay = document.querySelector('#weekday').value;
+        zipValue = "";
+        if (zipcodeInput.value != null) {
+            zipValue = zipcodeInput.value;
+        }
         event.preventDefault();
-        geoVenues = await mapboxUtils.formatVenues(zipValue);
+        geoVenues = await mapboxUtils.formatVenues(zipValue, weekDay);
         map.getSource('places').setData(geoVenues);
         //Geocode the zipcode
-        let newCenter = await geocode(zipValue, mapboxgl.accessToken);
-        map.flyTo({
-            center: newCenter,
-            zoom: 11
-        });
+        let newCenter = [-98.495141, 29.4246];
+        if (zipValue !== '') {
+            newCenter = await geocode(zipValue, mapboxgl.accessToken);
+            map.flyTo({
+                center: newCenter,
+                zoom: 11
+            });
+        } else {
+            map.flyTo({
+                center: newCenter,
+                zoom: 10
+            });
+        };
         mapboxUtils.clearLocationList();
         await mapboxUtils.buildLocationList(map, geoVenues);
         mapboxUtils.clearMarkers();
