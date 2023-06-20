@@ -2,13 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Song Finder Results Page</title>
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
     <link rel="stylesheet" th:href="@{/css/resets.css}">
     <link rel="stylesheet" th:href="@{/css/layout.css}">
     <link rel="stylesheet" th:href="@{/css/register.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/songfinder-results.css}">
 
 </head>
 <body>
@@ -27,6 +28,17 @@
     <div class="song-finder">
         <p class="song-finder-label"> New!!! Having trouble finding a song to sing? Try our chatGPT powered song finder!</p>
         <a class="song-finder-button" th:href="@{/song-finder}">Click Here!! Song Finder - powered by ChatGPT</a>
+    </div>
+    <div class="song-finder-results-container">
+        <h1>Song Finder Results</h1>
+        <div class="song-list" id="song-list">
+            <!-- Iterate over the songs list -->
+            <div th:each="song : ${songs}">
+                <h2 th:text="${song.name}"></h2>
+                <p th:text="${song.artist}"></p>
+            </div>
+        </div>
+    </div>
     </div>
 
 </div>
