@@ -4,6 +4,7 @@ package com.karaokehub.karaokehub.services;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.squareup.okhttp.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -14,7 +15,10 @@ import java.io.IOException;
 
 @Service("yelpApiService")
 public class YelpApiService {
-    static String apiKey;
+
+
+    private static String apiKey = "2GcKsiasG148oNxhkk8NC_db3KvAqwYYsDmWNxo2xswrAIG68XtQ53f_BhD402yNgQp2HtnpjTRwbcTMt_oJqgIHgXkaR0cxAdilrur6ZdzofNILZo9skANOTZJ_ZHYx";
+
     private static final String yelpBaseUrl = "api.yelp.com/v3";
 
     private static String makeAutoCompleteUrl(String query, String latitude, String longitude){
@@ -89,6 +93,8 @@ public class YelpApiService {
                 .execute();
 
         String responseString  = response.body().string();
+        System.out.println(responseString);
+        System.out.println(apiKey);
         ObjectNode objectNode = new ObjectMapper().readValue(responseString, ObjectNode.class);
         return objectNode.get("businesses").toString();
     }

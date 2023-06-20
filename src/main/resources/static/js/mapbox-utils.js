@@ -201,7 +201,7 @@ function changeMarkerColor(currentFeature) {
     let markers = document.getElementsByClassName('marker');
     for (const marker of markers) {
         if (`marker-${currentFeature.properties.id}` === marker.id) {
-            marker.classList.toggle('change-color');
+            marker.classList.toggle('change');
         }
     }
 }

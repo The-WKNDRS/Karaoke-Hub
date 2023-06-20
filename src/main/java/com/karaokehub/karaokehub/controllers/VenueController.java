@@ -31,21 +31,28 @@ public class VenueController {
     @GetMapping("/create-venue")
     public String createVenue(Model model) {
         model.addAttribute("venue", new Venue());
-        model.addAttribute("event", new Event());
         return "create-venue";
     }
 
     @PostMapping("/create-venue")
-    public String createVenue(@ModelAttribute Venue venue, @ModelAttribute Event event) {
+    public String createVenue(@ModelAttribute Venue venue) {
         venueDao.save(venue);
-        eventDao.save(event);
-        return "redirect:/venue-profile";
+        return "redirect:venue-profile/" + venue.getId();
     }
 
     @GetMapping("/venue-profile/{id}")
     public String venueProfile(Model model, @PathVariable long id) {
         model.addAttribute("venue", venueDao.getReferenceById(id));
+        List<Event> events = eventDao.findByVenueId(id);
+        model.addAttribute("events", events);
         return "venue-profile";
+    }
+
+    @PostMapping("/edit-venue/{id}")
+    public String editVenue(@ModelAttribute Venue venue, @PathVariable long id) {
+        venue = venueDao.findById(id);
+        venueDao.save(venue);
+        return "redirect:venue-profile/" + venue.getId();
     }
 
 

@@ -1,5 +1,6 @@
 package com.karaokehub.karaokehub.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,7 +27,7 @@ public class SecurityConfig {
 
 
         http.formLogin((form) -> form.loginPage("/login").defaultSuccessUrl("/profile"));
-        http.logout((form) -> form.logoutSuccessUrl("/search"));
+        http.logout((form) -> form.logoutSuccessUrl("/logout"));
         http.httpBasic(withDefaults());
         return http.build();
     }
@@ -36,5 +37,11 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    @Value("${YELP_API_KEY}")
+    private String apiKey;
 
+    @Bean
+    public String getApiKey() {
+        return apiKey;
+    }
 }

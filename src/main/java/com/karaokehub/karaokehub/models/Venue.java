@@ -87,14 +87,6 @@ public class Venue {
         this.zip_code = zip_code;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -149,6 +141,14 @@ public class Venue {
 
     public void setYelp_id(String yelp_id) {
         this.yelp_id = yelp_id;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     @PrePersist
