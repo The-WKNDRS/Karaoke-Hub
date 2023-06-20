@@ -84,5 +84,10 @@ public class UserController {
         return "/logout";
     }
 
+    @GetMapping("/about")
+    public String about() {
+        return "about";
+    }
+
 
 }

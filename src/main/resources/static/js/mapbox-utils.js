@@ -1,12 +1,23 @@
 const listings = document.getElementById('listings');
 
-export const getVenues = async function (zipValue) {
+export const getVenues = async function (zipValue, weekDay) {
+    console.log(weekDay)
     try {
         let url = '/search-venue-json';
-        if (zipValue !== '') {
-            url += `?zipcode=${zipValue}`;
+        if (weekDay !== 'Any') {
+            if (zipValue !== '') {
+                url += `?zipcode=${zipValue}`;
+            } else {
+                url += '?zipcode=null';
+            }
+            url += `&weekday=${weekDay}`;
         } else {
-            url += '?zipcode=null';
+            if (zipValue !== '') {
+                url += `?zipcode=${zipValue}`;
+            } else {
+                url += '?zipcode=null';
+            }
+            url += `&weekday=Any`;
         }
         const response = await fetch(url);
         const data = await response.json();
@@ -16,14 +27,14 @@ export const getVenues = async function (zipValue) {
     }
 };
 
-export const formatVenues = async function (zipValue) {
+export const formatVenues = async function (zipValue, weekDay) {
     const geoVenues = {
         "type": "FeatureCollection",
         "features": [
         ]
     };
     try {
-        for (const venue of await getVenues(zipValue)) {
+        for (const venue of await getVenues(zipValue, weekDay)) {
             let formattedVenues = {
                 type: "Feature",
                 geometry: {type: "Point", coordinates: []},
@@ -55,7 +66,7 @@ export const formatVenues = async function (zipValue) {
         }
         return geoVenues;
     } catch (error) {
-        alert("No venues found for that zip code. Please try again.");
+        //alert("No venues found for that zip code. Please try again.");
     }
 };
 

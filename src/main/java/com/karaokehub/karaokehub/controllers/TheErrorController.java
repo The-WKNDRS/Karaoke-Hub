@@ -5,16 +5,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class TheErrorController implements ErrorController {
 
-    @GetMapping("/error")
+    @RequestMapping("/error")
     public String handleError(HttpServletRequest request) {
         String errorPage = "error";
 
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+        System.out.println(status);
 
         if (status != null) {
             int statusCode = Integer.parseInt(status.toString());
@@ -33,12 +34,7 @@ public class TheErrorController implements ErrorController {
                 errorPage = "error/500";
             }
         }
-
         return errorPage;
-    }
-
-    public String getErrorPath() {
-        return "/error";
     }
 
 }

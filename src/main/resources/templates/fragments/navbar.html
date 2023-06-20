@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:sec="http://www.thymeleaf.org">
-
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abel&family=Anton&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
 <body>
 <nav th:fragment="navbar" class="navbar">
+  <div class="logo-nav">
+    <img class="logo-img-nav" th:src="@{/img/karaoke-icon.png}" alt="microphone">
+    <h3>Karaoke Hub</h3>
+  </div>
   <ul>
     <li><a class="navbar-links" th:href="@{/index}">Home</a></li>
     <li><a class="navbar-links" th:href="@{/about}">About</a></li>
@@ -22,38 +30,7 @@
         <button type="submit" id="signout" class="navbar-links">Sign Out</button>
       </form>
     </li>
-
-    <li><a class="navbar-links right-link" th:href="@{search-venue}">Find Karaoke!!</a>
-<!--      <div class="dropdown">-->
-<!--        <h3 class="dropdown-title">Find Karaoke!</h3>-->
-<!--        <form th:action="@{/search-venue}" th:method="post">-->
-<!--          <input class="form-input" type="text" placeholder="Enter Zip Code" />-->
-<!--          <div class="form-entry">-->
-<!--            <label for="travel-distance">Travel Distance:</label>-->
-<!--            <select id="travel-distance" class="form-input">-->
-<!--              <option value="5">5 miles</option>-->
-<!--              <option value="10">10 miles</option>-->
-<!--              <option value="15">15 miles</option>-->
-<!--              <option value="20">20 miles</option>-->
-<!--              <option value="25">25 miles</option>-->
-<!--              <option value="30">30 miles</option>-->
-<!--            </select>-->
-<!--          </div>-->
-<!--          <div class="form-entry">-->
-<!--            <label for="weekday">Day of the Week:</label>-->
-<!--            <select id="weekday" class="form-input">-->
-<!--              <option value="Monday">Monday</option>-->
-<!--              <option value="Tuesday">Tuesday</option>-->
-<!--              <option value="Wednesday">Wednesday</option>-->
-<!--              <option value="Thursday">Thursday</option>-->
-<!--              <option value="Friday">Friday</option>-->
-<!--              <option value="Saturday">Saturday</option>-->
-<!--              <option value="Sunday">Sunday</option>-->
-<!--            </select>-->
-<!--          </div>-->
-<!--          <button class="form-button" type="submit">Search</button>-->
-<!--        </form>-->
-<!--      </div>-->
+    <li class="find-karaoke"><a class="navbar-links right-link" th:href="@{search-venue}">Find Karaoke</a>
     </li>
   </ul>
 </nav>
