@@ -1,5 +1,5 @@
 
-export async function searchVenue(query, zipcode) {
+async function searchVenue(query, zipcode) {
     try {
         let url = `${window.location.protocol}//${window.location.host}/yelp/${query}?location=${zipcode}`;
         let response = await fetch(url);

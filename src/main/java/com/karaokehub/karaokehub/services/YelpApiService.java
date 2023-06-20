@@ -14,7 +14,6 @@ import java.io.IOException;
 
 @Service("yelpApiService")
 public class YelpApiService {
-    @Value("${apiKey}")
     static String apiKey;
     private static final String yelpBaseUrl = "api.yelp.com/v3";
 
