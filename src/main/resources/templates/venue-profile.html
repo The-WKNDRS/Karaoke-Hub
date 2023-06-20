@@ -46,7 +46,7 @@
     </div>
     <div class="edit-modal">
         <div class="modal">
-            <form class="edit-form" th:action="@{/edit-venue}" th:object="${venue}" th:method="post">
+            <form class="edit-form" th:action="@{/edit-venue/{id}(id=${venue.id})}" th:object="${venue}" th:method="post">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input id="name" name="name" th:field="*{name}">

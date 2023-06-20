@@ -48,8 +48,9 @@ public class VenueController {
         return "venue-profile";
     }
 
-    @PostMapping("/edit-venue")
-    public String editVenue(@ModelAttribute Venue venue) {
+    @PostMapping("/edit-venue/{id}")
+    public String editVenue(@ModelAttribute Venue venue, @PathVariable long id) {
+        venue = venueDao.findById(id);
         venueDao.save(venue);
         return "redirect:venue-profile/" + venue.getId();
     }
