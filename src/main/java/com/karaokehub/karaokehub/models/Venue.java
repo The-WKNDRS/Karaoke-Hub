@@ -35,6 +35,9 @@ public class Venue {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "venue")
     private List<Event> events;
 
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "venue")
+    private List<Comment> comments;
+
     public Venue(long id, String name, String address, String city, String state, String zip_code, String website, String yelp_id, List<Event> events) {
         this.id = id;
         this.name = name;
@@ -165,5 +168,13 @@ public class Venue {
 
     public void setEvents(List<Event> events) {
         this.events = events;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }
