@@ -29,10 +29,14 @@ export const getVenues = async function (zipValue, weekDay) {
 export const formatVenues = async function (zipValue, weekDay) {
     const geoVenues = {
         "type": "FeatureCollection",
-        "features": [
-        ]
+        "features": []
     };
     try {
+        // Fetch the Mapbox API key from the server
+        const mapboxApiKeyUrl = '/api/get-mapbox-api-key';
+        const response = await fetch(mapboxApiKeyUrl);
+        const mapKey = await response.text();
+
         for (const venue of await getVenues(zipValue, weekDay)) {
             let formattedVenues = {
                 type: "Feature",
@@ -59,12 +63,14 @@ export const formatVenues = async function (zipValue, weekDay) {
             }
             let addressString = (formattedVenues.properties.address + "," + formattedVenues.properties.city + "," + formattedVenues.properties.state + "," + formattedVenues.properties.zip);
 
-            let coords = await geocode((addressString), mapKey).then(async function(result) {return result;});
+            let coords = await geocode((addressString), mapKey).then(async function (result) { return result; });
             formattedVenues.geometry.coordinates = (coords);
             geoVenues.features.push(formattedVenues);
         }
         return geoVenues;
     } catch (error) {
+        // Handle the error condition
+        console.error('Error:', error);
         //alert("No venues found for that zip code. Please try again.");
     }
 };

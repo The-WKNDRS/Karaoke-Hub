@@ -1,4 +1,3 @@
-const apiKey = `${CHATGPT_APPID}`;
 const apiUrl = 'https://api.openai.com/v1/completions';
 
 const form = document.getElementById('song-finder-form');
@@ -17,26 +16,37 @@ function handleSubmit(event) {
 
     const prompt = `You are a karaoke song finder. Find 10 songs with vocal type: ${vocalType}, music genre: ${musicGenre}, and era: ${era}. Return the song name and artist.`;
 
-    const requestBody = {
-        model: 'text-davinci-003',
-        prompt: prompt,
-        max_tokens: 150,
-        temperature: 0,
-    };
+    // Make a request to your server to fetch the API key
+    fetch('/api/get-api-key')
+        .then(response => response.text())
+        .then(apiKey => {
+            const trimmedApiKey = apiKey.trim(); // Remove any leading/trailing whitespace
 
-    // Make an API request to ChatGPT using your API key
-    fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + apiKey,
-        },
-        body: JSON.stringify(requestBody),
-    })
-        .then(response => response.json())
-        .then(result => {
-            console.log('ChatGPT API Response:', result);
-            handleApiResponse(result);
+            const requestBody = {
+                model: 'text-davinci-003',
+                prompt: prompt,
+                max_tokens: 150,
+                temperature: 0,
+            };
+
+            // Make an API request to ChatGPT using the retrieved API key
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: 'Bearer ' + trimmedApiKey,
+                },
+                body: JSON.stringify(requestBody),
+            })
+                .then(response => response.json())
+                .then(result => {
+                    console.log('ChatGPT API Response:', result);
+                    handleApiResponse(result);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Handle the error condition
+                });
         })
         .catch(error => {
             console.error('Error:', error);
@@ -88,4 +98,3 @@ function renderSongList(songList) {
         songListContainer.appendChild(songContainer);
     }
 }
-
