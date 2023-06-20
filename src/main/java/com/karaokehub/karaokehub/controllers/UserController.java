@@ -2,8 +2,12 @@ package com.karaokehub.karaokehub.controllers;
 
 import com.karaokehub.karaokehub.models.User;
 import com.karaokehub.karaokehub.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +29,7 @@ public class UserController {
     @GetMapping("/register")
     public String registerUsers(Model model) {
         model.addAttribute("user", new User());
-        return "/register";
+        return "register";
     }
 
     @PostMapping("/register")
@@ -40,12 +44,12 @@ public class UserController {
     @GetMapping("/login")
     public String loginUsers(Model model) {
         model.addAttribute("user", new User());
-        return "/login";
+        return "login";
     }
 
     @GetMapping("/index")
     public String index() {
-        return "/index";
+        return "index";
     }
 
     @GetMapping("/profile")
@@ -54,7 +58,7 @@ public class UserController {
         long id = user.getId();
         user = userDao.getReferenceById(id);
         model.addAttribute("user", user);
-        return "/user-profile";
+        return "user-profile";
     }
 
     @PostMapping("/profile/update")
@@ -69,6 +73,20 @@ public class UserController {
             userDao.save(user);
         }
         return "redirect:/profile";
+    }
+
+    @GetMapping("/logout")
+    public String customLogout(HttpServletRequest request, HttpServletResponse response) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null){
+            new SecurityContextLogoutHandler().logout(request, response, authentication); // <= This is the call you are looking for.
+        }
+        return "/logout";
+    }
+
+    @GetMapping("/about")
+    public String about() {
+        return "about";
     }
 
 

@@ -133,7 +133,7 @@ input[type="submit"]:hover {
     animation-delay: 2s;
 }
 
-.note-amination {
+.note-animation {
     position: absolute;
     font-size: 25px;
     animation-name: notes;

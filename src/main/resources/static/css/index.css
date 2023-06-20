@@ -1,0 +1,54 @@
+.logo {
+    padding-top: 20px;
+}
+
+.background-image-wrapper {
+    background-image: url(/static/img/singers2.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.index-button {
+    background-color: #483B89;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.logo > h3 {
+    font-size: 40px;
+    color: darkslateblue;
+}
+
+.index-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.song-finder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.song-finder-label {
+    color: white;
+    background-color: #FF0000; /* Replace with your desired background color */
+    padding: 10px;
+}
+
+.song-finder-button {
+    color: white;
+    background-color: #483B89; /* Replace with your desired background color */
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+}
