@@ -41,7 +41,7 @@
             <strong>Website: </strong>
             <a th:href="${venueEventDto.venue.website}" th:text="${venueEventDto.venue.website}">Website</a>
             <br>
-          </span>
+        </span>
           <strong>Karaoke Nights:</strong>
         <div class="karaoke-nights-row">
           <span th:text="${venueEventDto.getKaraokeDays()}" th:unless="${venueEventDto.getKaraokeDays()}"></span>
@@ -52,19 +52,16 @@
           <span th:if="${event.dj}">
                 <strong>DJ: </strong><span th:text="${event.dj}"></span>
                 <br>
-              </span>
+            </span>
           <span th:text="${event.start_time}"></span> - <span th:text="${event.end_time}"></span>
         </div>
+        </p>
+        <a th:href="@{'/venue-profile/' + ${venueEventDto.venue.id}}" class="btn btn-primary">View Profile</a>
       </div>
+
     </div>
   </div>
 </div>
-</div>
-<div th:insert="fragments/navbar.html :: footer"></div>
-</body>
-</html>
-    </div>
-  </div>
 </div>
 <div th:insert="fragments/navbar.html :: footer"></div>
 </body>

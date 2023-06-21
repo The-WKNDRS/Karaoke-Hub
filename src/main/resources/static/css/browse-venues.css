@@ -127,6 +127,7 @@ ul.events-list li hr {
     background-position: center;
     background-repeat: no-repeat;
     z-index: -1;
+<<<<<<< HEAD
 }
 
 .venue-create-row {
@@ -149,4 +150,6 @@ ul.events-list li hr {
     text-decoration: none;
     font-size: 16px;
     font-weight: bold;
+=======
+>>>>>>> 7ec1c58 (browse venues page fully functional)
 }
