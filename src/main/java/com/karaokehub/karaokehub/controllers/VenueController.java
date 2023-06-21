@@ -40,7 +40,7 @@ public class VenueController {
     @PostMapping("/create-venue")
     public String createVenue(@ModelAttribute Venue venue) {
         venueDao.save(venue);
-        return "redirect:venue-profile/" + venue.getId();
+        return "redirect:venue/" + venue.getId();
     }
 
     @GetMapping("/venue/{id}")
