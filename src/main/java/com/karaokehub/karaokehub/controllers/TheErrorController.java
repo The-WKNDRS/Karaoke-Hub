@@ -19,6 +19,7 @@ public class TheErrorController implements ErrorController {
 
         if (status != null) {
             int statusCode = Integer.parseInt(status.toString());
+            System.out.println(statusCode);
 
             if (statusCode == HttpStatus.NOT_FOUND.value()) {
                 // handle HTTP 404 Not Found error
