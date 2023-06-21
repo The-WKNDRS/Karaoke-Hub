@@ -4,6 +4,7 @@ package com.karaokehub.karaokehub.services;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.squareup.okhttp.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -14,8 +15,10 @@ import java.io.IOException;
 
 @Service("yelpApiService")
 public class YelpApiService {
-    @Value("${apiKey}")
-    static String apiKey;
+
+
+    private static String apiKey = "2GcKsiasG148oNxhkk8NC_db3KvAqwYYsDmWNxo2xswrAIG68XtQ53f_BhD402yNgQp2HtnpjTRwbcTMt_oJqgIHgXkaR0cxAdilrur6ZdzofNILZo9skANOTZJ_ZHYx";
+
     private static final String yelpBaseUrl = "api.yelp.com/v3";
 
     private static String makeAutoCompleteUrl(String query, String latitude, String longitude){
@@ -41,8 +44,19 @@ public class YelpApiService {
                 .build()
                 .toUriString();
     }
-    private static String makeAutoCompleteUrl(String query, String location){
+    private static String makeAutoCompleteUrl(String id){
+        //making the uri adjustable by using the UriComponentsBuilder for the request
+        return UriComponentsBuilder.newInstance()
+                .scheme("https").host(yelpBaseUrl).path("/businesses/")
+                .path("/" + id)
+                .queryParam("radius", "40000")
+                .queryParam("sort_by", "rating")
+                .queryParam("limit", "1")
+                .build()
+                .toUriString();
+    }
 
+    private static String makeAutoCompleteUrl(String query, String location){
         //making the uri adjustable by using the UriComponentsBuilder for the request
         return UriComponentsBuilder.newInstance()
                 .scheme("https").host(yelpBaseUrl).path("/businesses/search")
@@ -55,9 +69,7 @@ public class YelpApiService {
                 .toUriString();
     }
     public static String execute(String query, String latitude, String longitude) throws IOException {
-
         OkHttpClient client = new OkHttpClient();
-
         //creating the api endpoint url
         String requestUri = makeAutoCompleteUrl(query, latitude, longitude );
         Request request = new Request.Builder()
@@ -76,12 +88,9 @@ public class YelpApiService {
     public static String execute(String query, String location) throws IOException {
 
         OkHttpClient client = new OkHttpClient();
-
         //creating the api endpoint url
         String requestUri = makeAutoCompleteUrl(query, location);
-
         Response response = client.newCall(
-
                         new Request.Builder()
                                 .url(requestUri)
                                 .addHeader("Access-Control-Allow-Origin","*")
@@ -90,8 +99,30 @@ public class YelpApiService {
                 .execute();
 
         String responseString  = response.body().string();
+        System.out.println(responseString);
+        System.out.println(apiKey);
         ObjectNode objectNode = new ObjectMapper().readValue(responseString, ObjectNode.class);
         return objectNode.get("businesses").toString();
+    }
+
+    public static String execute(String id) throws IOException {
+
+        OkHttpClient client = new OkHttpClient();
+        //creating the api endpoint url
+        String requestUri = makeAutoCompleteUrl(id);
+        Response response = client.newCall(
+                        new Request.Builder()
+                                .url(requestUri)
+                                .addHeader("Access-Control-Allow-Origin","*")
+                                .addHeader("Authorization", "Bearer " + apiKey)
+                                .build())
+                .execute();
+
+        String responseString  = response.body().string();
+        System.out.println(responseString);
+        System.out.println(apiKey);
+        ObjectNode objectNode = new ObjectMapper().readValue(responseString, ObjectNode.class);
+        return objectNode.toString();
     }
 }
 

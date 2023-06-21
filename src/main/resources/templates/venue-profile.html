@@ -3,10 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <title>Venue Profile</title>
+    <link rel="stylesheet" th:href="@{/css/resets.css}">
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/venue-profile.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
 </head>
 <body>
-<div class="yelp"></div>
-<input class="venueId" type="hidden" th:value="${venue.id}">
-<script src="js/yelp-api.js"></script>
+<div class="page-wrapper">
+    <div th:insert="fragments/navbar.html :: navbar"></div>
+    <div class="container">
+        <div class="row top"></div>
+        <div class="row">
+            <div class="column left">
+                <div class="img-wrapper"></div>
+                <div class="name-rating">
+                    <p th:text="${venue.name}" class="name"></p>
+                    <div class="rating"></div>
+                    <ul class="categories"></ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="edit">
+                    <h3>Edit Profile</h3>
+                    <img class="edit-img" th:src="@{/img/edit1.png}">
+                </div>
+                <div class="delete">
+                    <a th:href="@{/delete-venue/{id}(id=${venue.id})}" class="delete-btn">Delete profile</a>
+                </div>
+                <h3>Location and Hours</h3>
+                <div class="profile row">
+                    <div class="location column">
+                        <p><span th:text="${venue.address}" class="address"></span><p></p>
+                        <p><span th:text="${venue.city}" class="city"></span>, <span th:text="${venue.state}" class="state"></span></p>
+                    </div>
+                    <div class="times column">
+                        <div th:each="event: ${events}">
+                            <div class="hours">
+                            </div>
+                           </div>
+                    </div>
+                </div>
+                <a th:href="${venue.website}" target="_blank"><h1 th:text="${venue.website}" class="website"></h1></a>
+            </div>
+        </div>
+    </div>
+    <div class="edit-modal">
+        <div class="modal">
+            <form class="edit-form" th:action="@{/create-venue}" th:object="${venue}" th:method="post">
+                <input type="hidden" th:field="*{id}" />
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input id="name" name="name" th:field="*{name}">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input id="address" name="address" th:field="*{address}">
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input id="city" name="city" th:field="*{city}">
+                </div>
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <input id="state" name="state" th:field="*{state}">
+                </div>
+                <div class="form-group">
+                    <label for="zip_code">Zip Code</label>
+                    <input id="zip_code" name="zip_code" th:field="*{zip_code}">
+                </div>
+                <div class="form-group">
+                    <label for="website">Website</label>
+                    <input id="website" name="website" th:field="*{website}">
+                </div>
+                <input class="submit-edit" type="submit" value="Submit Edit">
+            </form>
+        </div>
+    </div>
+    <div th:insert="fragments/navbar.html :: footer"></div>
+</div>
+<input class="venueName" type="hidden" th:value="${venue.name}">
+<input class="venueZip" type="hidden" th:value="${venue.zip_code}">
+<script src="/js/venue-profile.js"></script>
 </body>
 </html>

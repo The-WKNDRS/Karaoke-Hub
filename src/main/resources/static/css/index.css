@@ -30,3 +30,25 @@
     align-items: center;
     padding: 20px;
 }
+
+.song-finder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.song-finder-label {
+    color: white;
+    background-color: #FF0000; /* Replace with your desired background color */
+    padding: 10px;
+}
+
+.song-finder-button {
+    color: white;
+    background-color: #483B89; /* Replace with your desired background color */
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+}

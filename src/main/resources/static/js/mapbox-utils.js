@@ -1,12 +1,22 @@
 const listings = document.getElementById('listings');
 
-export const getVenues = async function (zipValue) {
+export const getVenues = async function (zipValue, weekDay) {
     try {
         let url = '/search-venue-json';
-        if (zipValue !== '') {
-            url += `?zipcode=${zipValue}`;
+        if (weekDay !== 'Any') {
+            if (zipValue !== '') {
+                url += `?zipcode=${zipValue}`;
+            } else {
+                url += '?zipcode=null';
+            }
+            url += `&weekday=${weekDay}`;
         } else {
-            url += '?zipcode=null';
+            if (zipValue !== '') {
+                url += `?zipcode=${zipValue}`;
+            } else {
+                url += '?zipcode=null';
+            }
+            url += `&weekday=Any`;
         }
         const response = await fetch(url);
         const data = await response.json();
@@ -16,14 +26,18 @@ export const getVenues = async function (zipValue) {
     }
 };
 
-export const formatVenues = async function (zipValue) {
+export const formatVenues = async function (zipValue, weekDay) {
     const geoVenues = {
         "type": "FeatureCollection",
-        "features": [
-        ]
+        "features": []
     };
     try {
-        for (const venue of await getVenues(zipValue)) {
+        // Fetch the Mapbox API key from the server
+        const mapboxApiKeyUrl = '/api/get-mapbox-api-key';
+        const response = await fetch(mapboxApiKeyUrl);
+        const mapKey = await response.text();
+
+        for (const venue of await getVenues(zipValue, weekDay)) {
             let formattedVenues = {
                 type: "Feature",
                 geometry: {type: "Point", coordinates: []},
@@ -49,13 +63,15 @@ export const formatVenues = async function (zipValue) {
             }
             let addressString = (formattedVenues.properties.address + "," + formattedVenues.properties.city + "," + formattedVenues.properties.state + "," + formattedVenues.properties.zip);
 
-            let coords = await geocode((addressString), mapKey).then(async function(result) {return result;});
+            let coords = await geocode((addressString), mapKey).then(async function (result) { return result; });
             formattedVenues.geometry.coordinates = (coords);
             geoVenues.features.push(formattedVenues);
         }
         return geoVenues;
     } catch (error) {
-        alert("No venues found for that zip code. Please try again.");
+        // Handle the error condition
+        console.error('Error:', error);
+        //alert("No venues found for that zip code. Please try again.");
     }
 };
 
@@ -183,7 +199,7 @@ function createPopUp(map, currentFeature) {
 
     const popup = new mapboxgl.Popup({ closeOnClick: false })
         .setLngLat(currentFeature.geometry.coordinates)
-        .setHTML(`<h3>${currentFeature.properties.name}</h3><h4>${currentFeature.properties.address}</h4><h5><a href="/venue-profile/${currentFeature.properties.id}">Go to venue page</a></h5>`)
+        .setHTML(`<h3>${currentFeature.properties.name}</h3><h4>${currentFeature.properties.address}</h4><h5><a href="/venue/${currentFeature.properties.id}">Go to venue page</a></h5>`)
         .addTo(map);
 }
 
@@ -191,7 +207,38 @@ function changeMarkerColor(currentFeature) {
     let markers = document.getElementsByClassName('marker');
     for (const marker of markers) {
         if (`marker-${currentFeature.properties.id}` === marker.id) {
-            marker.classList.toggle('change-color');
+            marker.classList.toggle('change');
         }
     }
 }
+
+export async function searchVenues(event, map, geoVenues, zipcodeInput, weekDay, zipValue) {
+    weekDay = document.querySelector('#weekday').value;
+    zipValue = "";
+    if (zipcodeInput.value != null) {
+        zipValue = zipcodeInput.value;
+    }
+    event.preventDefault();
+    geoVenues = await formatVenues(zipValue, weekDay);
+    map.getSource('places').setData(geoVenues);
+    //Geocode the zipcode
+    let newCenter = [-98.495141, 29.4246];
+    if (zipValue !== '') {
+        newCenter = await geocode(zipValue, mapboxgl.accessToken);
+        map.flyTo({
+            center: newCenter,
+            zoom: 11
+        });
+    } else {
+        map.flyTo({
+            center: newCenter,
+            zoom: 10
+        });
+    };
+    clearLocationList();
+    await buildLocationList(map, geoVenues);
+    clearMarkers();
+    await addMarkers(map, geoVenues);
+}
+
+

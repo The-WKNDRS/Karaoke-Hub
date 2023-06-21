@@ -1,10 +1,41 @@
-nav ul {
+body {
+    font-family: Poppins, sans-serif;
+}
+
+.column.left {
+    position: relative;
+}
+
+.navbar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
+}
+
+nav ul {
+    display: flex;
+    justify-content: end;
     align-items: center;
     list-style-type: none;
     margin: 0;
     padding: 0;
+    gap: 40px;
+}
+
+.logo-nav {
+    display: flex;
+    align-items: center;
+}
+
+.logo-nav > h3 {
+    font-size: 40px;
+    color: white;
+}
+
+.logo-img-nav {
+    height: 50px;
+    width: 50px;
 }
 
 nav ul li {
@@ -51,15 +82,6 @@ nav ul li:hover .dropdown {
     margin-top: 15px;
 }
 
-#logout-button,
-.dropdown,
-.navbar-links:last-child {
-    margin-left: auto;
-}
-
-.navbar-links:last-child {
-    margin-left: 50px;
-}
 
 .dropdown-divider {
     border-top: 1px solid #000; /* Add a solid black border on top */
@@ -98,9 +120,7 @@ nav ul li:hover .dropdown {
 #weekday {
     margin-bottom: 10px;
 }
-.right-link {
-    margin-right: 50px;
-}
+
 
 .navbar {
     background-color: #483C8A; /* Replace with your desired background color */
@@ -124,4 +144,8 @@ button.navbar-links {
 
 #signout {
     background-color: #483B89;
+}
+
+.find-karaoke {
+    margin-right: 20px;
 }

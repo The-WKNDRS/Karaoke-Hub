@@ -1,9 +1,8 @@
 package com.karaokehub.karaokehub.controllers;
-
-import com.karaokehub.karaokehub.models.Event;
-import com.karaokehub.karaokehub.models.Venue;
-import com.karaokehub.karaokehub.models.VenueEventDto;
+import com.karaokehub.karaokehub.models.*;
+import com.karaokehub.karaokehub.repository.CommentRepository;
 import com.karaokehub.karaokehub.repository.EventRepository;
+import com.karaokehub.karaokehub.repository.UserRepository;
 import com.karaokehub.karaokehub.repository.VenueRepository;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -22,30 +21,55 @@ public class VenueController {
 
     private final VenueRepository venueDao;
     private final EventRepository eventDao;
+    private final CommentRepository commentDao;
+    private final UserRepository userDao;
 
-    public VenueController(VenueRepository venueDao, EventRepository eventDao) {
+    public VenueController(VenueRepository venueDao, EventRepository eventDao, CommentRepository commentDao, UserRepository userDao) {
         this.venueDao = venueDao;
         this.eventDao = eventDao;
+        this.commentDao = commentDao;
+        this.userDao = userDao;
     }
 
     @GetMapping("/create-venue")
     public String createVenue(Model model) {
         model.addAttribute("venue", new Venue());
-        model.addAttribute("event", new Event());
         return "create-venue";
     }
 
     @PostMapping("/create-venue")
-    public String createVenue(@ModelAttribute Venue venue, @ModelAttribute Event event) {
+    public String createVenue(@ModelAttribute Venue venue) {
         venueDao.save(venue);
-        eventDao.save(event);
-        return "redirect:/venue-profile";
+        return "redirect:venue/" + venue.getId();
     }
 
-    @GetMapping("/venue-profile/{id}")
+    @GetMapping("/venue/{id}")
     public String venueProfile(Model model, @PathVariable long id) {
         model.addAttribute("venue", venueDao.getReferenceById(id));
+        List<Event> events = eventDao.findByVenueId(id);
+        model.addAttribute("events", events);
+        model.addAttribute("numComments", commentDao.findAllByVenueId(id).size());
+        if (commentDao.findAllByVenueId(id).size() > 0) {
+            model.addAttribute("comments", commentDao.findAllByVenueId(id));
+        }
         return "venue-profile";
+    }
+
+    @PostMapping("/venue/comment")
+    public String venueComment(@RequestParam(name="body") String body, @RequestParam(name="venue_id") long venue_id) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long id = user.getId();
+        user = userDao.getReferenceById(id);
+        Venue venue = venueDao.getReferenceById(venue_id);
+        commentDao.save(new Comment(body, user, venue));
+        return "redirect:/venue/" + venue_id;
+    }
+
+    @PostMapping("/edit-venue/{id}")
+    public String editVenue(@ModelAttribute Venue venue, @PathVariable long id) {
+        venue = venueDao.findById(id);
+        venueDao.save(venue);
+        return "redirect:venue-profile/" + venue.getId();
     }
 
 
@@ -60,12 +84,17 @@ public class VenueController {
     public String showSearch() { return "search"; }
 
     @GetMapping(value = "/search-venue-json", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> sendVenues(@RequestParam(name = "zipcode") String zipcode) {
+    public ResponseEntity<String> sendVenues(@RequestParam(name = "zipcode") String zipcode, @RequestParam(name = "weekday") String weekday) {
         String data;
-        if (zipcode.equals("null")) {
-            data = venueDao.findAllValuesNative();
-        } else {
+        System.out.println(weekday);
+        if (!zipcode.equals("null") && weekday.equals("Any")) {
             data = venueDao.findVenueByZipcodeNative(zipcode);
+        } else if (!zipcode.equals("null") && !weekday.equals("Any")) {
+            data = venueDao.filterVenueByWeekdayNative(weekday, zipcode);
+        } else if (zipcode.equals("null") && !weekday.equals("Any")) {
+            data = venueDao.filterAllByWeekdayNative(weekday);
+        } else {
+            data = venueDao.findAllValuesNative();
         }
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONNECTION, "close")
