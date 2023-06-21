@@ -40,7 +40,7 @@ public class VenueController {
         return "redirect:venue-profile/" + venue.getId();
     }
 
-    @GetMapping("/venue-profile/{id}")
+    @GetMapping("venue-profile/{id}")
     public String venueProfile(Model model, @PathVariable long id) {
         model.addAttribute("venue", venueDao.getReferenceById(id));
         List<Event> events = eventDao.findByVenueId(id);
@@ -48,11 +48,11 @@ public class VenueController {
         return "venue-profile";
     }
 
-    @PostMapping("/edit-venue/{id}")
-    public String editVenue(@ModelAttribute Venue venue, @PathVariable long id) {
-        venue = venueDao.findById(id);
-        venueDao.save(venue);
-        return "redirect:venue-profile/" + venue.getId();
+    @GetMapping("delete-venue/{id}")
+    public String deleteVenue(@PathVariable("id") long id) {
+        venueDao.delete(venueDao.getReferenceById(id));
+        eventDao.deleteAll(eventDao.findByVenueId(id));
+        return "redirect:search-venue";
     }
 
 

@@ -37,11 +37,5 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Value("${YELP_API_KEY}")
-    private String apiKey;
 
-    @Bean
-    public String getApiKey() {
-        return apiKey;
-    }
 }

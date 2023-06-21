@@ -18,7 +18,7 @@
             <div class="column left">
                 <div class="img-wrapper"></div>
                 <div class="name-rating">
-                    <h1 th:text="${venue.name}" class="name"></h1>
+                    <p th:text="${venue.name}" class="name"></p>
                     <div class="rating"></div>
                     <ul class="categories"></ul>
                 </div>
@@ -28,25 +28,30 @@
                     <h3>Edit Profile</h3>
                     <img class="edit-img" th:src="@{/img/edit1.png}">
                 </div>
-                <div class="profile">
-                    <div class="rating"></div>
-                    <h1 th:text="${venue.address}" class="address"></h1>
-                    <h1 th:text="${venue.city}" class="city"></h1>
-                    <h1 th:text="${venue.state}" class="state"></h1>
-                    <a th:href="${venue.website}" target="_blank"><h1 th:text="${venue.website}" class="website"></h1></a>
+                <div class="delete">
+                    <a th:href="@{/delete-venue/{id}(id=${venue.id})}" class="delete-btn">Delete profile</a>
                 </div>
-                <h1>Events:</h1>
-                <div th:each="event: ${events}">
-                    <h2 th:text="${event.day_of_week}"></h2>
-                    <h4>Start time: <span th:text="${event.start_time}"></span></h4>
-                    <h4>Start time: <span th:text="${event.end_time}"></span></h4>
+                <h3>Location and Hours</h3>
+                <div class="profile row">
+                    <div class="location column">
+                        <p><span th:text="${venue.address}" class="address"></span><p></p>
+                        <p><span th:text="${venue.city}" class="city"></span>, <span th:text="${venue.state}" class="state"></span></p>
+                    </div>
+                    <div class="times column">
+                        <div th:each="event: ${events}">
+                            <div class="hours">
+                            </div>
+                           </div>
+                    </div>
                 </div>
+                <a th:href="${venue.website}" target="_blank"><h1 th:text="${venue.website}" class="website"></h1></a>
             </div>
         </div>
     </div>
     <div class="edit-modal">
         <div class="modal">
-            <form class="edit-form" th:action="@{/edit-venue/{id}(id=${venue.id})}" th:object="${venue}" th:method="post">
+            <form class="edit-form" th:action="@{/create-venue}" th:object="${venue}" th:method="post">
+                <input type="hidden" th:field="*{id}" />
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input id="name" name="name" th:field="*{name}">
@@ -71,7 +76,7 @@
                     <label for="website">Website</label>
                     <input id="website" name="website" th:field="*{website}">
                 </div>
-                <input type="submit" value="Submit Edit">
+                <input class="submit-edit" type="submit" value="Submit Edit">
             </form>
         </div>
     </div>
@@ -79,6 +84,6 @@
 </div>
 <input class="venueName" type="hidden" th:value="${venue.name}">
 <input class="venueZip" type="hidden" th:value="${venue.zip_code}">
-<script src="/js/venue-profile.js" ></script>
+<script src="/js/venue-profile.js"></script>
 </body>
 </html>

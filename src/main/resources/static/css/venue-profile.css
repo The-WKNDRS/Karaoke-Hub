@@ -2,6 +2,7 @@
 .container {
     row-gap: 10px;
 }
+
 .yelp-img {
     height: 90%;
     box-shadow: rgba(0, 0, 0, 0.4) -5px 5px, rgba(0, 0, 0, 0.3) -10px 10px, rgba(0, 0, 0, 0.2) -15px 15px, rgba(0, 0, 0, 0.1) -20px 20px, rgba(0, 0, 0, 0.05) -25px 25px;
@@ -9,17 +10,21 @@
 
 .name-rating {
     position: absolute;
-    left: 50px;
+    left: 30px;
     bottom: 100px;
     color: white;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.name-rating > p {
+    font-size: 50px;
+    font-weight: bold;
 }
 
 .name {
     font-size: 60px;
-}
-
-.rating {
-    font-size: 20px;
 }
 
 .categories {
@@ -36,6 +41,18 @@
     padding: 6px;
     transition: all .2s ease;
     cursor: pointer;
+}
+
+.delete {
+    display: flex;
+    align-self: end;
+    padding-right:55px;
+    padding-top: 8px;
+    cursor: pointer;
+}
+
+.delete > a:hover {
+    color: orangered;
 }
 
 .edit:hover {
@@ -115,6 +132,25 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     scale: 1.02;
+}
+
+.profile {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.location {
+    border-right: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.rating {
+    display: flex;
+    column-gap: 5px;
+    align-items: center;
+}
+
+.star {
+    filter: invert(57%) sepia(85%) saturate(425%) hue-rotate(5deg) brightness(100%) contrast(88%);
+    width: 25px;
 }
 
 @keyframes fade-in {

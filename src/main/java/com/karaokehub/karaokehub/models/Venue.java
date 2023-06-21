@@ -70,6 +70,16 @@ public class Venue {
         this.yelp_id = yelp_id;
     }
 
+    public Venue(long id, String name, String address, String city, String state, String zip_code, String website) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip_code = zip_code;
+        this.website = website;
+    }
+
     public Venue(String name, String address, String city, String state, String zip_code, String website) {
         this.name = name;
         this.address = address;
