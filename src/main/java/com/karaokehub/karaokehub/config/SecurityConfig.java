@@ -25,6 +25,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests((requests) -> requests.anyRequest().permitAll());
 
 
+
         http.formLogin((form) -> form.loginPage("/login").defaultSuccessUrl("/profile"));
         http.logout((form) -> form.logoutSuccessUrl("/logout"));
         http.httpBasic(withDefaults());
@@ -32,9 +33,9 @@ public class SecurityConfig {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
-}
 
+}
