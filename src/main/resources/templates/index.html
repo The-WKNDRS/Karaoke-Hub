@@ -27,8 +27,51 @@
     <div class="song-finder">
         <a class="song-finder-button" th:href="@{/song-finder}">Click Here!! Song Finder - powered by ChatGPT</a>
     </div>
-
 </div>
+
+<!-- Overlay HTML -->
+<div id="overlay" class="overlay">
+    <div class="welcome-message-wrapper">
+        <h1 class="welcome-message">
+            <span>K</span>
+            <span>a</span>
+            <span>r</span>
+            <span>a</span>
+            <span>o</span>
+            <span>k</span>
+            <span>e</span>
+            &nbsp;
+            <span>H</span>
+            <span>u</span>
+            <span>b</span>
+            &nbsp;
+            <span>L</span>
+            <span>i</span>
+            <span>v</span>
+            <span>e</span>
+        </h1>
+    </div>
+</div>
+
 <div th:insert="fragments/navbar.html :: footer"></div>
+
+<script>
+    // JavaScript to remove the overlay after 3 seconds
+    const overlay = document.getElementById('overlay');
+    const isSplashDisplayed = sessionStorage.getItem('splashDisplayed');
+    if (!isSplashDisplayed) {
+        overlay.style.display = 'flex';
+        setTimeout(() => {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                sessionStorage.setItem('splashDisplayed', true);
+            }, 5000); // Hide the overlay after 5 seconds
+        }, 3000); // Keep the overlay visible for 3 seconds
+    } else {
+        overlay.style.display = 'none';
+    }
+</script>
 </body>
 </html>
+
