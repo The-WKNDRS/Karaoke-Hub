@@ -60,7 +60,9 @@ public class VenueController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         long id = user.getId();
         user = userDao.getReferenceById(id);
+        System.out.println(user.getUsername());
         Venue venue = venueDao.getReferenceById(venue_id);
+        System.out.println(venue.getName());
         commentDao.save(new Comment(body, user, venue));
         return "redirect:/venue/" + venue_id;
     }
@@ -72,6 +74,12 @@ public class VenueController {
         return "redirect:venue-profile/" + venue.getId();
     }
 
+    @DeleteMapping("delete-venue/{id}")
+    public String deleteVenue(@PathVariable long id) {
+        venueDao.delete(venueDao.getReferenceById(id));
+        eventDao.deleteAll(eventDao.findByVenueId(id));
+        return "redirect:/";
+    }
 
     @GetMapping("/search-venue")
     public String searchVenue(Model model) {
