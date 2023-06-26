@@ -8,11 +8,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
-public class SecurityConfig {
+public class SecurityConfig implements WebMvcConfigurer {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 
@@ -26,8 +27,15 @@ public class SecurityConfig {
 
 
 
-        http.formLogin((form) -> form.loginPage("/login").defaultSuccessUrl("/profile"));
-        http.logout((form) -> form.logoutSuccessUrl("/logout"));
+        http.formLogin((form) -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/profile"))
+
+                        .logout((logout) -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        .permitAll()
+        );
         http.httpBasic(withDefaults());
         return http.build();
     }
