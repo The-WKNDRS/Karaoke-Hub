@@ -43,6 +43,12 @@ nav ul li {
     position: relative;
 }
 
+.home-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 44px;
+}
+
 .navbar-links {
     color: #fff;
     text-decoration: none;
@@ -116,11 +122,6 @@ nav ul li:hover .dropdown {
 #travel-distance {
     margin-bottom: 10px;
 }
-
-#weekday {
-    margin-bottom: 10px;
-}
-
 
 .navbar {
     background-color: #483C8A; /* Replace with your desired background color */

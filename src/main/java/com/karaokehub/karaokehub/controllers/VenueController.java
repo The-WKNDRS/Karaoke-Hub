@@ -82,14 +82,14 @@ public class VenueController {
         return "redirect:/";
     }
 
-    @GetMapping("/search-venue")
+    @GetMapping("/search")
     public String searchVenue(Model model) {
         List<Venue> venues = venueDao.findAll();
         model.addAttribute("venues", venues);
         return "search";
     }
 
-    @PostMapping("/search-venue")
+    @PostMapping("/search")
     public String showSearch() { return "search"; }
 
     @GetMapping(value = "/search-venue-json", produces = MediaType.APPLICATION_JSON_VALUE)
