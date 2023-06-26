@@ -9,7 +9,7 @@
 <nav th:fragment="navbar" class="navbar">
   <div class="logo-nav">
     <img class="logo-img-nav" th:src="@{/img/karaoke-icon.png}" alt="microphone">
-    <h3>Karaoke Hub</h3>
+    <h3><a class="home-link" th:href="@{/index}">Karaoke Hub</a></h3>
   </div>
   <ul>
     <li><a class="navbar-links" th:href="@{/index}">Home</a></li>
@@ -26,7 +26,6 @@
     </li>
     <li sec:authorize="isAuthenticated()">
       <form th:action="@{/logout}" method="post">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <button type="submit" id="signout" class="navbar-links">Sign Out</button>
       </form>
     </li>

@@ -43,6 +43,12 @@ nav ul li {
     position: relative;
 }
 
+.home-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 44px;
+}
+
 .navbar-links {
     color: #fff;
     text-decoration: none;
