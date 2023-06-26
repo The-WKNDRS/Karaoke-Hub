@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="page-wrapper">
-    <div th:insert="fragments/navbar.html :: navbar"></div>
+    <div th:insert="~{fragments/navbar.html :: navbar}"></div>
     <div class="container grow">
         <div class="row grow justify-space-between">
             <div class="column align-center">
@@ -21,8 +21,8 @@
                         <h3>Karaoke Hub</h3>
                     </div>
                     <h1>Login</h1>
-                    <p class="login-message" th:if="${param.error}">Invalid Username or Password</p>
-                    <p class="login-message" th:if="${param.logout}">Logout Successful</p>
+                    <p class="login-message" th:if="${param.error}">Invalid Credentials</p>
+                    <p class="login-message" th:if="${param.logout}">You have been logged out</p>
                     <form class="login-form" th:action="@{/login}" th:method="post">
                         <div class="form-group">
                             <label for="username">Username</label>
@@ -60,5 +60,5 @@
     </div>
 </div>
 </body>
-<div th:insert="~{fragments/navbar.html :: navbar}"></div>
+<div th:insert="~{fragments/navbar.html :: footer}"></div>
 </html>
