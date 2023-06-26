@@ -14,13 +14,13 @@ fetch('/api/get-mapbox-api-key')
             let weekDay = document.querySelector('#weekday').value;
             let zipValue = "";
             let geoVenues = await mapboxUtils.formatVenues(zipValue, weekDay);
-            let center = [-93.0977, 41.8780];
+            let center = [0, 0];
 
             let map = new mapboxgl.Map({
                 container: 'map',
                 style: 'mapbox://styles/mapbox/streets-v12',
                 center: center,
-                zoom: 10
+                zoom: 1
             });
 
             map.on('load', async () => {
