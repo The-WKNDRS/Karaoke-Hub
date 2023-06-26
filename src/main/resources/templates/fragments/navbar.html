@@ -8,8 +8,9 @@
 <body>
 <nav th:fragment="navbar" class="navbar">
   <div class="logo-nav">
-<!--    <a class="logo-img-nav" th:href="@{/index}" th:src="@{/img/karaoke-icon.png}" alt="microphone"></a>-->
+    <a class="home-link" th:href="@{/index}">
     <img class="logo-img-nav" th:href="@{/index}" th:src="@{/img/karaoke-icon.png}" alt="microphone">
+    </a>
     <h3><a class="home-link" th:href="@{/index}">Karaoke Hub</a></h3>
   </div>
   <ul>
@@ -30,7 +31,7 @@
         <button type="submit" id="signout" class="navbar-links">Sign Out</button>
       </form>
     </li>
-    <li class="find-karaoke"><a class="navbar-links right-link" th:href="@{search-venue}">Find Karaoke</a>
+    <li class="find-karaoke"><a class="navbar-links right-link" th:href="@{search}">Find Karaoke</a>
     </li>
   </ul>
 </nav>
