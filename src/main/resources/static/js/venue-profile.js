@@ -7,19 +7,38 @@ const getVenues = async (query, location) => {
     let yelpRating = document.querySelector('.rating');
     let yelpImg = document.querySelector('.img-wrapper');
     let yelpCat = document.querySelector('.categories');
+    let yelpPhone = document.querySelector('.phone');
+    let yelpHours = document.querySelector('.hours');
     let el = document.createElement('div');
-    if (venue.image_url !== "") {
-        yelpImg.innerHTML = `<img class="yelp-img" src=${venue.image_url} alt="logo">`
-    } else {
+    yelpPhone.innerText = business.display_phone;
+    let days = business.hours[0].open;
+    yelpHours.innerHTML += `<p>${days[0].start} - ${days[0].end}</p>
+                           <p>${days[1].start} - ${days[1].end}</p>
+                           <p>${days[2].start} - ${days[2].end}</p>
+                           <p>${days[3].start} - ${days[3].end}</p>
+                           <p>${days[4].start} - ${days[4].end}</p>
+                           <p>${days[5].start} - ${days[5].end}</p>
+                           <p>${days[6].start} - ${days[6].end}</p>`
+    if (venue.image_url === "") {
         yelpImg.innerHTML = `<img class="yelp-img" src="/img/generic-karaoke.jpeg" alt="logo">`
+    } else {
+        business.photos.forEach(photo => {
+            yelpImg.innerHTML += `<img class="yelp-img" src=${photo} alt="logo">`
+        })
     }
-    for(let i = 1; i <= venue.rating; i++) {
+    for(let i = 1; i <= business.rating; i++) {
         yelpRating.innerHTML += `<img class="star" src="/img/star.png" alt="star">`
     }
-    yelpRating.innerHTML += `<p>   - ${venue.review_count} reviews</p>`
+    yelpRating.innerHTML += `<p>   - ${business.review_count} reviews  -  ${business.price}</p>`
     venue.categories.forEach(cat => {
         yelpCat.innerHTML += `<li>${cat.title}</li>`
     })
+    if (business.is_closed === false) {
+        yelpRating.innerHTML += "<h4 class='open' style='color: green'> - Open</h4>"
+    } else {
+        yelpRating.innerHTML += "<h4 style='color: red'> - Closed</h4>"
+    }
+
 }
 // function to fetch yelp data through spring
 async function searchVenue(query, zipcode) {
@@ -74,6 +93,13 @@ window.onclick = (e) => {
     await getVenues(yelpVal, yelpZipVal);
 })()
 
+
+let seeAllBtn = document.querySelector('.see-all');
+let reviewWrapper = document.querySelector('.reviews-wrapper')
+seeAllBtn.onclick = () => {
+    reviewWrapper.classList.toggle('show')
+    seeAllBtn.classList.toggle('show-less')
+}
 
 
 

@@ -19,8 +19,6 @@ h2 {
     margin-top: 30px;
 }
 
-
-
 .logo {
     display: flex;
     align-items: center;
@@ -31,21 +29,121 @@ h2 {
     color: #483d8b;
 }
 
-.headshot {
+.isaac-container {
+    position: relative;
+}
+
+.matt-container {
+    position: relative;
+}
+
+.nick-container {
+    position: relative;
+}
+
+.joe-container {
+    position: relative;
+}
+
+.headshot-matt {
+    position: relative;
     height: auto;
     width: 100%;
-    /*border: 1px solid black;*/
-    /*transition: all ease .1s;*/
+    /*transition: all ease .3s;*/
 }
+
+.headshot-joe {
+    position: relative;
+    height: auto;
+    width: 100%;
+    /*transition: all ease .3s;*/
+}
+
+.headshot-isaac {
+    position: relative;
+    height: auto;
+    width: 100%;
+    /*transition: all ease .3s;*/
+}
+
+.headshot-nick {
+    position: relative;
+    height: auto;
+    width: 100%;
+    /*transition: all ease .3s;*/
+}
+
+
+.headshot-joe:hover {
+    opacity: 0.2;
+    /*scale: 1.02;*/
+    transition: opacity 0.3s ease;
+}
+
+.headshot-isaac:hover {
+    opacity: 0.2;
+    /*scale: 1.02;*/
+    transition: opacity 0.3s ease;
+}
+
+.headshot-nick:hover {
+    opacity: 0.2;
+    /*scale: 1.02;*/
+    transition: opacity 0.3s ease;
+}
+
+.headshot-matt:hover {
+    opacity: 0.2;
+    /*scale: 1.02;*/
+    transition: opacity 0.3s ease;
+}
+
+.nick-text {
+    position: absolute;
+    display: none;
+    text-align: center;
+    width: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    transition: opacity 0.1s ease;
+}
+
+.isaac-text {
+    position: absolute;
+    display: none;
+    text-align: center;
+    width: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    transition: opacity 0.1s ease;
+}
+
+.joe-text {
+    position: absolute;
+    display: none;
+    text-align: center;
+    width: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    transition: opacity 0.1s ease;
+}
+
 .matt-text {
     position: absolute;
-    max-width: 10%;
-    top: 40%;
+    display: none;
+    text-align: center;
+    width: 60%;
+    top: 50%;
     left: 50%;
-    /*transform: translate(-50%, -50%);*/
-}
-.headshot:hover {
-    scale: 1.02;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    transition: opacity 0.1s ease;
 }
 
 .logo-img {
@@ -65,53 +163,12 @@ h1 {
     row-gap: 20px;
 }
 
-.form-group > label {
-    position: absolute;
-    font-size: 13px;
-    top: 5px;
-    left: 5px;
-    color: rgba(0, 0, 0, 0.6);
-}
-
 .form-group {
     position: relative;
 }
 
-.form-group > input {
-    border: 1px solid black;
-    padding-top: 20px;
-    padding-bottom: 7px;
-    padding-left: 7px;
-    font-size: 20px;
-    width: 300px;
-    border-radius: 10px;
-}
-
-.form-group > input:focus {
-    border: 1px solid orangered;
-}
-
-input[type="submit"] {
-    height: 40px;
-    width: 310px;
-    border: 1px solid black;
-    border-radius: 8px;
-    background-color: darkslateblue;
-    color: whitesmoke;
-    background-size: 400% 400%;
-    transition: all ease .1s;
-}
-
-input[type="submit"]:hover {
-    scale: 1.02;
-}
-
 .account {
     margin-top: 15px;
-}
-
-.account > a {
-    color: dimgrey;
 }
 
 .image-display {
@@ -129,56 +186,3 @@ input[type="submit"]:hover {
     left: 57%;
     color: darkslateblue;
 }
-.note-position-1 {
-    top: 150px;
-}
-
-.note-position-2 {
-    top: 180px;
-    left: 50px;
-}
-
-.note-position-3 {
-    top: 160px;
-    left: 100px;
-}
-
-.note-position-4 {
-    top: 155px;
-    left: 75px;
-}
-
-.animation-delay-1 {
-    animation-delay: 1s;
-}
-
-.animation-delay-2 {
-    animation-delay: 2s;
-}
-
-.note-animation {
-    position: absolute;
-    font-size: 25px;
-    animation-name: notes;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    opacity: 0;
-}
-
-@keyframes notes {
-    0% {
-        font-size: 30px;
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        font-size: 60px;
-        margin-top: -150px;
-        margin-left: -200px;
-        opacity: 0;
-    }
-}
-

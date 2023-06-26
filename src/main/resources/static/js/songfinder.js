@@ -2,6 +2,9 @@ const apiUrl = 'https://api.openai.com/v1/completions';
 
 const form = document.getElementById('song-finder-form');
 const songListContainer = document.querySelector('.song-list');
+const loadingScreen = document.getElementById('loading-screen');
+const songFinderContainer = document.querySelector('.song-finder-container');
+const songResultsContainer = document.querySelector('.song-results-container');
 
 form.addEventListener('submit', handleSubmit);
 
@@ -15,6 +18,12 @@ function handleSubmit(event) {
     const era = formData.get('era');
 
     const prompt = `You are a karaoke song finder. Find 10 songs with vocal type: ${vocalType}, music genre: ${musicGenre}, and era: ${era}. Return the song name and artist.`;
+
+    // Show the loading screen
+    showLoadingScreen();
+
+    // Hide the song finder container
+    songFinderContainer.style.display = 'none';
 
     // Make a request to your server to fetch the API key
     fetch('/api/get-api-key')
@@ -42,15 +51,19 @@ function handleSubmit(event) {
                 .then(result => {
                     console.log('ChatGPT API Response:', result);
                     handleApiResponse(result);
+                    hideLoadingScreen(); // Hide the loading screen after receiving the API response
+                    songResultsContainer.style.display = 'block'; // Show the song results container
                 })
                 .catch(error => {
                     console.error('Error:', error);
                     // Handle the error condition
+                    hideLoadingScreen(); // Hide the loading screen in case of an error
                 });
         })
         .catch(error => {
             console.error('Error:', error);
             // Handle the error condition
+            hideLoadingScreen(); // Hide the loading screen in case of an error
         });
 }
 
@@ -98,3 +111,12 @@ function renderSongList(songList) {
         songListContainer.appendChild(songContainer);
     }
 }
+
+function showLoadingScreen() {
+    loadingScreen.style.display = 'flex';
+}
+
+function hideLoadingScreen() {
+    loadingScreen.style.display = 'none';
+}
+

@@ -3,18 +3,37 @@
     row-gap: 10px;
 }
 
+.row {
+    padding: 0;
+}
+
+.column.left {
+    gap: 20px;
+}
+
+.images {
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
+}
+
+.img-wrapper {
+    position: relative;
+    display: flex;
+    height: 300px;
+    width: 100%;
+}
+
 .yelp-img {
-    height: 90%;
-    box-shadow: rgba(0, 0, 0, 0.4) -5px 5px, rgba(0, 0, 0, 0.3) -10px 10px, rgba(0, 0, 0, 0.2) -15px 15px, rgba(0, 0, 0, 0.1) -20px 20px, rgba(0, 0, 0, 0.05) -25px 25px;
+    width: 33.3%;
 }
 
 .name-rating {
     position: absolute;
-    left: 30px;
-    bottom: 100px;
+    bottom: 0;
+    left: 0;
     color: white;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-top-right-radius: 20px;
     padding: 20px;
 }
 
@@ -33,26 +52,56 @@
     list-style-type: none;
 }
 
+.contact-info {
+    position: sticky;
+    width: 400px;
+    top: 360px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding-inline: 30px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    gap: 20px;
+}
+
+.icon {
+    width: 20px;
+}
+
+hr {
+    border: .5px solid rgba(0, 0, 0, 0.2);
+}
+
+.business-hours {
+    column-gap: 80px;
+}
+
+.hours {
+
+}
+
+.days > p {
+    display: inline;
+}
+
 .edit {
     display: flex;
     column-gap: 15px;
-    align-items: end;
-    align-self: end;
+    align-self: center;
+    justify-content: center;
     padding: 6px;
+    width: 390px;
     transition: all .2s ease;
     cursor: pointer;
 }
-
 .delete {
-    display: flex;
-    align-self: end;
-    padding-right:55px;
-    padding-top: 8px;
-    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 15px;
 }
-
-.delete > a:hover {
-    color: orangered;
+.delete-btn {
+    width: 25px;
+    filter: invert(11%) sepia(80%) saturate(7366%) hue-rotate(0deg) brightness(101%) contrast(112%);
 }
 
 .edit:hover {
@@ -80,16 +129,21 @@
 }
 
 .modal {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     background-color: darkslateblue;
-    height: 650px;
+    height: 600px;
     border-radius: 20px;
 }
 
 .edit-form {
     display: flex;
+    align-items: center;
     flex-direction: column;
     row-gap: 20px;
-    padding: 50px;
+    padding-inline: 50px;
     border-radius: 20px;
 }
 
@@ -103,6 +157,47 @@
 
 .form-group {
     position: relative;
+}
+
+.form-group > textarea {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.reviews-wrapper {
+    min-height: 100px;
+    max-height: 400px;
+    width: 600px;
+    overflow: hidden;
+}
+
+.show {
+    height: fit-content;
+}
+
+.show-less {
+    content: 'See less reviews';
+}
+
+.review {
+    height: 100px;
+}
+
+.review-btn {
+    width: 200px;
+    height: 40px;
+    background-color: darkslateblue;
+    color: white;
+    border-radius: 10px;
+}
+
+.review-btn:hover {
+    scale: 1.02;
+}
+
+.review > h4 {
+    font-weight: bold;
 }
 
 .form-group > input {
