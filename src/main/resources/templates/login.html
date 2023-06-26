@@ -21,6 +21,8 @@
                         <h3>Karaoke Hub</h3>
                     </div>
                     <h1>Login</h1>
+                    <p class="login-message" th:if="${param.error}">Invalid Username or Password</p>
+                    <p class="login-message" th:if="${param.logout}">Logout Successful</p>
                     <form class="login-form" th:action="@{/login}" th:method="post">
                         <div class="form-group">
                             <label for="username">Username</label>
@@ -58,5 +60,5 @@
     </div>
 </div>
 </body>
-<div th:insert="fragments/navbar.html :: footer"></div>
+<div th:insert="~{fragments/navbar.html :: navbar}"></div>
 </html>

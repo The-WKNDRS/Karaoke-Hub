@@ -47,6 +47,14 @@ public class UserController {
         return "login";
     }
 
+    @PostMapping("/login")
+    public String loginUsers(@ModelAttribute User user) {
+        if (userDao.findByUsername(user.getUsername()) != null && passwordEncoder.matches(user.getPassword(), userDao.findByUsername(user.getUsername()).getPassword())) {
+            return "redirect:/index";
+        }
+        return "redirect:/login?error";
+    }
+
     @GetMapping("/index")
     public String index() {
         return "index";
@@ -75,14 +83,14 @@ public class UserController {
         return "redirect:/profile";
     }
 
-    @GetMapping("/logout")
-    public String customLogout(HttpServletRequest request, HttpServletResponse response) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null){
-            new SecurityContextLogoutHandler().logout(request, response, authentication); // <= This is the call you are looking for.
-        }
-        return "/logout";
-    }
+//    @GetMapping("/logout")
+//    public String customLogout(HttpServletRequest request, HttpServletResponse response) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        if (authentication != null){
+//            new SecurityContextLogoutHandler().logout(request, response, authentication); // <= This is the call you are looking for.
+//        }
+//        return "/logout";
+//    }
 
     @GetMapping("/about")
     public String about() {

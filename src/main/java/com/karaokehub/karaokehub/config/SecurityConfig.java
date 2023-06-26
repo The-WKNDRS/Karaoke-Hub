@@ -27,8 +27,15 @@ public class SecurityConfig implements WebMvcConfigurer {
 
 
 
-        http.formLogin((form) -> form.loginPage("/login").defaultSuccessUrl("/profile"));
-        http.logout((form) -> form.logoutSuccessUrl("/logout"));
+        http.formLogin((form) -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/profile"))
+
+                        .logout((logout) -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        .permitAll()
+        );
         http.httpBasic(withDefaults());
         return http.build();
     }
