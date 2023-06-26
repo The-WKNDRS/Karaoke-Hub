@@ -2,13 +2,15 @@ package com.karaokehub.karaokehub.controllers;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
-public class TheErrorController implements ErrorController {
+@ControllerAdvice
+public class TheErrorController {
 
     @RequestMapping("/error")
     public String handleError(HttpServletRequest request) {
