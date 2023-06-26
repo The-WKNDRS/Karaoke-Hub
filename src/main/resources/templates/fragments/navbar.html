@@ -8,8 +8,9 @@
 <body>
 <nav th:fragment="navbar" class="navbar">
   <div class="logo-nav">
-<!--    <a class="logo-img-nav" th:href="@{/index}" th:src="@{/img/karaoke-icon.png}" alt="microphone"></a>-->
+    <a class="home-link" th:href="@{/index}">
     <img class="logo-img-nav" th:href="@{/index}" th:src="@{/img/karaoke-icon.png}" alt="microphone">
+    </a>
     <h3><a class="home-link" th:href="@{/index}">Karaoke Hub</a></h3>
   </div>
   <ul>
