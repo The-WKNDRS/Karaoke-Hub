@@ -12,23 +12,18 @@
 
 </head>
 <body>
-<div class="page-wrapper" style="background-image: url('/img/singers5.png'); background-size: cover; background-position: center;">
+<div class="page-wrapper" style="background-image: url('/img/venue_background.png'); background-size: cover; background-position: center;">
     <div th:insert="fragments/navbar.html :: navbar"></div>
     <div class="index-header">
         <div sec:authorize="isAuthenticated()">
             <a class="index-button" th:href="@{/profile}">Edit User Profile</a>
         </div>
-        <br>
-        <br>
-        <div class="logo">
-<!--            <img class="logo-img" th:src="@{/img/karaoke-icon.png}" alt="microphone">-->
-<!--            <h3>Karaoke Hub</h3>-->
+        <div class="song-finder">
+            <a class="song-finder-button" th:href="@{/song-finder}">Click Here!! Song Finder - powered by ChatGPT</a>
         </div>
         <a class="index-button" th:href="@{/browse-venues}">Browse Karaoke Venues</a>
     </div>
-    <div class="song-finder">
-        <a class="song-finder-button" th:href="@{/song-finder}">Click Here!! Song Finder - powered by ChatGPT</a>
-    </div>
+
 </div>
 
 <!-- Overlay HTML -->
