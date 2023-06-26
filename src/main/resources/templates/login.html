@@ -21,8 +21,9 @@
                         <h3>Karaoke Hub</h3>
                     </div>
                     <h1>Login</h1>
+                    <p class="login-message" th:if="${param.error}">Invalid Credentials</p>
+                    <p class="login-message" th:if="${param.logout}">You have been logged out</p>
                     <form class="login-form" th:action="@{/login}" th:method="post">
-                        <p class="login-message" th:text="${message}"></p>
                         <div class="form-group">
                             <label for="username">Username</label>
                             <input id="username" name="username">

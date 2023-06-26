@@ -29,7 +29,8 @@ public class SecurityConfig implements WebMvcConfigurer {
 
         http.formLogin((form) -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/profile"))
+                        .defaultSuccessUrl("/profile")
+                        .failureUrl("/login?error"))
 
                         .logout((logout) -> logout
                         .logoutUrl("/logout")

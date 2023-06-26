@@ -44,10 +44,10 @@ public class UserController {
 
         if (userDao.findByUsername(user.getUsername()) != null) {
             redir.addFlashAttribute("message", "Username Is Taken");
-            return "redirect:/register?username";
+            return "redirect:/register";
         } else if (user.getUsername() == null || user.getUsername().isEmpty()) {
             redir.addFlashAttribute("message", "Username Is Required");
-            return "redirect:/register?username1";
+            return "redirect:/register";
         } else {
             newUser.setUsername(user.getUsername());
         }
@@ -57,7 +57,7 @@ public class UserController {
         } else {
             redir.addFlashAttribute("user", user);
             redir.addFlashAttribute("message", "Invalid Email");
-            return "redirect:/register?email";
+            return "redirect:/register";
         }
 
         if (user.getPassword() != null && !user.getPassword().isEmpty()) {
@@ -67,12 +67,12 @@ public class UserController {
             } else {
                 redir.addFlashAttribute("user", user);
                 redir.addFlashAttribute("message", "Passwords Do Not Match");
-                return "redirect:/register?password1";
+                return "redirect:/register";
             }
         } else {
             redir.addFlashAttribute("user", user);
             redir.addFlashAttribute("message", "Password Is Required");
-            return "redirect:/register?password";
+            return "redirect:/register";
         }
 
         userDao.save(newUser);
@@ -81,31 +81,8 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String loginUsers(Model model) {
-        model.addAttribute("user", new User());
+    public String loginUsers() {
         return "login";
-    }
-
-    @GetMapping("/login?logout")
-    public String logoutUsers(RedirectAttributes redir) {
-        redir.addFlashAttribute("message", "You have been logged out");
-        return "redirect:/login";
-    }
-
-    @PostMapping("/login")
-    public String loginUsers(@ModelAttribute User user, RedirectAttributes redirect) {
-        if (user.getUsername() == null || user.getUsername().isEmpty()) {
-            redirect.addFlashAttribute("message", "Username Is Required");
-            return "redirect:/login?username";
-        } else if (user.getPassword() == null || user.getPassword().isEmpty()) {
-            redirect.addFlashAttribute("message", "Password Is Required");
-            return "redirect:/login?password";
-        } else if (userDao.findByUsername(user.getUsername()) != null && passwordEncoder.matches(user.getPassword(), userDao.findByUsername(user.getUsername()).getPassword())) {
-            return "redirect:/index";
-        } else {
-            redirect.addFlashAttribute("message", "Invalid Credentials");
-            return "redirect:/login?invalid";
-        }
     }
 
     @GetMapping("/index")
