@@ -107,7 +107,7 @@ h2 {
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 1;
-    transition: opacity 0.1s ease;
+    transition:opacity 0.1s ease;
 }
 
 .isaac-text {
