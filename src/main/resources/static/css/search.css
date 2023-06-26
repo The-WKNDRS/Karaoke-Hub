@@ -2,6 +2,7 @@
     --main-color: darkslateblue;
     --secondary-color: #E52C0B;
     --tertiary-color: #3B8A47;
+    --tertiary-alt: #0BE52C;
 }
 
 * {
@@ -47,7 +48,7 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
 }
 
 .sidebar h1 {
-    color: var(--tertiary-color);
+    color: var(--tertiary-alt);
     font-weight: bold;
 }
 
@@ -201,7 +202,7 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
 }
 
 .mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
-    border-bottom-color: #91c949;
+    border-bottom-color: var(--tertiary-alt);
 }
 
 .mapboxgl-popup {
