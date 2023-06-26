@@ -35,4 +35,11 @@ public class YelpApiController {
             return "{\"result\" : \"requires longitude/latitude combination\"}";
         }
     }
+
+    @ResponseBody
+    @CrossOrigin("*")
+    @GetMapping(value = "/yelpBusiness/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String yelpBusiness(@PathVariable String id)throws IOException {
+        return YelpApiService.execute(id);
+    }
 }

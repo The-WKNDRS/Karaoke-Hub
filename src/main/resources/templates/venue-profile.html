@@ -13,40 +13,95 @@
 <div class="page-wrapper">
     <div th:insert="fragments/navbar.html :: navbar"></div>
     <div class="container">
-        <div class="row top"></div>
+        <div class="row images">
+            <div class="img-wrapper"></div>
+            <div class="name-rating">
+                <p th:text="${venue.name}" class="name"></p>
+                <div class="rating"></div>
+                <ul class="categories"></ul>
+            </div>
+        </div>
         <div class="row">
             <div class="column left">
-                <div class="img-wrapper"></div>
-                <div class="name-rating">
-                    <h1 th:text="${venue.name}" class="name"></h1>
-                    <div class="rating"></div>
-                    <ul class="categories"></ul>
+                <h3>Business hours</h3>
+                <div class="business-hours row justify-center">
+                    <div class="column shrink days">
+                        <p>Mon</p>
+                        <p>Tue</p>
+                        <p>Wed</p>
+                        <p>Thu</p>
+                        <p>Fri</p>
+                        <p>Sat</p>
+                        <p>Sun</p>
+                    </div>
+                    <div class="column hours"></div>
                 </div>
+                <h3>Karaoke hours</h3>
+                <div class="karaoke-hours">
+                    <div th:each="event : ${events}">
+                        <p><span th:text="${event.day_of_week}"></span>             <span th:text="${event.start_time}"></span> - <span th:text="${event.end_time}"></span></p>
+                    </div>
+                </div>
+                <hr>
+                <h3>Leave a comment</h3>
+                <div class="leave-review">
+                    <form th:action="@{/venue/comment}" th:method="post">
+                        <div class="form-group">
+                            <label for="body"></label>
+                            <textarea cols="50" rows="3" name="body" id="body"></textarea>
+                            <button class="review-btn">Post comment</button>
+                            <input type="hidden" th:value="${venue.id}" name="venue_id">
+                        </div>
+                    </form>
+                </div>
+                <h3>Comments</h3>
+                <div class="reviews-wrapper">
+                    <div th:if="${numComments} != null" class="review" th:each="comment : ${comments}">
+                        <h4>@<span th:text="${comment.user.getUsername()}"></span></h4>
+                        <p th:text="${comment.body}"></p>
+                        <br>
+                        <hr>
+                    </div>
+                    <div th:if="${numComments} == null" class="review" >
+                        <h4>Be the first to comment!</h4>
+                    </div>
+                </div>
+                <button class="see-all">See all comments</button>
             </div>
-            <div class="column">
-                <div class="edit">
-                    <h3>Edit Profile</h3>
-                    <img class="edit-img" th:src="@{/img/edit1.png}">
-                </div>
-                <div class="profile">
-                    <div class="rating"></div>
-                    <h1 th:text="${venue.address}" class="address"></h1>
-                    <h1 th:text="${venue.city}" class="city"></h1>
-                    <h1 th:text="${venue.state}" class="state"></h1>
-                    <a th:href="${venue.website}" target="_blank"><h1 th:text="${venue.website}" class="website"></h1></a>
-                </div>
-                <h1>Events:</h1>
-                <div th:each="event: ${events}">
-                    <h2 th:text="${event.day_of_week}"></h2>
-                    <h4>Start time: <span th:text="${event.start_time}"></span></h4>
-                    <h4>Start time: <span th:text="${event.end_time}"></span></h4>
+            <div class="column align-center">
+                <div class="contact-info column shrink">
+                    <div class="row justify-space-between align-center">
+                        <a th:href="${venue.website}" target="_blank"><p th:text="${venue.website}" class="website"></p></a>
+                        <img class="icon" src="/img/redirect.png">
+                    </div>
+                    <hr />
+                    <div class="row justify-space-between align-center">
+                        <p class="phone"></p>
+                        <img class="icon" src="/img/phone.png">
+                    </div>
+                    <hr />
+                    <div class="row justify-space-between align-center">
+                        <div class="column">
+                            <p th:text="${venue.address}"></p>
+                            <p><span th:text="${venue.city}"></span>, <span th:text="${venue.state}"></span> <span th:text="${venue.zip_code}"></span></p>
+                        </div>
+                        <img class="icon" src="/img/map.png">
+                    </div>
+                    <hr />
+                    <div class="edit">
+                        <h3>Edit profile</h3>
+                        <img class="edit-img" src="/img/edit1.png">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
     <div class="edit-modal">
         <div class="modal">
-            <form class="edit-form" th:action="@{/edit-venue/{id}(id=${venue.id})}" th:object="${venue}" th:method="post">
+            <form class="edit-form" th:action="@{/create-venue}" th:object="${venue}" th:method="post">
+                <input type="hidden" th:field="*{id}" />
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input id="name" name="name" th:field="*{name}">
@@ -71,14 +126,17 @@
                     <label for="website">Website</label>
                     <input id="website" name="website" th:field="*{website}">
                 </div>
-                <input type="submit" value="Submit Edit">
+                <input class="submit-edit" type="submit" value="Submit Edit">
             </form>
+            <div class="delete">
+                <a th:href="@{|/delete-venue/${venue.id}|}"><img class="delete-btn" src="/img/delete.png"></a>
+            </div>
         </div>
     </div>
     <div th:insert="fragments/navbar.html :: footer"></div>
 </div>
 <input class="venueName" type="hidden" th:value="${venue.name}">
 <input class="venueZip" type="hidden" th:value="${venue.zip_code}">
-<script src="/js/venue-profile.js" ></script>
+<script src="/js/venue-profile.js"></script>
 </body>
 </html>
