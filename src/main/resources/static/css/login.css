@@ -43,6 +43,9 @@ h1 {
 }
 
 .login-message {
+    position: absolute;
+    z-index: 3;
+    top: 266px;
     font-size: 15px;
     color: var(--secondary-color);
     animation: fade-out 1s linear 3s 1 forwards;
