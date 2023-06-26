@@ -3,9 +3,8 @@ package com.karaokehub.karaokehub.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.karaokehub.karaokehub.config.YelpConfig;
 import com.squareup.okhttp.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -17,9 +16,13 @@ import java.io.IOException;
 public class YelpApiService {
 
 
-    private static String apiKey = "2GcKsiasG148oNxhkk8NC_db3KvAqwYYsDmWNxo2xswrAIG68XtQ53f_BhD402yNgQp2HtnpjTRwbcTMt_oJqgIHgXkaR0cxAdilrur6ZdzofNILZo9skANOTZJ_ZHYx";
+    public static YelpConfig yelpConfig;
 
     private static final String yelpBaseUrl = "api.yelp.com/v3";
+
+    public YelpApiService(YelpConfig yelpConfig) {
+        YelpApiService.yelpConfig = yelpConfig;
+    }
 
     private static String makeAutoCompleteUrl(String query, String latitude, String longitude){
 
@@ -75,7 +78,7 @@ public class YelpApiService {
         Request request = new Request.Builder()
                 .url(requestUri)
                 .addHeader("Access-Control-Allow-Origin","*")
-                .addHeader("Authorization", "Bearer " + apiKey)
+                .addHeader("Authorization", "Bearer " + yelpConfig.getYelpApiKey())
                 .build();
 
         Response response = client.newCall(request).execute();
@@ -94,13 +97,13 @@ public class YelpApiService {
                         new Request.Builder()
                                 .url(requestUri)
                                 .addHeader("Access-Control-Allow-Origin","*")
-                                .addHeader("Authorization", "Bearer " + apiKey)
+                                .addHeader("Authorization", "Bearer " + yelpConfig.getYelpApiKey())
                                 .build())
                 .execute();
 
         String responseString  = response.body().string();
         System.out.println(responseString);
-        System.out.println(apiKey);
+        System.out.println(yelpConfig.getYelpApiKey());
         ObjectNode objectNode = new ObjectMapper().readValue(responseString, ObjectNode.class);
         return objectNode.get("businesses").toString();
     }
@@ -114,13 +117,11 @@ public class YelpApiService {
                         new Request.Builder()
                                 .url(requestUri)
                                 .addHeader("Access-Control-Allow-Origin","*")
-                                .addHeader("Authorization", "Bearer " + apiKey)
+                                .addHeader("Authorization", "Bearer " + yelpConfig.getYelpApiKey())
                                 .build())
                 .execute();
 
         String responseString  = response.body().string();
-        System.out.println(responseString);
-        System.out.println(apiKey);
         ObjectNode objectNode = new ObjectMapper().readValue(responseString, ObjectNode.class);
         return objectNode.toString();
     }
