@@ -62,9 +62,9 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
 
 .search-form {
     position: absolute;
-    z-index: 999;
+    z-index: 11;
     top: 0;
-    left: 217%;
+    left: 70%;
     margin-top:30px;
     display: flex;
     padding: 0 30px;
@@ -261,12 +261,26 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
     }
 
     .search-form {
-        position: absolute;
         left: 0;
-        top: 12px;
+        top: 65%;
         width: 100%;
         justify-content: space-between;
         margin: unset;
+        height: 60px;
+    }
+
+    .drag {
+        height: 60px;
+        width: 47%;
+        position: absolute;
+        top: 65%;
+        left: 32%;
+        z-index: 99999999;
+        cursor: grab;
+    }
+
+    .drag :active {
+        cursor: grabbing;
     }
 
     .form-group {
@@ -293,7 +307,7 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
         height: auto;
         z-index: 10;
         bottom: 0;
-        top: 70%;
+        top: 65%;
         left: unset;
         overflow: hidden;
         border-right: 1px solid rgba(0, 0, 0, 0.25);
@@ -305,17 +319,12 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
         display: flex;
         flex-direction: column;
         align-items: center;
-        cursor: grab;
         position: relative;
     }
 
     .sidebar .heading h1 {
         line-height: 40px;
         padding: unset;
-    }
-
-    .sidebar .heading :active {
-        cursor: grabbing;
     }
 
     .listings {
