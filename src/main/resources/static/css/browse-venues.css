@@ -1,23 +1,24 @@
+/* Styles for regular webpage */
 
-.venue-browser{
+.venue-browser {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between; /* Added to distribute columns evenly */
+    justify-content: center;
 }
-/* Karaoke event row */
+
 ul.events-list {
     list-style-type: none;
     padding: 0;
     margin: 0;
     display: flex;
-    flex-wrap: wrap; /* Added */
+    flex-wrap: wrap;
 }
 
 ul.events-list li {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    flex-wrap: wrap; /* Added */
+    flex-wrap: wrap;
 }
 
 .card {
@@ -29,24 +30,9 @@ ul.events-list li {
     margin-left: 40px;
     margin-bottom: 35px;
     display: flex;
-    flex-wrap: wrap; /* Added */
-    align-content: flex-start; /* Added to align items at the start of the container */
+    flex-wrap: wrap;
+    align-content: flex-start;
     background-color: #f9f9f9;
-}
-
-ul.events-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap; /* Added */
-}
-
-ul.events-list li {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    flex-wrap: wrap; /* Added */
 }
 
 ul.events-list li hr {
@@ -54,8 +40,8 @@ ul.events-list li hr {
     margin-left: 10px;
     border: none;
     border-top: 1px solid #ccc;
-    order: 2; /* Added to control the horizontal placement */
-    flex-basis: 100%; /* Added to allow wrapping */
+    order: 2;
+    flex-basis: 100%;
 }
 
 .venue-browser-logo {
@@ -100,12 +86,6 @@ ul.events-list li hr {
 .card-title {
     font-size: 30px;
 }
-@media (max-width: 767px) {
-    .card {
-        width: 100%; /* Full width on smaller screens */
-        margin-right: 0;
-    }
-}
 
 .page-wrapper .venue-browser {
     display: flex;
@@ -127,7 +107,6 @@ ul.events-list li hr {
     background-position: center;
     background-repeat: no-repeat;
     z-index: -1;
-<<<<<<< HEAD
 }
 
 .venue-create-row {
@@ -150,6 +129,16 @@ ul.events-list li hr {
     text-decoration: none;
     font-size: 16px;
     font-weight: bold;
-=======
->>>>>>> 7ec1c58 (browse venues page fully functional)
+}
+
+/* Styles for smartphone-sized screens */
+@media (max-width: 767px) {
+    .venue-browser {
+        justify-content: center;
+    }
+
+    .card {
+        width: 90%;
+        margin: 0 0 35px 0;
+    }
 }
