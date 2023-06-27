@@ -66,5 +66,50 @@ fetch('/api/get-mapbox-api-key')
         // Handle the error condition
     });
 
+// Make the listings draggable:
+dragElement(document.querySelector(".sidebar"));
+
+function dragElement(elmnt) {
+    let pos1 = 0, pos2 = 0;
+
+    document.querySelector(".heading").onmousedown = dragMouseDown;
+
+
+    function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // get the mouse cursor position at startup:
+        pos2 = e.clientY;
+        document.onmouseup = closeDragElement;
+        // call a function whenever the cursor moves:
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // calculate the new cursor position:
+        pos1 = pos2 - e.clientY;
+        pos2 = e.clientY;
+        // set the element's new position:
+        elmnt.style.top = (elmnt.offsetTop - pos1) + "px";
+    }
+
+    function closeDragElement() {
+        // stop moving when mouse button is released:
+        document.onmouseup = null;
+        document.onmousemove = null;
+
+        //snap to position based on current position
+        if (elmnt.offsetTop <= (window.innerHeight * .3)) {
+            elmnt.style.top = "4%";
+        } else if (elmnt.offsetTop > (window.innerHeight * .3) && elmnt.offsetTop < (window.innerHeight * .65)) {
+            elmnt.style.top = "65%";
+        } else {
+            elmnt.style.top = ((((window.innerHeight - document.querySelector("footer").offsetHeight) - elmnt.children[0].offsetHeight) - document.querySelector(".navbar").offsetHeight) + 2) + "px";
+        }
+
+    }
+}
 
 
