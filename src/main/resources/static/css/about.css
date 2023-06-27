@@ -1,3 +1,13 @@
+@media  (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+    .column, h1 {
+        align-items: center;
+    }
+
+}
+
 body {
     font-family: AppleSystemUIFont, sans-serif;
 }
@@ -25,7 +35,7 @@ h2 {
 }
 
 .about {
-    font-size: 30px;g
+    font-size: 30px;
 }
 
 .logo {
@@ -58,52 +68,44 @@ h2 {
     position: relative;
     height: auto;
     width: 100%;
-    /*transition: all ease .3s;*/
 }
 
 .headshot-joe {
     position: relative;
     height: auto;
     width: 100%;
-    /*transition: all ease .3s;*/
 }
 
 .headshot-isaac {
     position: relative;
     height: auto;
     width: 100%;
-    /*transition: all ease .3s;*/
 }
 
 .headshot-nick {
     position: relative;
     height: auto;
     width: 100%;
-    /*transition: all ease .3s;*/
 }
 
 
 .headshot-joe:hover {
     opacity: 0.2;
-    /*scale: 1.02;*/
     transition: opacity 0.3s ease;
 }
 
 .headshot-isaac:hover {
     opacity: 0.2;
-    /*scale: 1.02;*/
     transition: opacity 0.3s ease;
 }
 
 .headshot-nick:hover {
     opacity: 0.2;
-    /*scale: 1.02;*/
     transition: opacity 0.3s ease;
 }
 
 .headshot-matt:hover {
     opacity: 0.2;
-    /*scale: 1.02;*/
     transition: opacity 0.3s ease;
 }
 
