@@ -15,39 +15,39 @@
 </head>
 <body>
 <div class="search-container">
-<div th:insert="fragments/navbar.html :: navbar"></div>
-<div class="search-page">
-<div class='map' id='map'></div>
-<form id="zipcodeForm" class="search-form" th:action="@{/search}" th:method="post">
-    <div class="form-group">
-        <label for="zipcode" class="label">Search</label>
-        <input id="zipcode" name="zipcode" class="zipcode" type="text" placeholder="Enter Zip Code"/>
+    <div th:insert="fragments/navbar.html :: navbar"></div>
+    <div class="search-page">
+        <div class='map' id='map'></div>
+        <div class='sidebar'>
+            <div class='heading'>
+                <form id="zipcodeForm" class="search-form" th:action="@{/search}" th:method="post">
+                    <div class="form-group">
+                        <label for="zipcode" class="label">Search</label>
+                        <input id="zipcode" name="zipcode" class="zipcode" type="text" placeholder="Enter Zip Code"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="weekday" class="label">Day</label>
+                        <select id="weekday" class="form-input">
+                            <option value="Any">Any</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                            <option value="Sunday">Sunday</option>
+                        </select>
+                    </div>
+                </form>
+                <div class="drag-handle"></div>
+                <h1>Our locations</h1>
+            </div>
+            <div id='listings' class='listings'></div>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="weekday" class="label">Day</label>
-        <select id="weekday" class="form-input">
-            <option value="Any">Any</option>
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-            <option value="Sunday">Sunday</option>
-        </select>
-    </div>
-</form>
-<div class='sidebar'>
-    <div class='heading'>
-        <h1>Our locations</h1>
-    </div>
-    <div id='listings' class='listings'></div>
+    <div th:insert="fragments/navbar.html :: footer"></div>
 </div>
-
 <script src="/js/geocoder-utils.js"></script>
 <script src="/js/mapbox.js" type="module"></script>
-</div>
-<div th:insert="fragments/navbar.html :: footer"></div>
-</div>
 </body>
 </html>

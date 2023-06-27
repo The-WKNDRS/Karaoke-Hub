@@ -20,6 +20,14 @@ The objective of the Karaoke Hub project is to develop a full stack web applicat
 1. Navigate to the following link https://github.com/The-WKNDRS/Karaoke-Hub, and clone the project to your local machine.
 2. Opened the clone project with Intellij
 
+3. Live Site Setup - 
+    1. Terminal command (remove angle brackets):
+    cat ~/.ssh/id_rsa.pub | ssh root@<ip_address> dokku ssh-keys:add <admin-yourname>
+    
+    2. Intellij Terminal command (remove angle brackets):
+    git remote add dokku dokku@<159.223.157.65>:<karaoke_hub>
+
+
 ## User Story
 1. Visitors have the least privileges. Users have access to all visitor functionality. 
 2. As a visitor, when I complete the registration form I expect/want to be told that I have successfully registered and be directed to a welcome screen
