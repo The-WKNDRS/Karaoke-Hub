@@ -60,6 +60,7 @@ nav ul li {
     border: .5px solid rgba(0, 0, 0, 0.6); /* Border around the dropdown container */
     box-shadow: rgb(38, 57, 77) 0 20px 30px -10px;
     position: absolute;
+    z-index: 9;
     left: 50%;
     transform: translateX(-50%);
     display: none;
@@ -166,7 +167,7 @@ nav ul li:hover .dropdown {
         display: block;
         position: relative;
         left:-10px;
-        z-index: 1;
+        z-index: 8;
         -webkit-user-select: none;
         user-select: none;
     }
@@ -225,7 +226,6 @@ nav ul li:hover .dropdown {
     nav ul {
         flex-direction: column;
         align-items: center;
-        z-index: 98;
         left: 110px;
         top: 146px;
         position: absolute;

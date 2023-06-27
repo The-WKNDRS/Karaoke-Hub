@@ -75,10 +75,10 @@ public class VenueController {
         return "redirect:venue-profile/" + venue.getId();
     }
 
-    @DeleteMapping("delete-venue/{id}")
+    @RequestMapping("delete-venue/{id}")
     public String deleteVenue(@PathVariable long id) {
-        venueDao.delete(venueDao.getReferenceById(id));
         eventDao.deleteAll(eventDao.findByVenueId(id));
+        venueDao.delete(venueDao.getReferenceById(id));
         return "redirect:/";
     }
 
