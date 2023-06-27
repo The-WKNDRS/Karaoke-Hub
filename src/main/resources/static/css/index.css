@@ -2,9 +2,11 @@
     padding-top: 20px;
 }
 
+.page-wrapper {
+    background-size: 110%;
+}
 .background-image-wrapper {
     background-image: url(/static/img/singers2.png);
-    background-size: 110%;
     background-position: center;
 }
 
