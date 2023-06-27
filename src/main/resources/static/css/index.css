@@ -1,14 +1,13 @@
-
-
 .logo {
     padding-top: 20px;
 }
 
-.background {
-    position: relative;
-    width: calc(100% + 20px);
-    margin-left: 0 !important;
-    place-items: center;
+.page-wrapper {
+    background-size: 110%;
+}
+.background-image-wrapper {
+    background-image: url(/static/img/singers2.png);
+    background-position: center;
 }
 
 .index-button {
