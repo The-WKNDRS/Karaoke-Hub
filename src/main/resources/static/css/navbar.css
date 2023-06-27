@@ -10,6 +10,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 65px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
 }
 
@@ -18,7 +19,7 @@ nav ul {
     justify-content: end;
     align-items: center;
     list-style-type: none;
-    margin: 0;
+    margin-right: 30px;
     padding: 0;
     gap: 40px;
 }
@@ -26,6 +27,7 @@ nav ul {
 .logo-nav {
     display: flex;
     align-items: center;
+    margin-left: 20px;
 }
 
 .logo-nav > h3 {
@@ -43,20 +45,27 @@ nav ul li {
     position: relative;
 }
 
-.navbar-links {
+.home-link {
     color: #fff;
+    text-decoration: none;
+    font-size: 44px;
+}
+
+.navbar-links {
     text-decoration: none;
     font-size: 22px;
 }
 
 .dropdown {
-    border: 2px solid #483B89; /* Border around the dropdown container */
+    border: .5px solid rgba(0, 0, 0, 0.6); /* Border around the dropdown container */
+    box-shadow: rgb(38, 57, 77) 0 20px 30px -10px;
     position: absolute;
+    z-index: 9;
     left: 50%;
     transform: translateX(-50%);
     display: none;
-    background-color: #f9f9f9;
-    min-width: 175px;
+    background-color: darkslateblue;
+    min-width: 190px;
     padding: 10px;
     border-radius: 5px;
 }
@@ -72,8 +81,7 @@ nav ul li:hover .dropdown {
 }
 
 .dropdown p {
-    margin-top: 15px;
-    margin-bottom: 15px;
+    color: white;
 }
 
 .dropdown a {
@@ -133,14 +141,140 @@ nav ul li:hover .dropdown {
     border-radius: 5px; /* Add rounded corners to the button */
 }
 
-button.navbar-links {
-    background-color: #483B89;
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#check {
+    display: none;
 }
 
 #signout {
-    background-color: #483B89;
+    transition: all .3s ease;
 }
 
-.find-karaoke {
-    margin-right: 20px;
+#menuToggle a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.2s ease;
+}
+
+@media screen and (max-width: 930px) {
+
+    #menuToggle {
+        display: block;
+        position: relative;
+        left:-10px;
+        z-index: 8;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+
+    #menuToggle a {
+        text-decoration: none;
+        color: white;
+        transition: color 0.2s ease;
+    }
+
+    #menuToggle a:hover {
+        color: orangered;
+    }
+
+    #signout:hover {
+        color: orangered;
+    }
+
+
+    #check {
+        display: block;
+        width: 40px;
+        height: 32px;
+        position: absolute;
+        top: -7px;
+        left: -5px;
+        cursor: pointer;
+        opacity: 0;
+        z-index: 2;
+    }
+
+    #menuToggle span {
+        display: block;
+        width: 33px;
+        height: 4px;
+        margin-bottom: 5px;
+        margin-right: 10px;
+        position: relative;
+        background: white;
+        border-radius: 3px;
+        z-index: 1;
+        transform-origin: 4px 0;
+        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+        background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+        opacity 0.55s ease;
+    }
+
+    #menuToggle .top {
+        transform-origin: 0 0;
+    }
+
+    #menuToggle .mid {
+        transform-origin: 0 100%;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        left: 110px;
+        top: 146px;
+        position: absolute;
+        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+        border-bottom-left-radius: 5px;
+        width: 300px;
+        margin: -100px 0 0 -50px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        background: darkslateblue;
+        list-style-type: none;
+        -webkit-font-smoothing: antialiased;
+        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+    }
+
+    #menuToggle span:first-child {
+        transform-origin: 0% 0%;
+    }
+
+    #menuToggle span:nth-last-child(2) {
+        transform-origin: 0% 100%;
+    }
+
+    #menuToggle input:checked ~ span {
+        opacity: 1;
+        transform: rotate(45deg) translate(-2px, -1px);
+        background: white;
+    }
+
+    #menuToggle input:checked ~ span:nth-last-child(3) {
+        opacity: 0;
+        transform: rotate(0deg) scale(0.2, 0.2);
+    }
+
+    #menuToggle input:checked ~ span:nth-last-child(2) {
+        transform: rotate(-45deg) translate(0, -1px);
+    }
+
+    #menuToggle input:checked ~ ul {
+        transform: translate(-100%, 0);
+    }
+
+    .dropdown {
+        z-index: 99;
+        transition: all 1s ease;
+    }
+
+    .dropdown a {
+        text-decoration: underline;
+    }
+
 }
