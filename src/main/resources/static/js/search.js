@@ -1,4 +1,5 @@
 import * as mapboxUtils from "./mapbox-utils.js";
+import {searchVenue, getBusinessData} from "./yelp-utils.js";
 
 // Fetch the Mapbox API key from the server
 fetch('/api/get-mapbox-api-key')

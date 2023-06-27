@@ -71,6 +71,10 @@ let editBtn = document.querySelector('.edit');
 let editModal = document.querySelector('.edit-modal')
 let submitEditBtn = document.querySelector('.submit-edit');
 
+let createEventBtn = document.querySelector('.create-event');
+let createEventModal = document.querySelector('.create-event-modal')
+let submitEventBtn = document.querySelector('.submit-edit');
+
 submitEditBtn.onclick = () => {
     editModal.style.display = "none";
 }
@@ -80,10 +84,23 @@ editBtn.onclick = () => {
 }
 
 window.onclick = (e) => {
+    console.log(e.target)
     if (e.target == editModal) {
         editModal.style.display = "none";
+    }else if (e.target == createEventModal) {
+        createEventModal.style.display = "none";
     }
 }
+
+submitEventBtn.onclick = () => {
+    createEventModal.style.display = "none";
+
+}
+
+createEventBtn.onclick = () => {
+    createEventModal.style.display = 'flex';
+}
+
 
 ( async () => {
     let yelpName = document.querySelector('.venueName');

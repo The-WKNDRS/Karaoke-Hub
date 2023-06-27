@@ -234,7 +234,7 @@ export async function searchVenues(event, map, geoVenues, zipcodeInput, weekDay,
             center: newCenter,
             zoom: 10
         });
-    };
+    }
     clearLocationList();
     await buildLocationList(map, geoVenues);
     clearMarkers();
