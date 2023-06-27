@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:sec="http://www.thymeleaf.org">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Abel&family=Anton&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -8,38 +9,45 @@
 <body>
 <nav th:fragment="navbar" class="navbar">
   <div class="logo-nav">
-    <img class="logo-img-nav" th:src="@{/img/karaoke-icon.png}" alt="microphone">
+    <a class="home-link" th:href="@{/index}">
+    <img class="logo-img-nav" th:href="@{/index}" th:src="@{/img/karaoke-icon.png}" alt="microphone">
+    </a>
     <h3><a class="home-link" th:href="@{/index}">Karaoke Hub</a></h3>
   </div>
-  <ul>
-    <li><a class="navbar-links" th:href="@{/index}">Home</a></li>
-    <li><a class="navbar-links" th:href="@{/about}">About</a></li>
-    <li><a class="navbar-links" th:href="@{/contact}">Contact</a></li>
-    <li sec:authorize="isAnonymous()">
-      <a class="navbar-links" th:href="@{/login}">Sign In</a>
-      <div class="dropdown">
-        <a class="navbar-links" th:href="@{/login}">Sign In</a>
-        <hr class="dropdown-divider">
-        <p class="account-text">Don't have an account? </p>
-        <a class="signup-link" th:href="@{/register}">Register</a>
-      </div>
-    </li>
-    <li sec:authorize="isAuthenticated()">
-      <form th:action="@{/logout}" method="post">
-        <button type="submit" id="signout" class="navbar-links">Sign Out</button>
-      </form>
-    </li>
-    <li class="find-karaoke"><a class="navbar-links right-link" th:href="@{search-venue}">Find Karaoke</a>
-    </li>
-  </ul>
+  <div id="menuToggle">
+    <input id="check" type="checkbox">
+    <span></span>
+    <span></span>
+    <span></span>
+    <ul>
+      <li><a class="navbar-links" th:href="@{/index}">Home</a></li>
+      <li><a class="navbar-links" th:href="@{/about}">About</a></li>
+      <li><a class="navbar-links" th:href="@{/contact}">Contact</a></li>
+      <li sec:authorize="isAnonymous()">
+        <a class="navbar-links" th:href="@{/login}">Login</a>
+        <div class="dropdown">
+          <a class="navbar-links" th:href="@{/login}">Login</a>
+          <hr class="dropdown-divider">
+          <p class="account-text">Don't have an account? </p>
+          <a class="signup-link" th:href="@{/register}">Register</a>
+        </div>
+      </li>
+      <li sec:authorize="isAuthenticated()">
+        <form th:action="@{/logout}" method="post">
+          <button type="submit" id="signout" class="navbar-links">Sign Out</button>
+        </form>
+      </li>
+      <li class="find-karaoke"><a class="navbar-links right-link" th:href="@{search}">Find Karaoke</a>
+      </li>
+    </ul>
+  </div>
 </nav>
-
+<script src="/js/navbar.js"></script>
 <footer>
   <div th:fragment="footer" class="footer-content">
     <p>&copy; 2023 Karaoke Hub. All rights reserved.</p>
     <p>Terms of Service | Privacy Policy | Disclaimer</p>
   </div>
 </footer>
-
 </body>
 </html>

@@ -199,7 +199,7 @@ function createPopUp(map, currentFeature) {
 
     const popup = new mapboxgl.Popup({ closeOnClick: false })
         .setLngLat(currentFeature.geometry.coordinates)
-        .setHTML(`<h3>${currentFeature.properties.name}</h3><h4>${currentFeature.properties.address}</h4><h5><a href="/venue/${currentFeature.properties.id}">Go to venue page</a></h5>`)
+        .setHTML(`<h3>${currentFeature.properties.name}</h3><h4>${currentFeature.properties.address}</h4><h5><a href="/venue/${currentFeature.properties.id}" class="popup-link">Go to venue page</a></h5>`)
         .addTo(map);
 }
 
@@ -234,7 +234,7 @@ export async function searchVenues(event, map, geoVenues, zipcodeInput, weekDay,
             center: newCenter,
             zoom: 10
         });
-    };
+    }
     clearLocationList();
     await buildLocationList(map, geoVenues);
     clearMarkers();

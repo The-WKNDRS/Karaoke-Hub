@@ -49,6 +49,7 @@ public class VenueController {
         List<Event> events = eventDao.findByVenueId(id);
         model.addAttribute("events", events);
         model.addAttribute("numComments", commentDao.findAllByVenueId(id).size());
+        System.out.println(commentDao.findAllByVenueId(id).size());
         if (commentDao.findAllByVenueId(id).size() > 0) {
             model.addAttribute("comments", commentDao.findAllByVenueId(id));
         }
@@ -74,21 +75,21 @@ public class VenueController {
         return "redirect:venue-profile/" + venue.getId();
     }
 
-    @DeleteMapping("delete-venue/{id}")
+    @RequestMapping("delete-venue/{id}")
     public String deleteVenue(@PathVariable long id) {
-        venueDao.delete(venueDao.getReferenceById(id));
         eventDao.deleteAll(eventDao.findByVenueId(id));
+        venueDao.delete(venueDao.getReferenceById(id));
         return "redirect:/";
     }
 
-    @GetMapping("/search-venue")
+    @GetMapping("/search")
     public String searchVenue(Model model) {
         List<Venue> venues = venueDao.findAll();
         model.addAttribute("venues", venues);
         return "search";
     }
 
-    @PostMapping("/search-venue")
+    @PostMapping("/search")
     public String showSearch() { return "search"; }
 
     @GetMapping(value = "/search-venue-json", produces = MediaType.APPLICATION_JSON_VALUE)
