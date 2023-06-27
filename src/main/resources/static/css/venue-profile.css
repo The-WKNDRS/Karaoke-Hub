@@ -1,3 +1,6 @@
+.page-wrapper {
+    animation: fade-in 2s linear;
+}
 
 .container {
     row-gap: 10px;
@@ -13,18 +16,21 @@
 
 .images {
     position: relative;
+    z-index: 1;
     box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
+    width: 100%;
+    max-width: 100%;
 }
 
 .img-wrapper {
     position: relative;
     display: flex;
-    height: 300px;
+    max-height: 400px;
     width: 100%;
 }
 
 .yelp-img {
-    width: 33.3%;
+    width: 33.3333333%;
 }
 
 .name-rating {
@@ -55,8 +61,9 @@
 .contact-info {
     position: sticky;
     width: 400px;
-    top: 360px;
+    top: 20px;
     border: 1px solid rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
     border-radius: 10px;
     padding-inline: 30px;
     padding-top: 20px;
@@ -66,6 +73,7 @@
 
 .icon {
     width: 20px;
+    cursor: pointer;
 }
 
 hr {
@@ -74,10 +82,6 @@ hr {
 
 .business-hours {
     column-gap: 80px;
-}
-
-.hours {
-
 }
 
 .days > p {
@@ -167,21 +171,45 @@ hr {
 
 .reviews-wrapper {
     min-height: 100px;
-    max-height: 400px;
+    max-height: 500px;
     width: 600px;
     overflow: hidden;
+    transition: all .5s ease;
 }
 
 .show {
-    height: fit-content;
+    min-height: 100px;
+    max-height: fit-content;
+    width: 600px;
+    transition: all .5s ease;
 }
 
 .show-less {
-    content: 'See less reviews';
+    width: 20px;
+    transform: rotate(-90deg);
+    transition: all .5s ease;
+}
+
+.see-all {
+    height: 25px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.comment-arrow {
+    width: 20px;
+    transform: rotate(90deg);
+    transition: all .5s ease;
 }
 
 .review {
-    height: 100px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
 }
 
 .review-btn {
@@ -198,6 +226,25 @@ hr {
 
 .review > h4 {
     font-weight: bold;
+}
+
+.thumb {
+    width: 23px;
+}
+
+.helpful {
+    cursor: pointer;
+    padding-right: 8px;
+    transition: all .15s ease;
+}
+
+.helpful:hover {
+    scale: 1.2;
+}
+
+.helpful-display {
+    display: flex;
+    justify-content: end;
 }
 
 .form-group > input {
@@ -230,7 +277,8 @@ input[type="submit"]:hover {
 }
 
 .profile {
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: space-between;
 }
 
 .location {
@@ -252,6 +300,16 @@ input[type="submit"]:hover {
     0% {
         opacity: 0;
     }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes showSinger {
+    0% {
+        opacity: 0;
+    }
+
     100% {
         opacity: 1;
     }

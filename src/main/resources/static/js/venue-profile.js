@@ -93,13 +93,18 @@ window.onclick = (e) => {
     await getVenues(yelpVal, yelpZipVal);
 })()
 
-
+// shows all comments and rotates arrow on button
 let seeAllBtn = document.querySelector('.see-all');
 let reviewWrapper = document.querySelector('.reviews-wrapper')
+let commentArrow = document.querySelector('.comment-arrow');
 seeAllBtn.onclick = () => {
     reviewWrapper.classList.toggle('show')
-    seeAllBtn.classList.toggle('show-less')
+    reviewWrapper.classList.toggle('reviews-wrapper')
+    commentArrow.classList.toggle('show-less')
+    commentArrow.classList.toggle('comment-arrow')
 }
+
+
 
 
 

@@ -49,6 +49,7 @@ public class VenueController {
         List<Event> events = eventDao.findByVenueId(id);
         model.addAttribute("events", events);
         model.addAttribute("numComments", commentDao.findAllByVenueId(id).size());
+        System.out.println(commentDao.findAllByVenueId(id).size());
         if (commentDao.findAllByVenueId(id).size() > 0) {
             model.addAttribute("comments", commentDao.findAllByVenueId(id));
         }
