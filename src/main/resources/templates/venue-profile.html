@@ -39,7 +39,9 @@
                 <h3>Karaoke hours</h3>
                 <div class="karaoke-hours">
                     <div th:each="event : ${events}">
-                        <p><span th:text="${event.day_of_week}"></span>             <span th:text="${event.start_time}"></span> - <span th:text="${event.end_time}"></span></p>
+                        <p><span th:text="${event.day_of_week}"></span>
+                            <span th:text="${event.start_time}"></span>
+                            - <span th:text="${event.end_time}"></span></p>
                     </div>
                 </div>
                 <hr>
@@ -109,6 +111,10 @@
             </div>
         </div>
     </div>
+
+
+
+
 
     <div class="edit-modal">
         <div class="modal">
@@ -186,5 +192,6 @@
 <input class="venueName" type="hidden" th:value="${venue.name}">
 <input class="venueZip" type="hidden" th:value="${venue.zip_code}">
 <script src="/js/venue-profile.js"></script>
+
 </body>
 </html>

@@ -90,17 +90,24 @@ public class VenueController {
     }
 
     @PostMapping("/search")
-    public String showSearch() { return "search"; }
+    public String showSearch() {
+        return "search";
+    }
 
     @GetMapping(value = "/search-venue-json", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> sendVenues(@RequestParam(name = "zipcode") String zipcode, @RequestParam(name = "weekday") String weekday) {
         String data;
-        System.out.println(weekday);
-        if (!zipcode.equals("null") && weekday.equals("Any")) {
-            data = venueDao.findVenueByZipcodeNative(zipcode);
-        } else if (!zipcode.equals("null") && !weekday.equals("Any")) {
-            data = venueDao.filterVenueByWeekdayNative(weekday, zipcode);
-        } else if (zipcode.equals("null") && !weekday.equals("Any")) {
+        String zipcode2 = zipcode;
+
+        if (zipcode2.length() < 5 && !zipcode2.equals("null")) {
+            zipcode2 = zipcode2.concat("%");
+        }
+
+        if (!zipcode2.equals("null") && weekday.equals("Any")) {
+            data = venueDao.findVenueByZipcodeNative(zipcode2);
+        } else if (!zipcode2.equals("null") && !weekday.equals("Any")) {
+            data = venueDao.filterVenueByWeekdayNative(weekday, zipcode2);
+        } else if (zipcode2.equals("null") && !weekday.equals("Any")) {
             data = venueDao.filterAllByWeekdayNative(weekday);
         } else {
             data = venueDao.findAllValuesNative();

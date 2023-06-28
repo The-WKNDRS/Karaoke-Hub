@@ -60,7 +60,7 @@ nav ul li {
     border: .5px solid rgba(0, 0, 0, 0.6); /* Border around the dropdown container */
     box-shadow: rgb(38, 57, 77) 0 20px 30px -10px;
     position: absolute;
-    z-index: 9;
+    z-index: 15;
     left: 50%;
     transform: translateX(-50%);
     display: none;

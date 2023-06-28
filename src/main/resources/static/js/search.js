@@ -1,6 +1,8 @@
 import * as mapboxUtils from "./mapbox-utils.js";
 import {searchVenue, getBusinessData} from "./yelp-utils.js";
 
+const clearButton = document.querySelector('#clear');
+
 // Fetch the Mapbox API key from the server
 fetch('/api/get-mapbox-api-key')
     .then(response => response.text())
@@ -34,12 +36,41 @@ fetch('/api/get-mapbox-api-key')
                 getLocation();
             });
 
-            zipcodeForm.addEventListener('change', async function (event) {
+            zipcodeForm.addEventListener('submit', async function (event) {
+                if (clearButton.classList.contains('d-none')) {
+                    clearButton.classList.toggle('d-none');
+                }
+                await mapboxUtils.searchVenues(event, map, geoVenues, zipcodeInput, weekDay, zipValue);
+
+            });
+
+            zipcodeInput.addEventListener('change', async function (event) {
+                if (clearButton.classList.contains('d-none')) {
+                    clearButton.classList.toggle('d-none');
+                }
                 await mapboxUtils.searchVenues(event, map, geoVenues, zipcodeInput, weekDay, zipValue);
             });
 
             weekdayInput.addEventListener('change', async function (event) {
+                if (clearButton.classList.contains('d-none')) {
+                    clearButton.classList.toggle('d-none');
+                }
                 await mapboxUtils.searchVenues(event, map, geoVenues, zipcodeInput, weekDay, zipValue);
+            });
+
+            //Event listener for the "clear" button
+            document.querySelector("#clear").addEventListener("click", async function () {
+                document.querySelector("#weekday").value = "Any";
+                document.querySelector("#zipcode").value = "";
+                await mapboxUtils.searchVenues(event, map, geoVenues, zipcodeInput, weekDay, zipValue);
+
+                //remove the clear button
+                clearButton.classList.toggle('d-none');
+
+                //close the sidebar
+                if (window.innerWidth < 768) {
+                    closeSideBar();
+                }
             });
 
             //GeoLocation Functions
@@ -68,9 +99,12 @@ fetch('/api/get-mapbox-api-key')
 
 // Make the listings draggable:
 
-    dragElement(document.querySelector(".drag"));
+    let drag = document.querySelector(".drag");
     let sideBar = document.querySelector(".sidebar");
     let zipForm = document.querySelector("#zipcodeForm");
+
+    dragElement(drag);
+
     function dragElement(elmnt) {
         let pos1 = 0, pos2 = 0;
 
@@ -113,12 +147,33 @@ fetch('/api/get-mapbox-api-key')
                 sideBar.style.top = "65%";
                 zipForm.style.top = "65%";
             } else {
-                elmnt.style.top = ((((window.innerHeight - document.querySelector("footer").offsetHeight) - sideBar.children[0].offsetHeight) - document.querySelector(".navbar").offsetHeight) + 2) + "px";
-                sideBar.style.top = ((((window.innerHeight - document.querySelector("footer").offsetHeight) - sideBar.children[0].offsetHeight) - document.querySelector(".navbar").offsetHeight) + 2) + "px";
-                zipForm.style.top = ((((window.innerHeight - document.querySelector("footer").offsetHeight) - sideBar.children[0].offsetHeight) - document.querySelector(".navbar").offsetHeight) + 2) + "px";
+                closeSideBar();
             }
 
         }
     }
+
+    function closeSideBar() {
+        drag.style.top = ((((window.innerHeight - document.querySelector("footer").offsetHeight) - sideBar.children[0].offsetHeight) - document.querySelector(".navbar").offsetHeight) + 2) + "px";
+        sideBar.style.top = ((((window.innerHeight - document.querySelector("footer").offsetHeight) - sideBar.children[0].offsetHeight) - document.querySelector(".navbar").offsetHeight) + 2) + "px";
+        zipForm.style.top = ((((window.innerHeight - document.querySelector("footer").offsetHeight) - sideBar.children[0].offsetHeight) - document.querySelector(".navbar").offsetHeight) + 2) + "px";
+    }
+
+    //Reset the adjusted positions on window resize
+    window.addEventListener('resize', function () {
+        if (window.innerWidth > 768) {
+            document.querySelector(".drag").style.top = "unset";
+            sideBar.style.top = "0";
+            zipForm.style.top = "0";
+        } else {
+            document.querySelector(".drag").style.top = "65%";
+            sideBar.style.top = "65%";
+            zipForm.style.top = "65%";
+        }
+
+    });
+
+
+
 
 
