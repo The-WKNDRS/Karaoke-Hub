@@ -153,6 +153,8 @@ nav ul li:hover .dropdown {
 
 #signout {
     transition: all .3s ease;
+    background: unset;
+    color: white;
 }
 
 #menuToggle a {
