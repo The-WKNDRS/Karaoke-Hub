@@ -1,11 +1,12 @@
 @media  (max-width: 768px) {
-    .row {
+    .container {
         flex-direction: column;
+        display: flex;
+        flex-wrap: wrap;
     }
-    .column, h1 {
+    .column {
         align-items: center;
     }
-
 }
 
 body {

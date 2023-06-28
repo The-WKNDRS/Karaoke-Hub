@@ -1,3 +1,12 @@
+@media  (max-width: 768px) {
+    .column, .row{
+        align-items: center;
+    }
+    .column {
+        align-items: center;
+    }
+}
+
 
 .container {
     row-gap: 10px;
