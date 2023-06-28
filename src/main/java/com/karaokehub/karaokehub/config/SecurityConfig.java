@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -40,6 +41,8 @@ public class SecurityConfig implements WebMvcConfigurer {
         http.httpBasic(withDefaults());
         return http.build();
     }
+
+    HttpSessionRequestCache requestCache = new HttpSessionRequestCache();
 
     @Bean
     public PasswordEncoder passwordEncoder(){
