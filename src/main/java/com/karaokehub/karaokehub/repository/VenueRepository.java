@@ -21,7 +21,7 @@ public interface VenueRepository extends JpaRepository<Venue, Long> {
     String findAllValuesNative();
 
     @Query(
-            value = "SELECT JSON_ARRAYAGG(JSON_OBJECT('id', v.id, 'address', v.address, 'city', v.city, 'name', v.name, 'state', v.state, 'website', v.website, 'yelp_id', v.yelp_id, 'zipcode', v.zip_code, 'events', e.events)) FROM venue v LEFT JOIN (SELECT venue_id, JSON_ARRAYAGG(JSON_OBJECT('id', id, 'day_of_week', day_of_week, 'dj', dj, 'end_time', end_time, 'start_time', start_time)) AS events FROM events GROUP BY venue_id) e ON e.venue_id = v.id WHERE v.zip_code = ?;",
+            value = "SELECT JSON_ARRAYAGG(JSON_OBJECT('id', v.id, 'address', v.address, 'city', v.city, 'name', v.name, 'state', v.state, 'website', v.website, 'yelp_id', v.yelp_id, 'zipcode', v.zip_code, 'events', e.events)) FROM venue v LEFT JOIN (SELECT venue_id, JSON_ARRAYAGG(JSON_OBJECT('id', id, 'day_of_week', day_of_week, 'dj', dj, 'end_time', end_time, 'start_time', start_time)) AS events FROM events GROUP BY venue_id) e ON e.venue_id = v.id WHERE v.zip_code LIKE ?;",
 
             nativeQuery = true
     )
@@ -39,7 +39,7 @@ public interface VenueRepository extends JpaRepository<Venue, Long> {
                     "        WHEN 'Saturday' THEN 'Sat'\n" +
                     "        WHEN 'Sunday' THEN 'Sun'\n" +
                     "        END\n" +
-                    "    ) GROUP BY venue_id) e ON e.venue_id = v.id WHERE v.zip_code = ? AND e.venue_id IS NOT NULL;",
+                    "    ) GROUP BY venue_id) e ON e.venue_id = v.id WHERE v.zip_code LIKE ? AND e.venue_id IS NOT NULL;",
 
             nativeQuery = true
     )
