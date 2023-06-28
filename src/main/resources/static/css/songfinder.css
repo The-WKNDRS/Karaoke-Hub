@@ -165,10 +165,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 20px;
-    border: 5px solid #ff00ff;
-    box-shadow: 0 0 20px #ff00ff;
     background-color: transparent;
+    flex-wrap: wrap; /* Allow the loading animation divs to wrap to the next line */
 }
 
 .loading-message {
@@ -179,10 +177,56 @@
     color: #ff00ff;
     text-transform: uppercase;
     letter-spacing: 6px;
+    animation: pulse 1.5s ease-in-out infinite;
 }
+
 
 .loading-message span {
     margin: 0 3px;
     text-shadow: 0px 0px 15px #ff00ff;
     animation: flicker 1s ease-in-out alternate infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+}
+
+.loading-message-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    border: 5px solid #ff00ff;
+    box-shadow: 0 0 20px #ff00ff;
+    background-color: transparent;
+}
+
+.loading-animation {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    margin: 5px; /* Add some spacing around each loading animation div */
+    margin-top:25px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
