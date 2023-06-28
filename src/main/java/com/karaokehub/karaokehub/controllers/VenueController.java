@@ -90,7 +90,9 @@ public class VenueController {
     }
 
     @PostMapping("/search")
-    public String showSearch() { return "search"; }
+    public String showSearch() {
+        return "search";
+    }
 
     @GetMapping(value = "/search-venue-json", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> sendVenues(@RequestParam(name = "zipcode") String zipcode, @RequestParam(name = "weekday") String weekday) {

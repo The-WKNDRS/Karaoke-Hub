@@ -12,6 +12,16 @@
     box-sizing: border-box;
 }
 
+.d-none {
+    display: none;
+    height: 0;
+    width: 0;
+    cursor: none;
+    pointer-events: none;
+    position: absolute;
+    z-index: -9999;
+}
+
 html, body {
     height: 100%;
     margin: 0;
@@ -236,13 +246,34 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
     color: var(--tertiary-alt);
 }
 
+@media only screen and (min-width: 769px) {
+    .clear-wrapper {
+        position: absolute;
+        left: 94%;
+        top: 38%;
+        background-color: var(--main-color);
+        border-radius: 9999px;
+    }
+
+    .clear-button {
+        background-image: url(../img/clear-button.png);
+        display: block;
+        height: 32px;
+        width: 32px;
+        background-size: cover;
+        background-color: unset;
+        border: var(--secondary-color-alt) solid 2px;
+        border-radius: 35px;
+        filter: brightness(0) saturate(100%) invert(20%) sepia(95%) saturate(2781%) hue-rotate(358deg) brightness(97%) contrast(96%);
+    }
+}
 
 /*media queries for small devices screen size smaller than 768px*/
-
 @media only screen and (max-width: 768px) {
 
     .search-container {
         height: 100%;
+        overflow: hidden;
     }
 
     .search-form {
@@ -335,7 +366,22 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
         height: unset;
     }
 
+    .clear-wrapper {
+        position: absolute;
+        left: 94%;
+        top: 23%;
 
+    }
+
+    .clear-button {
+        background-image: url(../img/clear-button.png);
+        display: block;
+        height: 32px;
+        width: 32px;
+        background-size: cover;
+        background-color: unset;
+        filter: brightness(0) saturate(100%) invert(20%) sepia(95%) saturate(2781%) hue-rotate(358deg) brightness(97%) contrast(96%);
+    }
 }
 
 @keyframes shake {
