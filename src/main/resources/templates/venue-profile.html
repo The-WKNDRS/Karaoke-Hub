@@ -12,15 +12,15 @@
 <body>
 <div class="page-wrapper">
     <div th:insert="fragments/navbar.html :: navbar"></div>
-    <div class="container">
-        <div class="row images">
-            <div class="img-wrapper"></div>
-            <div class="name-rating">
-                <p th:text="${venue.name}" class="name"></p>
-                <div class="rating"></div>
-                <ul class="categories"></ul>
-            </div>
+    <div class="row images">
+        <div class="img-wrapper"></div>
+        <div class="name-rating">
+            <p th:text="${venue.name}" class="name"></p>
+            <div class="rating"></div>
+            <ul class="categories"></ul>
         </div>
+    </div>
+    <div class="container">
         <div class="row">
             <div class="column left">
                 <h3>Business hours</h3>
@@ -58,23 +58,32 @@
                 </div>
                 <h3>Comments</h3>
                 <div class="reviews-wrapper">
-                    <div th:if="${numComments} != null" class="review" th:each="comment : ${comments}">
-                        <h4>@<span th:text="${comment.user.getUsername()}"></span></h4>
+                    <div th:if="${numComments} > 0" class="review" th:each="comment : ${comments}">
+                        <div class="profile">
+                            <h4>@<span th:text="${comment.user.getUsername()}"></span></h4>
+                            <a class="helpful"><img class="thumb" src="/img/thumb.png"></a>
+                        </div>
                         <p th:text="${comment.body}"></p>
                         <br>
+                        <div class="helpful-display">
+                            <h5><span>4 </span> People found this comment helpful</h5>
+
+                        </div>
                         <hr>
                     </div>
-                    <div th:if="${numComments} == null" class="review" >
+                    <div th:if="${numComments} == 0" class="review" >
                         <h4>Be the first to comment!</h4>
                     </div>
                 </div>
-                <button class="see-all">See all comments</button>
+                <div class="see-all">
+                    <img class="comment-arrow" src="/img/arrow.png" alt="arrow">
+                </div>
             </div>
             <div class="column align-center">
                 <div class="contact-info column shrink">
                     <div class="row justify-space-between align-center">
                         <a th:href="${venue.website}" target="_blank"><p th:text="${venue.website}" class="website"></p></a>
-                        <img class="icon" src="/img/redirect.png">
+                        <a th:href="${venue.website}" target="_blank"><img class="icon" src="/img/redirect.png"></a>
                     </div>
                     <hr />
                     <div class="row justify-space-between align-center">
@@ -95,10 +104,17 @@
                         <img class="edit-img" src="/img/edit1.png">
                     </div>
                 </div>
+                <div class="events">
+                    <a class="create-event"><button>Create event</button></a>
+                    <a class="edit-event"><button>Edit events</button></a>
+                </div>
             </div>
         </div>
     </div>
-<!--</div>-->
+
+
+
+
 
     <div class="edit-modal">
         <div class="modal">
@@ -128,11 +144,47 @@
                     <label for="website">Website</label>
                     <input id="website" name="website" th:field="*{website}">
                 </div>
+                <div class="form-group">
+                    <label for="yelp_id">Yelp ID</label>
+                    <input id="yelp_id" name="yelp_id" th:field="*{yelp_id}">
+                </div>
                 <input class="submit-edit" type="submit" value="Submit Edit">
             </form>
             <div class="delete">
                 <a th:href="@{|/delete-venue/${venue.id}|}"><img class="delete-btn" src="/img/delete.png"></a>
             </div>
+        </div>
+    </div>
+    <div class="create-event-modal">
+        <div class="modal">
+            <form class="edit-form" th:action="@{/create-event}" th:method="post">
+                <input type="hidden" th:field="*{id}" />
+                <div class="form-group">
+                    <label class="day-select" for="day">Day</label>
+                    <select id="day" name="day">
+                        <option>Monday</option>
+                        <option>Tuesday</option>
+                        <option>Wednesday</option>
+                        <option>Thursday</option>
+                        <option>Friday</option>
+                        <option>Saturday</option>
+                        <option>Sunday</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="start">Start time</label>
+                    <input id="start" name="start" type="time">
+                </div>
+                <div class="form-group">
+                    <label for="end">End time</label>
+                    <input id="end" name="end" type="time">
+                </div>
+                <div class="form-group">
+                    <label for="dj">Dj name</label>
+                    <input id="dj" name="dj" >
+                </div>
+                <input class="submit-edit" type="submit" value="Create Event">
+            </form>
         </div>
     </div>
     <div th:insert="fragments/navbar.html :: footer"></div>

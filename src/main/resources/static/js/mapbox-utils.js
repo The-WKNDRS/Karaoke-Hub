@@ -162,7 +162,7 @@ export function buildLocationList(map, geoVenues) {
             detailsTitle.innerHTML = 'Events';
             details.appendChild(detailsTitle);
             if (venue.properties.events) {
-                venue.properties.events.forEach((event, index) => {
+                venue.properties.events.forEach((event) => {
                     let el = document.createElement('h4');
                     el.innerHTML = `${event.day_of_week} Start: ${event.start_time} End: ${event.end_time}`;
                     details.appendChild(el);
@@ -234,7 +234,7 @@ export async function searchVenues(event, map, geoVenues, zipcodeInput, weekDay,
             center: newCenter,
             zoom: 10
         });
-    };
+    }
     clearLocationList();
     await buildLocationList(map, geoVenues);
     clearMarkers();
