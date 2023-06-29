@@ -20,6 +20,11 @@
       <p>Just make your selections, press submit, and your data will be sent to ChatGPT where artificial intelligence will return 10 song suggestions based on your selections. Only for registered users, limit 5 per day.</p>
     </div>
   </div>
+  <div id="loading-screen" class="loading-screen">
+    <div class="ring"> Loading
+      <span></span>
+    </div>
+  </div>
   <div class="song-finder-row">
     <div class="song-finder-container">
       <form action="/song-finder-results" method="post" id="song-finder-form">
@@ -68,19 +73,6 @@
         </select>
         <button type="submit" th:action="@{/song-finder-results}">Submit</button>
       </form>
-    </div>
-    <div id="loading-screen" class="loading-screen">
-      <div class="loading-message-wrapper">
-        <h1 class="loading-message">
-          <span>L</span>
-          <span>o</span>
-          <span>a</span>
-          <span>d</span>
-          <span>i</span>
-          <span>n</span>
-          <span>g</span>
-        </h1>
-      </div>
     </div>
     <div class="song-results-container">
       <h1>Song Finder Results</h1>

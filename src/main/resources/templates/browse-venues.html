@@ -14,21 +14,58 @@
 </head>
 <body>
 <div th:insert="~{fragments/navbar.html :: navbar}"></div>
+<div class="footer-lock">
 <div class="venue-page-wrapper">
-  <div class="background-image" style="background-image: url('/img/singers5.png');"></div>
-  <div class="venue-browser-header">
-    <div class="venue-browser-logo">
-      <img class="venue-browser-logo-img" th:src="@{/img/karaoke-icon.png}" alt="microphone">
-      <h3>Karaoke Hub</h3>
-    </div>
-    <h3>Karaoke Bars</h3>
-  </div>
+  <div class="background-image" style="background-image: url('/img/background_photo2.png');"></div>
   <div class="venue-create-row">
     <div class="col-md-12">
       <div class="venue-create-button">
         <a href="/create-venue" class="btn">Create a new venue!</a>
       </div>
     </div>
+  </div>
+  <div class venue-filter-row>
+    <div class="venue-filter">
+      <div class="city-filter">
+        <label for="city-filter">City:</label>
+        <select id="city-filter">
+          <option value="">All</option>
+          <option value="Austin">Austin</option>
+          <option value="Balcones Heights">Balcones Heights</option>
+          <option value="Broadlands">Broadlands</option>
+          <option value="Fairfax">Fairfax</option>
+          <option value="Helotes">Helotes</option>
+          <option value="Leesburg">Leesburg</option>
+          <option value="New Braunfels">New Braunfels</option>
+          <option value="San Antonio">San Antonio</option>
+        </select>
+      </div>
+      <div class="state-filter">
+        <label for="state-filter">State:</label>
+        <select id="state-filter">
+          <option value="">All</option>
+          <option value="TX">TX</option>
+          <option value="VA">VA</option>
+        </select>
+      </div>
+      <div class="karaoke-night-filter">
+        <label for="karaoke-night-filter">Karaoke Night:</label>
+        <select id="karaoke-night-filter">
+          <option value="">All</option>
+          <option value="Mon">Monday</option>
+          <option value="Tue">Tuesday</option>
+          <option value="Wed">Wednesday</option>
+          <option value="Thu">Thursday</option>
+          <option value="Fri">Friday</option>
+          <option value="Sat">Saturday</option>
+          <option value="Sun">Sunday</option>
+        </select>
+      </div>
+      <div class="filter-buttons">
+        <button onclick="applyFilters()">Apply Filters</button>
+        <button onclick="resetFilters()">Reset Filters</button>
+      </div>
+  </div>
   </div>
   <div class="venue-browser">
     <div th:each="venueEventDto : ${venueEventList}" class="card">
@@ -42,7 +79,7 @@
             <strong>Website: </strong>
             <a th:href="${venueEventDto.venue.website}" th:text="${venueEventDto.venue.website}">Website</a>
             <br>
-        </span>
+          </span>
           <strong>Karaoke Nights:</strong>
         <div class="karaoke-nights-row">
           <span th:text="${venueEventDto.getKaraokeDays()}" th:unless="${venueEventDto.getKaraokeDays()}"></span>
@@ -51,8 +88,8 @@
           <span th:text="${event.day_of_week}"></span>
           <br>
           <span th:if="${event.dj}">
-                <strong>DJ: </strong><span th:text="${event.dj}"></span>
-                <br>
+              <strong>DJ: </strong><span th:text="${event.dj}"></span>
+              <br>
             </span>
           <span th:text="${event.start_time}"></span> - <span th:text="${event.end_time}"></span>
         </div>
@@ -63,6 +100,46 @@
   </div>
 </div>
 </div>
-<div th:insert="fragments/navbar.html :: footer"></div>
+<div id=footer th:insert="fragments/navbar.html :: footer"></div>
 </body>
+<script>
+  function applyFilters() {
+    let city = document.getElementById("city-filter").value;
+    let state = document.getElementById("state-filter").value;
+    let karaokeNight = document.getElementById("karaoke-night-filter").value;
+
+    let cards = document.getElementsByClassName("card");
+    for (let i = 0; i < cards.length; i++) {
+      let card = cards[i];
+      let venueLocation = card.querySelector(".card-text > span").textContent;
+      let karaokeNights = card.querySelectorAll(".karaoke-night > span:first-child");
+      let isVisible = true;
+
+      if (city && venueLocation.indexOf(city) === -1) {
+        isVisible = false;
+      }
+
+      if (state && venueLocation.indexOf(state) === -1) {
+        isVisible = false;
+      }
+
+      if (karaokeNight && !Array.from(karaokeNights).some(night => night.textContent === karaokeNight)) {
+        isVisible = false;
+      }
+
+      card.style.display = isVisible ? "block" : "none";
+    }
+  }
+
+  function resetFilters() {
+    document.getElementById("city-filter").value = "";
+    document.getElementById("state-filter").value = "";
+    document.getElementById("karaoke-night-filter").value = "";
+
+    let cards = document.getElementsByClassName("card");
+    for (let i = 0; i < cards.length; i++) {
+      cards[i].style.display = "block";
+    }
+  }
+</script>
 </html>
