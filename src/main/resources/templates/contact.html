@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8">
-  <title>Home</title>
+  <title>Contact Page</title>
   <link rel="stylesheet" th:href="@{/css/navbar.css}">
   <link rel="stylesheet" th:href="@{/css/index.css}">
   <link rel="stylesheet" th:href="@{/css/resets.css}">
@@ -16,7 +16,7 @@
 <div class="contact-page-wrapper" style="background: url('/img/letters.png') repeat center;">
   <div class="contact-form-container">
     <h1>Contact Us</h1>
-    <form th:action="@{/contact}" method="post">
+    <form id="contact-form" action="@{/contact}" method="post">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" required>
 
@@ -31,5 +31,24 @@
   </div>
 </div>
 <div th:insert="fragments/navbar.html :: footer"></div>
+<script>
+  document.getElementById("contact-form").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent form submission
+
+    // Display the custom modal popup
+    let modal = document.getElementById("custom-modal");
+    modal.style.display = "block";
+
+    // Redirect to the index page after a delay
+    setTimeout(function() {
+      window.location.href = "/index"; // Replace with your desired index page URL
+    }, 3000); // 3000 milliseconds (3 seconds) delay
+  });
+</script>
+<div id="custom-modal" class="custom-modal">
+  <div class="custom-modal-content">
+    <p>Your email has been successfully submitted. We will get back to you soon.</p>
+  </div>
+</div>
 </body>
 </html>
