@@ -1,5 +1,6 @@
 .page-wrapper {
     animation: fade-in 2s linear;
+    overflow: hidden;
 }
 
 
@@ -12,6 +13,7 @@
 }
 
 .column.left {
+    margin-top: 10px;
     gap: 20px;
 }
 
@@ -32,6 +34,7 @@
 
 .yelp-img {
     width: 33.3333333%;
+    object-fit: cover;
 }
 
 .name-rating {
@@ -82,11 +85,16 @@ hr {
 }
 
 .business-hours {
-    column-gap: 80px;
+    column-gap: 120px;
 }
 
 .days > p {
     display: inline;
+    font-size: 20px;
+}
+
+.hours {
+    font-size: 20px;
 }
 
 .edit {
@@ -98,6 +106,8 @@ hr {
     width: 390px;
     transition: all .2s ease;
     cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
 }
 .delete {
     position: absolute;
@@ -109,13 +119,59 @@ hr {
     filter: invert(11%) sepia(80%) saturate(7366%) hue-rotate(0deg) brightness(101%) contrast(112%);
 }
 
-.edit:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+.edit:hover  .edit-img {
+    animation: shake .3s ease-in-out;
 }
 
 .edit-img {
     width: 30px;
+}
+
+.karaoke-event {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.karaoke-time {
+    display: flex;
+    gap: 5px;
+    font-size: 20px;
+}
+
+.karaoke-time > span:first-child {
+    width: 100px;
+    margin-right: 58px;
+}
+
+.events .go-back {
+    color: darkslateblue;
+}
+
+.x {
+    display: inline;
+    width: 35px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 287px;
+    pointer-events: none;
+    transition: all .2s ease;
+}
+
+.edit-icon {
+    width: 30px;
+    display: inline;
+    cursor: pointer;
+}
+
+.edit-icon:hover {
+    animation: shake .3s ease-in-out;
+}
+
+.hide {
+    display: none;
+    transition: all .2s ease;
 }
 
 .edit-modal {
@@ -143,7 +199,22 @@ hr {
     left: 0;
     top: 0;
     width: 100%;
-    height: 70%;
+    height: 100%;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.edit-event-modal {
+    display: none;
+    justify-content: center;
+    align-content: center;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
 }
@@ -158,7 +229,7 @@ hr {
     border-radius: 20px;
 }
 
-.edit-form {
+.edit-form, .edit-event-form {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -166,6 +237,11 @@ hr {
     padding-inline: 50px;
     border-radius: 20px;
     margin: 30px 0 30px 0;
+}
+
+.forms-wrapper. {
+    display: none;
+    flex-direction: column;
 }
 
 .form-group > label {
@@ -186,6 +262,60 @@ hr {
     padding-left: 7px;
     text-align: center;
     border-radius: 10px;
+}
+
+.form-group > input {
+    border: 1px solid black;
+    padding-top: 20px;
+    padding-bottom: 7px;
+    padding-left: 7px;
+    font-size: 20px;
+    width: 300px;
+    border-radius: 10px;
+}
+
+.form-event > select {
+    width: 130px;
+    font-size: 20px;
+    border: 1px solid black;
+    padding: 23px 0 11px 7px;
+    border-radius: 10px;
+}
+
+.form-event > input {
+    border: 1px solid black;
+    padding-top: 20px;
+    padding-bottom: 7px;
+    padding-left: 7px;
+    font-size: 20px;
+    width: 130px;
+    border-radius: 10px;
+}
+
+.form-event > label {
+    position: absolute;
+    font-size: 13px;
+    top: 5px;
+    left: 5px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.form-event {
+    position: relative;
+}
+
+.edit-event-form .submit-edit {
+    height: 40px;
+    width: 310px;
+    border: 1px solid black;
+    border-radius: 8px;
+    background-color: rgba(0,0, 0, 0.4);
+    color: whitesmoke;
+    transition: all ease .1s;
+}
+
+.edit-event-form .submit-edit:hover {
+    scale: 1.2;
 }
 
 .form-group {
@@ -276,16 +406,6 @@ hr {
     justify-content: end;
 }
 
-.form-group > input {
-    border: 1px solid black;
-    padding-top: 20px;
-    padding-bottom: 7px;
-    padding-left: 7px;
-    font-size: 20px;
-    width: 300px;
-    border-radius: 10px;
-}
-
 .form-group > input:focus {
     border: 1px solid orangered;
 }
@@ -361,4 +481,22 @@ input[type="submit"]:hover {
         opacity: 1;
     }
 
+}
+
+@keyframes shake {
+    0% {
+        transform: rotate(0);
+    }
+    25% {
+        transform: rotate(30deg)
+    }
+    50% {
+        transform: rotate(-30deg)
+    }
+    75% {
+        transform: rotate(30deg)
+    }
+    100% {
+        transform: rotate(0);
+    }
 }
