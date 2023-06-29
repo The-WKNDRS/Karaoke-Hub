@@ -34,6 +34,19 @@ h2 {
     align-items: center;
 }
 
+.logo-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /*height: 100%;*/
+}
+
+.linkedin-logo, .github-logo {
+    height: 50px;
+    width: 50px;
+}
+
 .logo > h3 {
     font-size: 40px;
     color: #483d8b;
