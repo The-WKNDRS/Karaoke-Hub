@@ -1,6 +1,10 @@
 // uses fetched yelp data to display it on the page
 const getVenues = async (query, location) => {
     let venues = await searchVenue(query, location);
+    if(!venues || venues.length === 0){
+        console.log("No venues returned");
+        return;
+    }
     let venue = venues[0];
     let business = await getBusinessData(venue.alias);
     console.log(business);
@@ -11,14 +15,18 @@ const getVenues = async (query, location) => {
     let yelpHours = document.querySelector('.hours');
     let el = document.createElement('div');
     yelpPhone.innerText = business.display_phone;
-    let days = business.hours[0].open;
-    yelpHours.innerHTML += `<p>${days[0].start} - ${days[0].end}</p>
-                           <p>${days[1].start} - ${days[1].end}</p>
-                           <p>${days[2].start} - ${days[2].end}</p>
-                           <p>${days[3].start} - ${days[3].end}</p>
-                           <p>${days[4].start} - ${days[4].end}</p>
-                           <p>${days[5].start} - ${days[5].end}</p>
-                           <p>${days[6].start} - ${days[6].end}</p>`
+    if (business.hours && business.hours.length > 0 && business.hours[0].open) {
+        let days = business.hours[0].open;
+        days.forEach(day => {
+            if (day.start && day.end) {
+                yelpHours.innerHTML += `<p>${day.start} - ${day.end}</p>`;
+            } else {
+                console.log('Day data incomplete:', day);
+            }
+        });
+    } else {
+        console.log("Hours not available for this business");
+    }
     if (venue.image_url === "") {
         yelpImg.innerHTML = `<img class="yelp-img" src="/img/generic-karaoke.jpeg" alt="logo">`
     } else {
@@ -50,6 +58,7 @@ async function searchVenue(query, zipcode) {
         return data;
     } catch (error) {
         console.log('Error:', error);
+        throw error; // or return [];
     }
 }
 

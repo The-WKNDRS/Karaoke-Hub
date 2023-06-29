@@ -94,7 +94,12 @@ ul.events-list li hr {
 }
 
 .venue-page-wrapper {
-    position: relative;
+    padding-bottom: 2.5rem;
+}
+
+.footer-lock{
+    position:relative;
+    min-height: 100vh;
 }
 
 .background-image {
@@ -142,3 +147,81 @@ ul.events-list li hr {
         margin: 0 0 35px 0;
     }
 }
+
+.venue-filter-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.venue-filter {
+    display: flex;
+    gap: 20px;
+    justify-content: space-evenly;
+    margin-bottom:25px;
+
+}
+
+
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.city-filter select,
+.state-filter select,
+.karaoke-night-filter select {
+    color: black;
+    background-color: white;
+    border: none;
+    outline: none;
+    font-size: 16px; /* Adjust the font size as desired */
+}
+
+.city-filter,
+.state-filter,
+.karaoke-night-filter {
+    border: 2px solid #483B89;
+    background-color: #483B89;
+    padding: 5px;
+    display: inline-block;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.city-filter label,
+.state-filter label,
+.karaoke-night-filter label {
+    color: white;
+    font-size: 16px; /* Adjust the font size as desired */
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-buttons button {
+    background-color: #E72711;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
