@@ -18,7 +18,7 @@ public class SecurityConfig implements WebMvcConfigurer {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
                 .requestMatchers( "create-venue", "user-profile", "profile", "profile/update", "contact", "contact-success", "song-finder").authenticated()
-                .requestMatchers("register", "login", "/", "index", "logout", "search", "browse-venues", "venue/**", "venue/comment/upvote", "yelp/**", "yelpBusiness/**", "api/**", "search-venue-json", "about").permitAll()
+                .requestMatchers("register", "login", "/", "index", "logout", "search", "browse-venues", "venue/**", "venue/comment/upvote", "yelp/**", "yelpBusiness/**", "api/**", "search-venue-json", "about", "delete-venue/**").permitAll()
                 .requestMatchers("css/**", "js/**", "img/**").permitAll()
         );
 

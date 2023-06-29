@@ -57,19 +57,42 @@ public class VenueController {
         return "venue-profile";
     }
 
-    @PostMapping("/venue/{id}/create_event{e_id}")
-    public String createEvent(@PathVariable long id, @PathVariable long e_id, @RequestParam(name="day") String day, @RequestParam(name="start") String start, @RequestParam(name="end") String end, @RequestParam(name="dj") String dj) {
+    @PostMapping("/venue/{id}/create_event")
+    public String createEvent(@PathVariable long id, @RequestParam(name="day") String day, @RequestParam(name="start") String start, @RequestParam(name="end") String end, @RequestParam(name="dj") String dj) {
         Venue venue = venueDao.findById(id);
-//        switch (day) {
-//            case "Monday" -> day = "Mon";
-//            case "Tuesday" -> day = "Tue";
-//            case "Wednesday" -> day = "Wed";
-//            case "Thursday" -> day = "Thu";
-//            case "Friday" -> day = "Fri";
-//            case "Saturday" -> day = "Sat";
-//            case "Sunday" -> day = "Sun";
-//        }
+        switch (day) {
+            case "Monday" -> day = "Mon";
+            case "Tuesday" -> day = "Tue";
+            case "Wednesday" -> day = "Wed";
+            case "Thursday" -> day = "Thu";
+            case "Friday" -> day = "Fri";
+            case "Saturday" -> day = "Sat";
+            case "Sunday" -> day = "Sun";
+        }
         Event event = new Event(day, start, end, dj, venue);
+        eventDao.save(event);
+        return "redirect:/venue/" + id;
+    }
+
+    @PostMapping("/venue/{id}/edit_event/{e_id}")
+    public String editEvent(@PathVariable long id, @PathVariable long e_id, @RequestParam(name="day") String day, @RequestParam(name="start") String start, @RequestParam(name="end") String end, @RequestParam(name="dj") String dj) {
+        Venue venue = venueDao.findById(id);
+        Event event = eventDao.findById(e_id);
+        switch (day) {
+            case "Monday" -> day = "Mon";
+            case "Tuesday" -> day = "Tue";
+            case "Wednesday" -> day = "Wed";
+            case "Thursday" -> day = "Thu";
+            case "Friday" -> day = "Fri";
+            case "Saturday" -> day = "Sat";
+            case "Sunday" -> day = "Sun";
+        }
+        if (day == "") {
+            event.setDay_of_week(day);
+        }
+        event.setStart_time(start);
+        event.setEnd_time(end);
+        event.setDj(dj);
         eventDao.save(event);
         return "redirect:/venue/" + id;
     }

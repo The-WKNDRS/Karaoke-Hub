@@ -27,55 +27,19 @@
                 <h3>Business hours</h3>
                 <div class="business-hours row justify-center">
                     <div class="column shrink days">
-                        <p>Mon</p>
-                        <p>Tue</p>
-                        <p>Wed</p>
-                        <p>Thu</p>
-                        <p>Fri</p>
-                        <p>Sat</p>
-                        <p>Sun</p>
+
                     </div>
                     <div class="column hours"></div>
                 </div>
                 <h3>Karaoke event hours</h3>
                 <div class="karaoke-hours">
                     <div class="karaoke">
-                        <div th:each="event : ${events}">
-                            <p><span th:text="${event.day_of_week}"></span><span th:text="${event.start_time}"></span> - <span th:text="${event.end_time}"></span></p>
+                        <div class="karaoke-event" th:each="event : ${events}">
+                            <p class="karaoke-time"><span th:text="${event.day_of_week}"></span><span th:text="${event.start_time}"></span> - <span th:text="${ event.end_time}"></span></p>
+                            <img th:id="${event.id}" class="edit-icon hide" src="/img/edit1.png">
                         </div>
                     </div>
-                    <div class="forms-wrapper" >
-                        <form class="edit-event-form" th:each="event : ${events}" th:action="@{|/venue/${venue.id}/create_event/${event.id}|}" th:method="post">
-                            <div class="form-event">
-                                <label class="day-select" for="day">Day</label>
-                                <select id="day-edit" name="day" th:value="${event.day_of_week}">
-                                    <option>Monday</option>
-                                    <option>Tuesday</option>
-                                    <option>Wednesday</option>
-                                    <option>Thursday</option>
-                                    <option>Friday</option>
-                                    <option>Saturday</option>
-                                    <option>Sunday</option>
-                                </select>
-                            </div>
-                            <div class="form-event">
-                                <label for="start">Start time</label>
-                                <input id="start-edit" name="start" type="time" th:value="${event.start_time}">
-                            </div>
-                            <div class="form-event">
-                                <label for="end">End time</label>
-                                <input id="end-edit" name="end" type="time" th:value="${event.end_time}">
-                            </div>
-                            <div class="form-event">
-                                <label for="dj">Dj name</label>
-                                <input id="dj-edit" name="dj" th:value="${event.dj}">
-                            </div>
-                            <input class="edit-event-btn" type="submit" value="Create Event" >
-                        </form>
-                    </div>
-
                 </div>
-
                 <hr>
                 <h3 sec:authorize="isAuthenticated()">Leave a comment</h3>
                 <div class="leave-review" sec:authorize="isAuthenticated()">
@@ -117,7 +81,8 @@
             <div class="column align-center">
                 <div class="contact-info column shrink">
                     <div class="row justify-space-between align-center">
-                        <a th:href="${venue.website}" target="_blank"><p th:text="${venue.website}" class="website"></p></a>
+                        <p th:if="${venue.website.isEmpty()}">No website available</p>
+                        <a th:unless="${venue.website == true}" th:href="${venue.website}" target="_blank"><p th:text="${venue.website}" class="website"></p></a>
                         <a th:href="${venue.website}" target="_blank"><img class="icon" src="/img/redirect.png"></a>
                     </div>
                     <hr />
@@ -141,7 +106,7 @@
                 </div>
                 <div sec:authorize="isAuthenticated()" class="events">
                     <a class="create-event"><button>Create event</button></a>
-                    <a class="edit-event"><button>Edit events</button></a>
+                    <a><button class="edit-event">Edit events</button><img class="x hide" src="/img/x.png"></a>
                 </div>
             </div>
         </div>
@@ -212,6 +177,38 @@
                 <div class="form-group">
                     <label for="dj">Dj name</label>
                     <input id="dj" name="dj" >
+                </div>
+                <input class="submit-edit" type="submit" value="Create Event">
+            </form>
+        </div>
+    </div>
+    <div class="edit-event-modal" th:each="event : ${events}" th:id="${event.id} + e">
+        <div class="modal">
+            <form class="edit-event-form" th:action="@{|/venue/${venue.id}/edit_event/${event.id}|}" th:method="post">
+                <div class="form-group">
+                    <label class="day-select" for="day">Day</label>
+                    <select id="day-select" name="day">
+                        <option></option>
+                        <option>Monday</option>
+                        <option>Tuesday</option>
+                        <option>Wednesday</option>
+                        <option>Thursday</option>
+                        <option>Friday</option>
+                        <option>Saturday</option>
+                        <option>Sunday</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="start">Start time</label>
+                    <input id="start-edit" name="start" type="time" th:value="*{event.start_time}">
+                </div>
+                <div class="form-group">
+                    <label for="end">End time</label>
+                    <input id="end-edit" name="end" type="time" th:value="${event.end_time}">
+                </div>
+                <div class="form-group">
+                    <label for="dj">Dj name</label>
+                    <input id="dj-edit" name="dj" th:value="${event.dj}">
                 </div>
                 <input class="submit-edit" type="submit" value="Create Event">
             </form>

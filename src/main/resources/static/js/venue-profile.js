@@ -1,4 +1,35 @@
 // uses fetched yelp data to display it on the page
+const addColon = (time) => {
+    let newTime = time.split('');
+    newTime.splice(2, 0, ':');
+    return newTime.join('');
+}
+
+const getDay = (day) => {
+    switch (day) {
+        case 0:
+            return "Mon"
+            break;
+        case 1:
+            return "Tue"
+            break;
+        case 2:
+            return "Wed"
+            break;
+        case 3:
+            return "Thu"
+            break;
+        case 4:
+            return "Fri"
+            break;
+        case 5:
+            return "Sat"
+            break;
+        case 6:
+            return "Sun"
+            break;
+    }
+}
 
 async function searchVenue(query, zipcode) {
     try {
@@ -31,17 +62,21 @@ const getVenues = async (query, location) => {
     let yelpImg = document.querySelector('.img-wrapper');
     let yelpCat = document.querySelector('.categories');
     let yelpPhone = document.querySelector('.phone');
+    let yelpDays = document.querySelector('.days');
     let yelpHours = document.querySelector('.hours');
+    console.log(business)
     let el = document.createElement('div');
-    yelpPhone.innerText = business.display_phone;
+    if (business.display_phone === undefined) {
+        yelpPhone.innerText = "No phone number available";
+    } else {
+        yelpPhone.innerText = business.display_phone;
+    }
     let days = business.hours[0].open;
-    yelpHours.innerHTML += `<p>${days[0].start} - ${days[0].end}</p>
-                           <p>${days[1].start} - ${days[1].end}</p>
-                           <p>${days[2].start} - ${days[2].end}</p>
-                           <p>${days[3].start} - ${days[3].end}</p>
-                           <p>${days[4].start} - ${days[4].end}</p>
-                           <p>${days[5].start} - ${days[5].end}</p>
-                           <p>${days[6].start} - ${days[6].end}</p>`
+    days.forEach(day => {
+        yelpDays.innerHTML += `<p>${getDay(day.day)}</p>`
+        yelpHours.innerHTML += `<p>${addColon(day.start)}   -   ${addColon(day.end)}</p>`
+    })
+
     if (business.photos.length < 1) {
         yelpImg.innerHTML = `<img class="yelp-img" src="/img/generic-karaoke.jpeg" alt="logo">
                              <img class="yelp-img" src="/img/generic-karaoke.jpeg" alt="logo">
@@ -74,11 +109,16 @@ let createEventBtn = document.querySelector('.create-event');
 let createEventModal = document.querySelector('.create-event-modal')
 let submitEventBtn = document.querySelector('.submit-edit');
 
+
 let editEventBtn = document.querySelector('.edit-event');
+let editForm = document.querySelector('.edit-event-form');
 let formsWrapper = document.querySelector('.forms-wrapper');
 let karaoke = document.querySelector('.karaoke');
-
-
+let editIcons = document.querySelectorAll('.edit-icon');
+let goBack = document.querySelector('.go-back');
+let x = document.querySelector('.x');
+let editSelect = document.querySelector('.day-select');
+let editOptions = document.querySelectorAll('.day-edit option');
 
 if (editBtn) {
     submitEditBtn.onclick = () => {
@@ -90,16 +130,12 @@ if (editBtn) {
     }
 
     editEventBtn.onclick = () => {
-        formsWrapper.style.display = 'flex';
-        karaoke.style.display = 'none';
-    }
-}
-
-window.onclick = (e) => {
-    if (e.target == editModal) {
-        editModal.style.display = "none";
-    }else if (e.target == createEventModal) {
-        createEventModal.style.display = "none";
+            x.classList.toggle('hide');
+            editIcons.forEach(icon => {
+                icon.classList.toggle('hide');
+            })
+            editEventBtn.classList.toggle('go-back')
+            editEventBtn.classList.toggle('edit-event')
     }
 }
 
@@ -111,8 +147,20 @@ if (createEventBtn) {
         createEventModal.style.display = 'flex';
     }
 }
-
-
+let eventModal;
+let eventId;
+if (editIcons.length > 0) {
+    editIcons.forEach(icon => {
+        icon.onclick = (e) => {
+            eventId = e.target.id;
+            let selector = eventId + 'e';
+            eventModal = document.getElementById(selector);
+            console.log(eventId);
+            eventModal.style.display = 'flex';
+            console.log(eventId)
+        }
+    })
+}
 
 ( async () => {
     let yelpName = document.querySelector('.venueName');
@@ -132,6 +180,18 @@ seeAllBtn.onclick = () => {
     commentArrow.classList.toggle('show-less')
     commentArrow.classList.toggle('comment-arrow')
 }
+
+window.onclick = (e) => {
+    console.log(e.target)
+    if (e.target == editModal) {
+        editModal.style.display = "none";
+    } else if (e.target == createEventModal) {
+        createEventModal.style.display = "none";
+    } else if (e.target == eventModal) {
+        eventModal.style.display = "none";
+    }
+}
+
 
 
 

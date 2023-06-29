@@ -84,11 +84,16 @@ hr {
 }
 
 .business-hours {
-    column-gap: 80px;
+    column-gap: 120px;
 }
 
 .days > p {
     display: inline;
+    font-size: 20px;
+}
+
+.hours {
+    font-size: 20px;
 }
 
 .edit {
@@ -100,6 +105,8 @@ hr {
     width: 390px;
     transition: all .2s ease;
     cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
 }
 .delete {
     position: absolute;
@@ -111,13 +118,59 @@ hr {
     filter: invert(11%) sepia(80%) saturate(7366%) hue-rotate(0deg) brightness(101%) contrast(112%);
 }
 
-.edit:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+.edit:hover  .edit-img {
+    animation: shake .3s ease-in-out;
 }
 
 .edit-img {
     width: 30px;
+}
+
+.karaoke-event {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.karaoke-time {
+    display: flex;
+    gap: 5px;
+    font-size: 20px;
+}
+
+.karaoke-time > span:first-child {
+    width: 100px;
+    margin-right: 58px;
+}
+
+.events .go-back {
+    color: darkslateblue;
+}
+
+.x {
+    display: inline;
+    width: 35px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 287px;
+    pointer-events: none;
+    transition: all .2s ease;
+}
+
+.edit-icon {
+    width: 30px;
+    display: inline;
+    cursor: pointer;
+}
+
+.edit-icon:hover {
+    animation: shake .3s ease-in-out;
+}
+
+.hide {
+    display: none;
+    transition: all .2s ease;
 }
 
 .edit-modal {
@@ -175,7 +228,7 @@ hr {
     border-radius: 20px;
 }
 
-.edit-form {
+.edit-form, .edit-event-form {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -185,12 +238,7 @@ hr {
     margin: 30px 0 30px 0;
 }
 
-.edit-event-form {
-    display: flex;
-    align-items: center;
-}
-
-.forms-wrapper {
+.forms-wrapper. {
     display: none;
     flex-direction: column;
 }
@@ -255,9 +303,18 @@ hr {
     position: relative;
 }
 
-.edit-event-form > input[type="submit"] {
-    width: 80px;
-    height: 50px;
+.edit-event-form .submit-edit {
+    height: 40px;
+    width: 310px;
+    border: 1px solid black;
+    border-radius: 8px;
+    background-color: rgba(0,0, 0, 0.4);
+    color: whitesmoke;
+    transition: all ease .1s;
+}
+
+.edit-event-form .submit-edit:hover {
+    scale: 1.2;
 }
 
 .form-group {
@@ -423,4 +480,22 @@ input[type="submit"]:hover {
         opacity: 1;
     }
 
+}
+
+@keyframes shake {
+    0% {
+        transform: rotate(0);
+    }
+    25% {
+        transform: rotate(30deg)
+    }
+    50% {
+        transform: rotate(-30deg)
+    }
+    75% {
+        transform: rotate(30deg)
+    }
+    100% {
+        transform: rotate(0);
+    }
 }
