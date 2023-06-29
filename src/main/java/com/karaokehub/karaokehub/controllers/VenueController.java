@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import retrofit2.http.Path;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,7 @@ public class VenueController {
 
     @GetMapping("/venue/{id}")
     public String venueProfile(Model model, @PathVariable long id) {
-        model.addAttribute("venue", venueDao.getReferenceById(id));
+        model.addAttribute("venue", venueDao.findById(id));
         List<Event> events = eventDao.findByVenueId(id);
         model.addAttribute("events", events);
         model.addAttribute("numComments", commentDao.findAllByVenueId(id).size());
@@ -55,6 +56,24 @@ public class VenueController {
         }
         return "venue-profile";
     }
+
+    @PostMapping("/venue/{id}/create_event{e_id}")
+    public String createEvent(@PathVariable long id, @PathVariable long e_id, @RequestParam(name="day") String day, @RequestParam(name="start") String start, @RequestParam(name="end") String end, @RequestParam(name="dj") String dj) {
+        Venue venue = venueDao.findById(id);
+//        switch (day) {
+//            case "Monday" -> day = "Mon";
+//            case "Tuesday" -> day = "Tue";
+//            case "Wednesday" -> day = "Wed";
+//            case "Thursday" -> day = "Thu";
+//            case "Friday" -> day = "Fri";
+//            case "Saturday" -> day = "Sat";
+//            case "Sunday" -> day = "Sun";
+//        }
+        Event event = new Event(day, start, end, dj, venue);
+        eventDao.save(event);
+        return "redirect:/venue/" + id;
+    }
+
 
     @PostMapping("/venue/comment")
     public String venueComment(@RequestParam(name="body") String body, @RequestParam(name="venue_id") long venue_id) {
@@ -66,6 +85,16 @@ public class VenueController {
         System.out.println(venue.getName());
         commentDao.save(new Comment(body, user, venue));
         return "redirect:/venue/" + venue_id;
+    }
+
+    @RequestMapping("/venue/{v_id}comment/upvote/{id}")
+    public String commentUpVote(@PathVariable long id, @PathVariable long v_id) {
+        Comment comment = commentDao.findById(id);
+        long upVotes = comment.getUpVotes();
+        System.out.println("it is " + comment.getUpVotes());
+        comment.setUpVotes(upVotes + 1);
+        commentDao.save(comment);
+        return "redirect:/venue/" + v_id;
     }
 
     @PostMapping("/edit-venue/{id}")

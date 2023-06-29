@@ -16,19 +16,18 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig implements WebMvcConfigurer {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-
-//        http.authorizeHttpRequests((requests) -> requests
-//                .requestMatchers( "/create-venue", "/user-profile", "/venue-profile", "/profile", "/profile/update", "search-venue", "/contact", "/contact-success", "/song-finder ).authenticated()
-//                .requestMatchers("/register", "/login", "/index", "/logout", "/search-venue").permitAll()
-//                .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
-//
-//        );
-        http.authorizeHttpRequests((requests) -> requests.anyRequest().permitAll());
+        http.authorizeHttpRequests((requests) -> requests
+                .requestMatchers( "create-venue", "user-profile", "profile", "profile/update", "contact", "contact-success", "song-finder").authenticated()
+                .requestMatchers("register", "login", "/", "index", "logout", "search", "browse-venues", "venue/**", "venue/comment/upvote", "yelp/**", "yelpBusiness/**", "api/**", "search-venue-json", "about").permitAll()
+                .requestMatchers("css/**", "js/**", "img/**").permitAll()
+        );
 
 
 
         http.formLogin((form) -> form
                         .loginPage("/login")
+                        .successForwardUrl("/profile")
+                        .failureForwardUrl("/login")
                         .defaultSuccessUrl("/profile")
                         .failureUrl("/login?error"))
 
