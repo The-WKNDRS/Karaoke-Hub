@@ -4,6 +4,10 @@
     --tertiary-color: #3B8A47;
 }
 
+.page-wrapper {
+
+}
+
 body {
     font-family: AppleSystemUIFont, sans-serif;
 }
