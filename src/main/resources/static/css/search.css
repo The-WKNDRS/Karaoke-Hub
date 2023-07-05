@@ -62,10 +62,11 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
     position: absolute;
     width: 33.3333%;
     height: 93%;
-    top: 0;
+    top: 65px;
     left: 0;
     border-right: 1px solid rgba(0, 0, 0, 0.25);
     color: var(--tertiary-color);
+    background: radial-gradient(circle at 100% 100%, rgb(0, 0, 0) 0%, rgba(72, 61, 139, 1) 100%) fixed;
 }
 
 .sidebar h1 {
@@ -78,7 +79,7 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
     z-index: 11;
     top: 0;
     left: 80%;
-    margin-top: 30px;
+    margin-top: 70px;
     display: flex;
     flex-direction: column;
 }
@@ -90,7 +91,7 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
     max-width: unset;
     position: relative;
     left: 80%;
-    top: 16%;
+    top: 20%;
 }
 
 /*mic head*/
@@ -188,14 +189,14 @@ input {
 .heading {
     background: var(--main-color);
     color: white;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--main-color);
     height: 60px;
     line-height: 60px;
     padding: 0 10px;
 }
 
 .listings {
-    height: 100%;
+    height: 93%;
     overflow: auto;
     padding-bottom: 60px;
 }
@@ -212,7 +213,7 @@ input {
 
 .listings .item .title {
     display: block;
-    color: var(--main-color);
+    color: white;
     font-weight: 700;
 }
 
@@ -226,7 +227,7 @@ input {
 
 .listings .item.active .title,
 .listings .item .title:hover {
-    color: var(--main-color-alt)
+    color: var(--secondary-color-alt)
 }
 
 .listings .item.active {
@@ -260,6 +261,7 @@ input {
 
 .marker.change {
     animation: shake .3s 1 linear;
+    filter: brightness(0) saturate(100%) invert(20%) sepia(95%) saturate(2781%) hue-rotate(358deg) brightness(97%) contrast(96%);
 }
 
 .mapboxgl-popup-close-button {

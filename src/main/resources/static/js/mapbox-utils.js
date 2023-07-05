@@ -118,7 +118,8 @@ export function buildLocationList(map, geoVenues) {
             /* Assign a unique `id` to the listing. */
             listing.id = `listing-${venue.properties.id}`;
             /* Assign the `item` class to each listing for styling. */
-            listing.className = 'item';
+            listing.className = 'item appear';
+
 
             /* Add the link to the individual listing created above. */
             const link = document.createElement('a');
@@ -174,6 +175,18 @@ export function buildLocationList(map, geoVenues) {
                 });
             }
         }
+        const appear = document.querySelectorAll('.appear');
+        const cb = function(entries){
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    entry.target.classList.add('inview');
+                } else {
+                    entry.target.classList.remove('inview');
+                }
+            });
+        }
+        const io = new IntersectionObserver(cb);
+        appear.forEach(el => io.observe(el));
     } catch (error) {
         console.log(error);
     }

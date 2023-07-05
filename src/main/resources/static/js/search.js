@@ -32,7 +32,7 @@ import {buildLocationList} from "./mapbox-utils.js";
     let center = [0, 0];
     let map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v12',
+        style: 'mapbox://styles/mapbox/navigation-night-v1',
         center: center,
         zoom: 1
     });
@@ -245,7 +245,7 @@ import {buildLocationList} from "./mapbox-utils.js";
     window.addEventListener('resize', function () {
         if (window.innerWidth > 768) {
             document.querySelector(".drag").style.top = "unset";
-            sideBar.style.top = "0";
+            sideBar.style.top = "65px";
             zipForm.style.top = "0";
         } else {
             document.querySelector(".drag").style.top = "65%";
@@ -255,7 +255,9 @@ import {buildLocationList} from "./mapbox-utils.js";
 
     });
 
+
 })();
+
 
 
 
