@@ -91,7 +91,7 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
     max-width: unset;
     position: relative;
     left: 80%;
-    top: 20%;
+    margin-top: 178px;
 }
 
 /*mic head*/
@@ -393,7 +393,7 @@ input {
         width: 28%;
         position: absolute;
         left: 69%;
-        top: 5px;
+        top: 15%;
         align-items: center;
         justify-content: space-between;
     }
