@@ -97,6 +97,17 @@ input[type="submit"] {
     transition: all ease .1s;
 }
 
+input[type="button"] {
+    height: 40px;
+    width: 310px;
+    border: 1px solid black;
+    border-radius: 8px;
+    background-color: darkslateblue;
+    color: whitesmoke;
+    background-size: 400% 400%;
+    transition: all ease .1s;
+}
+
 input[type="submit"]:hover {
     scale: 1.02;
 }
@@ -107,6 +118,20 @@ input[type="submit"]:hover {
 
 .account > a {
     color: dimgrey;
+}
+
+#confirm-btn {
+    display: none;
+}
+
+.rel {
+    position: relative;
+}
+
+.confirm {
+    position: absolute;
+    top: 125px;
+    display: none;
 }
 
 .appear {

@@ -18,7 +18,7 @@
         <div class="row images appear">
             <div class="img-wrapper"></div>
             <div class="name-rating">
-                <p th:text="${venue.name}" class="name"></p>
+                <h3 class="name"></h3>
                 <div class="rating"></div>
                 <ul class="categories"></ul>
             </div>
@@ -49,9 +49,13 @@
                 <h3 class="appear">Karaoke event hours</h3>
                 <div class="karaoke-hours appear">
                     <div class="karaoke">
+                        <h4 th:if="${events.size() == 0}">No events created yet</h4>
                         <div class="karaoke-event" th:each="event : ${events}">
                             <p class="karaoke-time"><span th:text="${event.day_of_week}"></span><span th:text="${event.start_time}"></span> - <span th:text="${ event.end_time}"></span></p>
-                            <img th:id="${event.id}" class="edit-icon hide" src="/img/edit1.png">
+                            <div class="edit-delete">
+                                <img th:id="${event.id}" class="edit-icon hide" src="/img/edit1.png">
+                                <a th:href="@{|/venue/${venue.id}/delete_event/${event.id}|}"><img class="delete-icon hide" src="/img/delete.png"></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -72,21 +76,21 @@
                     <div th:if="${numComments} > 0" class="review" th:each="comment : ${comments}">
                         <div class="profile">
                             <h4>@<span th:text="${comment.user.getUsername()}"></span></h4>
-                            <a class="helpful" th:href="@{|/venue/${venue.id}comment/upvote/${comment.id}|}"><img class="thumb" src="/img/thumb.png"></a>
+                            <a sec:authorize="isAuthenticated()" class="helpful" th:href="@{|/venue/${venue.id}comment/upvote/${comment.id}|}"><img class="thumb" src="/img/thumb.png"></a>
                         </div>
                         <p th:text="${comment.body}"></p>
                         <br>
-                        <div th:if="${comment.upVotes} == 1" class="helpful-display">
+                        <div sec:authorize="isAuthenticated()" th:if="${comment.upVotes} == 1" class="helpful-display">
                             <h5><span th:text="${comment.upVotes}"></span> person found this comment helpful</h5>
                         </div>
-                        <div th:if="${comment.upVotes} > 1" class="helpful-display">
+                        <div sec:authorize="isAuthenticated()" th:if="${comment.upVotes} > 1" class="helpful-display">
                             <h5><span th:text="${comment.upVotes}"></span> people found this comment helpful</h5>
                         </div>
                         <hr>
                     </div>
                     <div th:if="${numComments} == 0" class="review" >
                         <h4 sec:authorize="isAuthenticated()">Be the first to comment!</h4>
-                        <h4 sec:authorize="isAnonymous()">Login to comment</h4>
+                        <h4 sec:authorize="isAnonymous()">Log in to comment</h4>
                     </div>
                 </div>
                 <div sec:authorize="isAuthenticated()" th:if="${numComments} > 4" class="see-all appear">
