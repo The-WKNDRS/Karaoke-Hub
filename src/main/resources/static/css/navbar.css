@@ -106,7 +106,7 @@ nav ul li {
 }
 
 .dropdown.find {
-    top: 45px;
+    top: 40px;
 }
 
 nav ul li:hover .dropdown {
@@ -265,16 +265,16 @@ nav ul li:hover .dropdown {
         left: 123px;
         top: 146px;
         position: absolute;
-        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
         border-bottom-left-radius: 5px;
         width: 300px;
         margin: -100px 0 0 -50px;
         padding-top: 20px;
         padding-bottom: 20px;
-        background: darkslateblue;
+        background: #3c3177;
         list-style-type: none;
         -webkit-font-smoothing: antialiased;
-        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+        box-shadow: rgb(0, 0, 0, 0.7) 0 20px 30px -10px;
+        transition: transform 0.5s ease;
     }
 
     #menuToggle span:first-child {

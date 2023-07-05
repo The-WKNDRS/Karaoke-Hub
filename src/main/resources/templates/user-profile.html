@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+    <link rel="icon" type="image/x-icon" href="/img/karaoke-icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
     <link rel="stylesheet" th:href="@{/css/resets.css}">
     <link rel="stylesheet" th:href="@{/css/layout.css}">
@@ -20,20 +21,20 @@
                     <h1><span th:text="${user.getUsername()}"></span>'s profile</h1>
                     <form class="update-form" th:action="@{/profile/update}" th:object="${user}" th:method="post">
                         <div class="form-group">
-                            <label for="username">Username</label>
                             <input id="username" name="username" th:field="*{username}">
+                            <label for="username">Username</label>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
                             <input id="email" name="email" th:field="*{email}">
+                            <label for="email">Email</label>
                         </div>
                         <div class="form-group">
+                            <input id="password" name="password" type="password" placeholder=" " th:field="*{password}">
                             <label for="password">Password</label>
-                            <input id="password" name="password" type="password" placeholder="Password" th:field="*{password}">
                         </div>
                         <div class="form-group">
+                            <input id="confirmPassword" name="confirmPassword" type="password" placeholder=" ">
                             <label for="confirmPassword">Confirm Password</label>
-                            <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm Password">
                         </div>
                         <div class="form-group">
                             <input id="id" name="id" th:field="*{id}" type="hidden">
