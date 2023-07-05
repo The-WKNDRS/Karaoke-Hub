@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Venue</title>
-    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
     <link rel="stylesheet" th:href="@{/css/resets.css}">
     <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
     <link rel="stylesheet" th:href="@{/css/create-venue.css}">
 </head>
@@ -16,10 +17,6 @@
         <div class="row grow justify-space-between">
             <div class="column align-center">
                 <div class="create-box">
-                    <div class="logo">
-                        <img class="logo-img" th:src="@{/img/karaoke-icon.png}" alt="microphone">
-                        <h3>Karaoke Hub</h3>
-                    </div>
                     <h1>Create Venue</h1>
                 </div>
                 <form class="register-form" th:action="@{/create-venue}" th:object="${venue}" th:method="post">
@@ -55,7 +52,7 @@
         </div>
     </div>
 </div>
-
+<div th:insert="fragments/navbar.html :: footer"></div>
 <script>
     const nameInput = document.getElementById('name');
     const cityInput = document.getElementById('city');

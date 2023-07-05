@@ -1,4 +1,5 @@
 import * as utils from './utils.js';
+
 const listings = document.getElementById('listings');
 let newCenter = [0, 0];
 
@@ -21,8 +22,7 @@ export const getVenues = async function (zipValue, weekDay) {
             url += `&weekday=Any`;
         }
         const response = await fetch(url);
-        const data = await response.json();
-        return data;
+        return await response.json();
     } catch (error) {
         console.log(error);
     }
@@ -76,6 +76,7 @@ export const formatVenues = async function (zipValue, weekDay) {
 };
 
 export function addMarkers(map, geoVenues) {
+    clearMarkers();
     /* For each feature in the GeoJSON object above: */
     for (const marker of geoVenues.features) {
         /* Create a div element for the marker. */
@@ -106,7 +107,10 @@ export function addMarkers(map, geoVenues) {
 
 export function buildLocationList(map, geoVenues) {
     try {
+        // Clear the listings
         listings.innerHTML = '';
+        // Clear and add markers
+        addMarkers(map, geoVenues);
         //Display the venues in the sidebar
         for (const venue of geoVenues.features) {
             /* Add a new listing section to the sidebar. */
@@ -173,6 +177,10 @@ export function buildLocationList(map, geoVenues) {
     } catch (error) {
         console.log(error);
     }
+    //if no venues are found
+    if (listings.innerHTML === '') {
+        noVenues();
+    }
 }
 
 export function noVenues() {
@@ -185,7 +193,7 @@ export function noVenues() {
     noVenues.appendChild(noDetailsTitle);
 }
 
-export function clearMarkers() {
+function clearMarkers() {
     let markers = document.getElementsByClassName('marker');
     while(markers.length > 0) {
         markers[0].remove();
@@ -219,7 +227,7 @@ function changeMarkerColor(currentFeature) {
     }
 }
 
-export async function searchVenues(event, map, geoVenues, zipcodeInput, weekDay, zipValue) {
+export async function searchVenues(map, zipcodeInput, weekDay, zipValue) {
     try {
         weekDay = document.querySelector('#weekday').value;
         zipValue = "";
@@ -228,11 +236,9 @@ export async function searchVenues(event, map, geoVenues, zipcodeInput, weekDay,
             zipValue = zipcodeInput.value;
         }
 
-        event.preventDefault();
-
         //Get the venues
-        geoVenues = await formatVenues(zipValue, weekDay);
-        map.getSource('places').setData(geoVenues);
+        let geoVenues = await formatVenues(zipValue, weekDay);
+        map.getSource('venues').setData(geoVenues);
 
         //Geocode the zipcode
         if (zipValue !== '') {
@@ -259,13 +265,7 @@ export async function searchVenues(event, map, geoVenues, zipcodeInput, weekDay,
                 zoom: 10
             });
         }
-
-        await buildLocationList(map, geoVenues);
-        if (listings.innerHTML === '') {
-            noVenues();
-        }
-        clearMarkers();
-        await addMarkers(map, geoVenues);
+        return geoVenues;
     } catch (error) {
         console.log(error);
     }

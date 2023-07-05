@@ -15,6 +15,9 @@ public class Comment {
 	@Column(nullable = true)
 	private String date;
 
+	@Column(columnDefinition = "integer default 0")
+	private long upVotes;
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -77,6 +80,14 @@ public class Comment {
 
 	public void setVenue(Venue venue) {
 		this.venue = venue;
+	}
+
+	public long getUpVotes() {
+		return upVotes;
+	}
+
+	public void setUpVotes(long upVotes) {
+		this.upVotes = upVotes;
 	}
 }
 

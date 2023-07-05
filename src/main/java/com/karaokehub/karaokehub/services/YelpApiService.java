@@ -120,6 +120,7 @@ public class YelpApiService {
                 .execute();
 
         String responseString  = response.body().string();
+        System.out.println(responseString);
         ObjectNode objectNode = new ObjectMapper().readValue(responseString, ObjectNode.class);
         return objectNode.toString();
     }

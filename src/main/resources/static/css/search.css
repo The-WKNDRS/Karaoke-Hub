@@ -78,6 +78,7 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
     margin-top: 30px;
     display: flex;
     padding: 0 30px;
+    flex-wrap: wrap;
 }
 
 .form-group {
@@ -99,6 +100,17 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
     border-radius: 10px;
     height: 2rem;
     color: var(--main-color-alt);
+}
+
+#distance {
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    height: 2rem;
+    color: var(--main-color-alt);
+}
+
+.distance {
+    width: 75%;
 }
 
 .label {

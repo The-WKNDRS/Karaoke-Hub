@@ -3,96 +3,102 @@
 <head>
   <meta charset="UTF-8">
   <title>Home</title>
-  <link rel="stylesheet" th:href="@{/css/navbar.css}">
-  <link rel="stylesheet" th:href="@{/css/index.css}">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
   <link rel="stylesheet" th:href="@{/css/resets.css}">
   <link rel="stylesheet" th:href="@{/css/layout.css}">
-  <link rel="stylesheet" th:href="@{/css/register.css}">
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
   <link rel="stylesheet" th:href="@{/css/footer.css}">
   <link rel="stylesheet" th:href="@{/css/songfinder.css}">
 </head>
 <body>
-<div class="page-wrapper" style="background-image: url('/img/singers5.png'); background-size: cover; background-position: center;">
+<div class="page-wrapper">
   <div th:insert="fragments/navbar.html :: navbar"></div>
-  <div class="instructions-row">
-    <div class="instructions-container">
-      <p>Just make your selections, press submit, and your data will be sent to ChatGPT where artificial intelligence will return 10 song suggestions based on your selections. Only for registered users, limit 5 per day.</p>
+  <div class="container">
+    <img class="mic-icon appear" src="/img/karaoke-icon.png">
+    <img class="chatgpt appear" src="/img/openai.png">
+  <div class="row grow justify-center align-center">
+    <div class="column shrink align-center">
+      <div class="instructions-row appear">
+        <div class="instructions-container">
+          <p>Make your selections, press submit, and your data will be sent to ChatGPT where artificial intelligence will return 10 song suggestions based on your selections. Only for registered users, limit 5 per day.</p>
+        </div>
+        <div class="song-finder-container">
+          <form action="/song-finder-results" method="post" id="song-finder-form">
+            <label for="vocal-type">Who is singing?:</label>
+            <select id="vocal-type" name="vocalType">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="both">Both</option>
+              <option value="group">Group</option>
+              <option value="dontcare">Don't Care</option>
+            </select>
+
+            <label for="music-genre">Music Genre:</label>
+            <select id="music-genre" name="musicGenre">
+              <option value="rock">Rock</option>
+              <option value="pop">Pop</option>
+              <option value="hip-hop">Hip Hop</option>
+              <option value="country">Country</option>
+              <option value="jazz">Jazz</option>
+              <option value="blues">Blues</option>
+              <option value="reggae">Reggae</option>
+              <option value="rnb">R&amp;B</option>
+              <option value="folk">Folk</option>
+              <option value="latin">Latin</option>
+              <option value="metal">Metal</option>
+              <option value="classical">Classical</option>
+              <option value="electronic">Electronic</option>
+              <option value="indie">Indie</option>
+              <option value="punk">Punk</option>
+              <option value="show-tunes">Show Tunes</option>
+              <option value="Disney">Disney</option>
+              <option value="comedy">Comedy</option>
+            </select>
+
+            <label for="era">Era:</label>
+            <select id="era" name="era">
+              <option value="50s">50's</option>
+              <option value="60s">60's</option>
+              <option value="70s">70's</option>
+              <option value="80s">80's</option>
+              <option value="90s">90's</option>
+              <option value="00s">00's</option>
+              <option value="10s">10's</option>
+              <option value="20s">20's</option>
+              <option value="dontcare">Don't Care</option>
+            </select>
+            <button type="submit" th:action="@{/song-finder-results}">Submit</button>
+          </form>
+        </div>
+      </div>
+      <div class="song-finder-row">
+        <div class="song-results-container">
+          <h1>Song Finder Results</h1>
+          <div class="song-list" id="song-list">
+            <!-- Iterate over the songs list -->
+            <div th:each="song, songStat : ${songs}" class="song-item">
+              <div class="song-details">
+                <h2>
+                  <span th:text="${songStat.count}"></span>.
+                  <span th:text="${song.name}"></span>
+                </h2>
+                <p th:text="${song.artist}"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
   <div id="loading-screen" class="loading-screen">
     <div class="ring"> Loading
       <span></span>
     </div>
   </div>
-  <div class="song-finder-row">
-    <div class="song-finder-container">
-      <form action="/song-finder-results" method="post" id="song-finder-form">
-        <label for="vocal-type">Who is singing?:</label>
-        <select id="vocal-type" name="vocalType">
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="both">Both</option>
-          <option value="group">Group</option>
-          <option value="dontcare">Don't Care</option>
-        </select>
-
-        <label for="music-genre">Music Genre:</label>
-        <select id="music-genre" name="musicGenre">
-          <option value="rock">Rock</option>
-          <option value="pop">Pop</option>
-          <option value="hip-hop">Hip Hop</option>
-          <option value="country">Country</option>
-          <option value="jazz">Jazz</option>
-          <option value="blues">Blues</option>
-          <option value="reggae">Reggae</option>
-          <option value="rnb">R&amp;B</option>
-          <option value="folk">Folk</option>
-          <option value="latin">Latin</option>
-          <option value="metal">Metal</option>
-          <option value="classical">Classical</option>
-          <option value="electronic">Electronic</option>
-          <option value="indie">Indie</option>
-          <option value="punk">Punk</option>
-          <option value="show-tunes">Show Tunes</option>
-          <option value="Disney">Disney</option>
-          <option value="comedy">Comedy</option>
-        </select>
-
-        <label for="era">Era:</label>
-        <select id="era" name="era">
-          <option value="50s">50's</option>
-          <option value="60s">60's</option>
-          <option value="70s">70's</option>
-          <option value="80s">80's</option>
-          <option value="90s">90's</option>
-          <option value="00s">00's</option>
-          <option value="10s">10's</option>
-          <option value="20s">20's</option>
-          <option value="dontcare">Don't Care</option>
-        </select>
-        <button type="submit" th:action="@{/song-finder-results}">Submit</button>
-      </form>
-    </div>
-    <div class="song-results-container">
-      <h1>Song Finder Results</h1>
-      <div class="song-list" id="song-list">
-        <!-- Iterate over the songs list -->
-        <div th:each="song, songStat : ${songs}" class="song-item">
-          <div class="song-details">
-            <h2>
-              <span th:text="${songStat.count}"></span>.
-              <span th:text="${song.name}"></span>
-            </h2>
-            <p th:text="${song.artist}"></p>
-          </div>
-        </div>
-      </div>
-
-
-    </div>
   </div>
+  <div th:insert="fragments/navbar.html :: footer"></div>
 </div>
-<div th:insert="fragments/navbar.html :: footer"></div>
 <script src="/js/songfinder.js"></script>
 </body>
 </html>

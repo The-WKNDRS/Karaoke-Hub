@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
     <link rel="stylesheet" th:href="@{/css/resets.css}">
     <link rel="stylesheet" th:href="@{/css/layout.css}">
-    <link rel="stylesheet" th:href="@{/css/register.css}">
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/register.css}">
 </head>
 <body>
 <div class="page-wrapper">
@@ -15,12 +16,8 @@
     <div class="container grow">
         <div class="row grow justify-space-between">
             <div class="column align-center">
-                <div class="register-box">
-                    <div class="logo">
-                        <img class="logo-img" th:src="@{/img/karaoke-icon.png}" alt="microphone">
-                        <h3>Karaoke Hub</h3>
-                    </div>
-                    <h1>Your <br>Profile</h1>
+                <div class="register-box appear">
+                    <h1><span th:text="${user.getUsername()}"></span>'s profile</h1>
                     <form class="update-form" th:action="@{/profile/update}" th:object="${user}" th:method="post">
                         <div class="form-group">
                             <label for="username">Username</label>
@@ -46,7 +43,7 @@
                 </div>
             </div>
             <div class="column align-center">
-                <div class="image-display">
+                <div class="image-display appear">
                     <img class="karaoke-img" th:src="@{/img/karaoke-singer.png}" alt="karaoke">
                     <div class="notes">
                         <div class="note-position-1 note-animation animation-delay-1">
@@ -67,5 +64,17 @@
         </div>
     </div>
 </div>
+<script>
+    const appear = document.querySelectorAll('.appear');
+    const cb = function(entries){
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                entry.target.classList.add('inview');
+            }
+        });
+    }
+    const io = new IntersectionObserver(cb);
+    appear.forEach(el => io.observe(el));
+</script>
 </body>
 </html>
