@@ -18,6 +18,7 @@
 */
 .container {
     display: flex;
+    margin-top: 65px;
     flex-direction: column;
     align-items: center;
     row-gap: 20px;
@@ -111,4 +112,20 @@
 }
 .column.justify-space-between {
     justify-content: space-between;
+}
+
+.gap-60 {
+    gap: 60px;
+}
+
+.appear {
+    transition: all 0.7s;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.appear.inview {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.2s;
 }

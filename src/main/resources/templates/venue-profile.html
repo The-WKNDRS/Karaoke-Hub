@@ -1,52 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Venue Profile</title>
+    <link rel="icon" type="image/x-icon" href="/img/karaoke-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
     <link rel="stylesheet" th:href="@{/css/resets.css}">
     <link rel="stylesheet" th:href="@{/css/layout.css}">
-    <link rel="stylesheet" th:href="@{/css/venue-profile.css}">
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/venue-profile.css}">
 </head>
 <body>
 <div class="page-wrapper">
     <div th:insert="fragments/navbar.html :: navbar"></div>
-    <div class="row images">
-        <div class="img-wrapper"></div>
-        <div class="name-rating">
-            <p th:text="${venue.name}" class="name"></p>
-            <div class="rating"></div>
-            <ul class="categories"></ul>
-        </div>
-    </div>
     <div class="container">
+        <div class="row images appear">
+            <div class="img-wrapper"></div>
+            <div class="name-rating">
+                <p th:text="${venue.name}" class="name"></p>
+                <div class="rating"></div>
+                <ul class="categories"></ul>
+            </div>
+        </div>
         <div class="row">
             <div class="column left">
-                <h3>Business hours</h3>
-                <div class="business-hours row justify-center">
+                <h3 class="appear">Business hours</h3>
+                <div class="business-hours row justify-center appear">
                     <div class="column shrink days">
-                        <p>Mon</p>
-                        <p>Tue</p>
-                        <p>Wed</p>
-                        <p>Thu</p>
-                        <p>Fri</p>
-                        <p>Sat</p>
-                        <p>Sun</p>
+                        <p >Mon</p>
+                        <p >Tue</p>
+                        <p >Wed</p>
+                        <p >Thu</p>
+                        <p >Fri</p>
+                        <p >Sat</p>
+                        <p >Sun</p>
                     </div>
-                    <div class="column hours"></div>
-                </div>
-                <h3>Karaoke hours</h3>
-                <div class="karaoke-hours">
-                    <div th:each="event : ${events}">
-                        <p><span th:text="${event.day_of_week}"></span>
-                            <span th:text="${event.start_time}"></span>
-                            - <span th:text="${event.end_time}"></span></p>
+                    <div class="column hours">
+                        <p class="one">Closed</p>
+                        <p class="two">Closed</p>
+                        <p class="three">Closed</p>
+                        <p class="four">Closed</p>
+                        <p class="five">Closed</p>
+                        <p class="six">Closed</p>
+                        <p class="seven">Closed</p>
                     </div>
                 </div>
-                <hr>
-                <h3>Leave a comment</h3>
-                <div class="leave-review">
+                <h3 class="appear">Karaoke event hours</h3>
+                <div class="karaoke-hours appear">
+                    <div class="karaoke">
+                        <div class="karaoke-event" th:each="event : ${events}">
+                            <p class="karaoke-time"><span th:text="${event.day_of_week}"></span><span th:text="${event.start_time}"></span> - <span th:text="${ event.end_time}"></span></p>
+                            <img th:id="${event.id}" class="edit-icon hide" src="/img/edit1.png">
+                        </div>
+                    </div>
+                </div>
+                <hr class="appear">
+                <h3 sec:authorize="isAuthenticated()" class="appear">Leave a comment</h3>
+                <div class="leave-review appear" sec:authorize="isAuthenticated()">
                     <form th:action="@{/venue/comment}" th:method="post">
                         <div class="form-group">
                             <label for="body"></label>
@@ -56,33 +67,37 @@
                         </div>
                     </form>
                 </div>
-                <h3>Comments</h3>
-                <div class="reviews-wrapper">
+                <h3 class="appear">Comments</h3>
+                <div class="reviews-wrapper appear">
                     <div th:if="${numComments} > 0" class="review" th:each="comment : ${comments}">
                         <div class="profile">
                             <h4>@<span th:text="${comment.user.getUsername()}"></span></h4>
-                            <a class="helpful"><img class="thumb" src="/img/thumb.png"></a>
+                            <a class="helpful" th:href="@{|/venue/${venue.id}comment/upvote/${comment.id}|}"><img class="thumb" src="/img/thumb.png"></a>
                         </div>
                         <p th:text="${comment.body}"></p>
                         <br>
-                        <div class="helpful-display">
-                            <h5><span>4 </span> People found this comment helpful</h5>
-
+                        <div th:if="${comment.upVotes} == 1" class="helpful-display">
+                            <h5><span th:text="${comment.upVotes}"></span> person found this comment helpful</h5>
+                        </div>
+                        <div th:if="${comment.upVotes} > 1" class="helpful-display">
+                            <h5><span th:text="${comment.upVotes}"></span> people found this comment helpful</h5>
                         </div>
                         <hr>
                     </div>
                     <div th:if="${numComments} == 0" class="review" >
-                        <h4>Be the first to comment!</h4>
+                        <h4 sec:authorize="isAuthenticated()">Be the first to comment!</h4>
+                        <h4 sec:authorize="isAnonymous()">Login to comment</h4>
                     </div>
                 </div>
-                <div class="see-all">
+                <div sec:authorize="isAuthenticated()" th:if="${numComments} > 4" class="see-all appear">
                     <img class="comment-arrow" src="/img/arrow.png" alt="arrow">
                 </div>
             </div>
             <div class="column align-center">
-                <div class="contact-info column shrink">
+                <div class="contact-info column shrink appear">
                     <div class="row justify-space-between align-center">
-                        <a th:href="${venue.website}" target="_blank"><p th:text="${venue.website}" class="website"></p></a>
+                        <p th:if="${venue.website.isEmpty()}">No website available</p>
+                        <a th:unless="${venue.website == true}" th:href="${venue.website}" target="_blank"><p th:text="${venue.website}" class="website"></p></a>
                         <a th:href="${venue.website}" target="_blank"><img class="icon" src="/img/redirect.png"></a>
                     </div>
                     <hr />
@@ -98,55 +113,51 @@
                         </div>
                         <img class="icon" src="/img/map.png">
                     </div>
-                    <hr />
-                    <div class="edit">
+                    <hr sec:authorize="isAuthenticated()"/>
+                    <div sec:authorize="isAuthenticated()" class="edit">
                         <h3>Edit profile</h3>
                         <img class="edit-img" src="/img/edit1.png">
                     </div>
                 </div>
-                <div class="events">
+                <div sec:authorize="isAuthenticated()" class="events">
                     <a class="create-event"><button>Create event</button></a>
-                    <a class="edit-event"><button>Edit events</button></a>
+                    <a><button class="edit-event">Edit events</button><img class="x hide" src="/img/x.png"></a>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
 
     <div class="edit-modal">
         <div class="modal">
             <form class="edit-form" th:action="@{/create-venue}" th:object="${venue}" th:method="post">
                 <input type="hidden" th:field="*{id}" />
                 <div class="form-group">
+                    <input id="name" name="name" placeholder=" " th:field="*{name}">
                     <label for="name">Name</label>
-                    <input id="name" name="name" th:field="*{name}">
                 </div>
                 <div class="form-group">
+                    <input id="address" name="address" placeholder=" " th:field="*{address}">
                     <label for="address">Address</label>
-                    <input id="address" name="address" th:field="*{address}">
                 </div>
                 <div class="form-group">
+                    <input id="city" name="city" placeholder=" " th:field="*{city}">
                     <label for="city">City</label>
-                    <input id="city" name="city" th:field="*{city}">
                 </div>
                 <div class="form-group">
+                    <input id="state" name="state" placeholder=" " th:field="*{state}">
                     <label for="state">State</label>
-                    <input id="state" name="state" th:field="*{state}">
                 </div>
                 <div class="form-group">
+                    <input id="zip_code" name="zip_code" placeholder=" " th:field="*{zip_code}">
                     <label for="zip_code">Zip Code</label>
-                    <input id="zip_code" name="zip_code" th:field="*{zip_code}">
                 </div>
                 <div class="form-group">
+                    <input id="website" name="website" placeholder=" " th:field="*{website}">
                     <label for="website">Website</label>
-                    <input id="website" name="website" th:field="*{website}">
                 </div>
                 <div class="form-group">
+                    <input id="yelp_id" name="yelp_id" placeholder=" " th:field="*{yelp_id}">
                     <label for="yelp_id">Yelp ID</label>
-                    <input id="yelp_id" name="yelp_id" th:field="*{yelp_id}">
                 </div>
                 <input class="submit-edit" type="submit" value="Submit Edit">
             </form>
@@ -157,8 +168,7 @@
     </div>
     <div class="create-event-modal">
         <div class="modal">
-            <form class="edit-form" th:action="@{/create-event}" th:method="post">
-                <input type="hidden" th:field="*{id}" />
+            <form class="edit-form" th:action="@{|/venue/${venue.id}/create_event|}" th:method="post">
                 <div class="form-group">
                     <label class="day-select" for="day">Day</label>
                     <select id="day" name="day">
@@ -172,18 +182,50 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <input id="start" name="start" placeholder=" " type="time">
                     <label for="start">Start time</label>
-                    <input id="start" name="start" type="time">
                 </div>
                 <div class="form-group">
+                    <input id="end" name="end" placeholder=" " type="time">
                     <label for="end">End time</label>
-                    <input id="end" name="end" type="time">
                 </div>
                 <div class="form-group">
+                    <input id="dj" name="dj" placeholder=" ">
                     <label for="dj">Dj name</label>
-                    <input id="dj" name="dj" >
                 </div>
                 <input class="submit-edit" type="submit" value="Create Event">
+            </form>
+        </div>
+    </div>
+    <div class="edit-event-modal" th:each="event : ${events}" th:id="${event.id} + e">
+        <div class="modal">
+            <form class="edit-event-form" th:action="@{|/venue/${venue.id}/edit_event/${event.id}|}" th:method="post">
+                <div class="form-group">
+                    <label class="day-select" for="day">Day</label>
+                    <select id="day-select" name="day">
+                        <option></option>
+                        <option>Monday</option>
+                        <option>Tuesday</option>
+                        <option>Wednesday</option>
+                        <option>Thursday</option>
+                        <option>Friday</option>
+                        <option>Saturday</option>
+                        <option>Sunday</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input id="start-edit" name="start" type="time" placeholder=" " th:value="*{event.start_time}">
+                    <label for="start">Start time</label>
+                </div>
+                <div class="form-group">
+                    <input id="end-edit" name="end" type="time" placeholder=" " th:value="${event.end_time}">
+                    <label for="end">End time</label>
+                </div>
+                <div class="form-group">
+                    <input id="dj-edit" name="dj" placeholder=" " th:value="${event.dj}">
+                    <label for="dj">Dj name</label>
+                </div>
+                <input class="submit-edit" type="submit" value="Edit Event">
             </form>
         </div>
     </div>
@@ -192,6 +234,5 @@
 <input class="venueName" type="hidden" th:value="${venue.name}">
 <input class="venueZip" type="hidden" th:value="${venue.zip_code}">
 <script src="/js/venue-profile.js"></script>
-
 </body>
 </html>

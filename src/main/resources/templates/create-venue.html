@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Venue</title>
-    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="icon" type="image/x-icon" href="/img/karaoke-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
     <link rel="stylesheet" th:href="@{/css/resets.css}">
     <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
     <link rel="stylesheet" th:href="@{/css/create-venue.css}">
 </head>
@@ -14,38 +16,34 @@
     <div th:insert="fragments/navbar.html :: navbar"></div>
     <div class="container grow">
         <div class="row grow justify-space-between">
-            <div class="column align-center">
+            <div class="column align-center appear">
                 <div class="create-box">
-                    <div class="logo">
-                        <img class="logo-img" th:src="@{/img/karaoke-icon.png}" alt="microphone">
-                        <h3>Karaoke Hub</h3>
-                    </div>
                     <h1>Create Venue</h1>
                 </div>
                 <form class="register-form" th:action="@{/create-venue}" th:object="${venue}" th:method="post">
                     <div class="form-group">
+                        <input id="name" name="name" placeholder=" " th:field="*{name}">
                         <label for="name">Name</label>
-                        <input id="name" name="name" th:field="*{name}">
                     </div>
                     <div class="form-group">
+                        <input id="address" name="address" placeholder=" " th:field="*{address}">
                         <label for="address">Address</label>
-                        <input id="address" name="address" th:field="*{address}">
                     </div>
                     <div class="form-group">
+                        <input id="city" name="city" placeholder=" " th:field="*{city}">
                         <label for="city">City</label>
-                        <input id="city" name="city" th:field="*{city}">
                     </div>
                     <div class="form-group">
+                        <input id="state" name="state" placeholder=" " th:field="*{state}">
                         <label for="state">State</label>
-                        <input id="state" name="state" th:field="*{state}">
                     </div>
                     <div class="form-group">
+                        <input id="zip_code" name="zip_code" placeholder=" " th:field="*{zip_code}">
                         <label for="zip_code">Zip Code</label>
-                        <input id="zip_code" name="zip_code" th:field="*{zip_code}">
                     </div>
                     <div class="form-group">
+                        <input id="website" name="website" placeholder=" " th:field="*{website}">
                         <label for="website">Website (Optional)</label>
-                        <input id="website" name="website" th:field="*{website}">
                     </div>
                     <input type="hidden" id="yelp_id" name="yelp_id" th:field="*{yelp_id}">
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
@@ -55,7 +53,7 @@
         </div>
     </div>
 </div>
-
+<div th:insert="fragments/navbar.html :: footer"></div>
 <script>
     const nameInput = document.getElementById('name');
     const cityInput = document.getElementById('city');
@@ -69,6 +67,17 @@
         const city = cityInput.value.toLowerCase().replace(/\s+/g, '-');
         yelpIdInput.value = `${name}-${city}`;
     }
+
+    const appear = document.querySelectorAll('.appear');
+    const cb = function(entries){
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                entry.target.classList.add('inview');
+            }
+        });
+    }
+    const io = new IntersectionObserver(cb);
+    appear.forEach(el => io.observe(el));
 </script>
 </body>
 </html>

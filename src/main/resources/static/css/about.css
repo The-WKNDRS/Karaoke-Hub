@@ -1,6 +1,23 @@
+@keyframes transitionIn {
+    from {
+        opacity: 0;
+        transform: rotateX(-10deg);
+    }
+    to {
+        opacity: 1;
+        transform: rotateX(0);
+    }
+}
+
+.column {
+    animation: transitionIn 0.75s;
+}
+
 
 body {
     font-family: AppleSystemUIFont, sans-serif;
+    background: radial-gradient(circle at 100% 100%, rgb(0, 0, 0) 0%, rgba(72, 61, 139, 1) 100%) fixed;
+    color: white;
 }
 
 h2 {

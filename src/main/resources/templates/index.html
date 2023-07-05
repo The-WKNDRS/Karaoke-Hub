@@ -2,27 +2,98 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
     <title>Home</title>
-    <link rel="stylesheet" th:href="@{/css/navbar.css}">
-    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="icon" type="image/x-icon" href="/img/karaoke-icon.png">
     <link rel="stylesheet" th:href="@{/css/resets.css}">
     <link rel="stylesheet" th:href="@{/css/layout.css}">
-    <link rel="stylesheet" th:href="@{/css/register.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
-
 </head>
 <body>
-<div class="page-wrapper" style="background-image: url('/img/venue_background2.png');
- background-position: center;">
+<div class="page-wrapper" >
     <div th:insert="fragments/navbar.html :: navbar"></div>
-    <div class="index-header">
-        <div sec:authorize="isAuthenticated()">
-            <a class="index-button" th:href="@{/profile}">Edit User Profile</a>
+    <div class="container grow">
+        <div class="row grow justify-center">
+            <div class="column grow align-center gap-60">
+                <div class="row justify-space-between intro appear">
+                    <h2>Find karaoke easier than ever before</h2>
+                    <div class="intro-img-wrapper">
+                        <img src="/img/hand-mic.png" alt="karaoke">
+                    </div>
+                </div>
+                <div class="row justify-center">
+                    <div class="chatgpt-wrapper appear">
+                        <h2>Need help finding songs to sing at your newly found karaoke spot?</h2>
+                        <div class="chatgpt-img-wrapper row justify-center align-center">
+                            <p>Try our <span>ChatGPT</span> powered song generator using custom prompts to find songs for everyone's preferences</p>
+                            <div class="column align-center">
+                                <img src="/img/openai.png" alt="chatgpt">
+                                <a th:href="@{/song-finder}"><button class="chatgpt-btn">Try it</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h2 class="appear cards">Featured Venues</h2>
+                <div class="row card appear">
+                    <div class="column left dark">
+                        <div class="card-header">
+                            <h2>Thirsty Camel Bar</h2>
+                        </div>
+                        <div class="card-body">
+                            <p><em>San Antonio, TX</em></p>
+                            <p class="caption">Karaoke bar that specializes in live music and karaoke, perfect for your night out</p>
+                            <hr>
+                            <p class="right"><a th:href="@{/venue/19}">Check out their profile</a></p>
+                        </div>
+                    </div>
+                    <div class="column right">
+                        <div class="img-wrapper">
+                            <img class="camel" src="/img/thirsty-camel.jpeg" alt="thirsty camel">
+                        </div>
+                    </div>
+                </div>
+                <div class="row card appear">
+                    <div class="column left">
+                        <div class="img-wrapper">
+                            <img class="elbow" src="/img/elbow-room.jpeg" alt="elbow room">
+                        </div>
+                    </div>
+                    <div class="column right dark">
+                        <div class="card-header">
+                            <h2>The Elbow Room</h2>
+                        </div>
+                        <div class="card-body">
+                            <p><em>San Antonio, TX</em></p>
+                            <p class="caption">Karaoke bar that specializes in live music and karaoke, perfect for your night out</p>
+                            <hr>
+                            <p class="right"><a th:href="@{/venue/19}">Check out their profile</a></p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row card last appear">
+                    <div class="column left dark">
+                        <div class="card-header">
+                            <h2>The Martini Club</h2>
+                        </div>
+                        <div class="card-body">
+                            <p><em>San Antonio, TX</em></p>
+                            <p class="caption">Karaoke bar that specializes in live music and karaoke, perfect for your night out</p>
+                            <hr>
+                            <p class="right"><a th:href="@{/venue/22}">Check out their profile</a></p>
+                        </div>
+                    </div>
+                    <div class="column right">
+                        <div class="img-wrapper">
+                            <img class="martini" src="/img/martini-club.jpeg" alt="martini club">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="song-finder">
-            <a class="song-finder-button" th:href="@{/song-finder}">Click Here!! Song Finder - powered by ChatGPT</a>
-        </div>
-        <a class="index-button" th:href="@{/browse-venues}">Browse Karaoke Venues</a>
     </div>
 
 </div>
@@ -53,23 +124,7 @@
 
 <div th:insert="fragments/navbar.html :: footer"></div>
 
-<script>
-    // JavaScript to remove the overlay after 3 seconds
-    const overlay = document.getElementById('overlay');
-    const isSplashDisplayed = sessionStorage.getItem('splashDisplayed');
-    if (!isSplashDisplayed) {
-        overlay.style.display = 'flex';
-        setTimeout(() => {
-            overlay.style.opacity = '0';
-            setTimeout(() => {
-                overlay.style.display = 'none';
-                sessionStorage.setItem('splashDisplayed', true);
-            }, 5000); // Hide the overlay after 5 seconds
-        }, 3000); // Keep the overlay visible for 3 seconds
-    } else {
-        overlay.style.display = 'none';
-    }
-</script>
+<script src="/js/index.js"></script>
 </body>
 </html>
 
