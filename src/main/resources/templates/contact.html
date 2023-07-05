@@ -18,13 +18,12 @@
       <div class="column align-center">
         <div class="contact-form-container">
           <div class="left">
-            <h2>Drop us a line</h2>
-            <h3>Let us know if you have any suggestions or criticism</h3>
+<!--            <h3>Let us know if you have any suggestions or criticism</h3>-->
             <img src="/img/hand-mic.png">
           </div>
           <div class="right">
-            <h1>Contact Us</h1>
-            <form th:action="@{/contact}" method="post">
+            <h1>Drop us a line</h1>
+            <form class="contact-form" th:action="@{/contact}" method="post">
               <label for="name">Name:</label>
               <input type="text" id="name" name="name" required>
 

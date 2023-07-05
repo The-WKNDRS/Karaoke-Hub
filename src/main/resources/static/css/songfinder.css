@@ -10,11 +10,31 @@ body {
     height: 100vh;
 }
 
+.chatgpt {
+    position: absolute;
+    z-index: -99;
+    left: 0;
+    width: 500px;
+    filter: drop-shadow(2px 2px 2px rgba(255, 255, 255, 0.3));
+}
+
+.mic-icon {
+    position: absolute;
+    z-index: -99;
+    right: 0;
+    bottom: 0;
+    width: 500px;
+    filter: drop-shadow(2px 2px 2px rgba(255, 255, 255, 0.3));
+}
+
 .instructions-row {
     display: flex;
     justify-content: center;
+    position: static;
+    z-index: 1;
     width: 70%;
     border-radius: 30px;
+    background: rgba(53, 45, 110, 0.6);
     box-shadow: rgba(0, 0, 0, 0.35) 0 25px 35px;
 }
 
@@ -216,6 +236,18 @@ body {
     top: -6px;
     right: -8px;
     box-shadow: 0 0 20px #ff00ff;
+}
+
+.appear {
+    transition: all 0.7s;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.appear.inview {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.2s;
 }
 
 @keyframes animateC {

@@ -16,7 +16,7 @@
     <div class="container grow">
         <div class="row grow justify-space-between">
             <div class="column align-center login">
-                <div class="login-box">
+                <div class="login-box appear">
                     <h1>Welcome back</h1>
                     <form class="login-form" th:action="@{/login}" th:method="post">
                         <p class="login-message" th:if="${param.error}">Invalid Credentials</p>
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="column align-center pic">
-                <div class="image-display">
+                <div class="image-display appear">
                     <img class="karaoke-img" th:src="@{/img/karaoke-singer.png}" alt="karaoke">
                     <div class="notes">
                         <div class="note-position-1 note-animation animation-delay-1">
@@ -57,5 +57,17 @@
     </div>
 </div>
 <div th:insert="~{fragments/navbar.html :: footer}"></div>
+<script>
+    const appear = document.querySelectorAll('.appear');
+    const cb = function(entries){
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                entry.target.classList.add('inview');
+            }
+        });
+    }
+    const io = new IntersectionObserver(cb);
+    appear.forEach(el => io.observe(el));
+</script>
 </body>
 </html>
