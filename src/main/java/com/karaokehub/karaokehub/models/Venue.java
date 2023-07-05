@@ -11,16 +11,16 @@ public class Venue {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String name;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String address;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String city;
 
-    @Column(nullable = false, length = 4)
+    @Column(length = 4)
     private String state;
 
     @Column(nullable = false, length = 6)
