@@ -92,71 +92,15 @@ input[type="submit"]:hover {
     color: dimgrey;
 }
 
-.image-display {
-    height: 100%;
-    width: 100%;
-}
-.karaoke-img {
-    height: 100%;
-    width: 600px
-}
-
-.notes {
-    position: absolute;
-    top: 0;
-    left: 57%;
-    color: darkslateblue;
-}
-.note-position-1 {
-    top: 150px;
-}
-
-.note-position-2 {
-    top: 180px;
-    left: 50px;
-}
-
-.note-position-3 {
-    top: 160px;
-    left: 100px;
-}
-
-.note-position-4 {
-    top: 155px;
-    left: 75px;
-}
-
-.animation-delay-1 {
-    animation-delay: 1s;
-}
-
-.animation-delay-2 {
-    animation-delay: 2s;
-}
-
-.note-amination {
-    position: absolute;
-    font-size: 25px;
-    animation-name: notes;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
+.appear {
+    transition: all 0.7s;
     opacity: 0;
+    transform: translateY(40px);
 }
 
-@keyframes notes {
-    0% {
-        font-size: 30px;
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        font-size: 60px;
-        margin-top: -150px;
-        margin-left: -200px;
-        opacity: 0;
-    }
+.appear.inview {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.2s;
 }
 
