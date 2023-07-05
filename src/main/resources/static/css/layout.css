@@ -117,3 +117,15 @@
 .gap-60 {
     gap: 60px;
 }
+
+.appear {
+    transition: all 0.7s;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.appear.inview {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.2s;
+}
