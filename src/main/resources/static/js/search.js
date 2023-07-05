@@ -121,9 +121,9 @@ import {buildLocationList} from "./mapbox-utils.js";
 
             //snap to position based on current position
             if (elmnt.offsetTop <= (window.innerHeight * .3)) {
-                elmnt.style.top = "4%";
-                sideBar.style.top = "4%";
-                zipForm.style.top = "4%";
+                elmnt.style.top = "14%";
+                sideBar.style.top = "14%";
+                zipForm.style.top = "14%";
             } else if (elmnt.offsetTop > (window.innerHeight * .3) && elmnt.offsetTop < (window.innerHeight * .65)) {
                 elmnt.style.top = "65%";
                 sideBar.style.top = "65%";
@@ -137,9 +137,9 @@ import {buildLocationList} from "./mapbox-utils.js";
 
     //close sidebar
     function closeSideBar() {
-        drag.style.top = ((((window.innerHeight - document.querySelector("footer").offsetHeight) - sideBar.children[0].offsetHeight) - document.querySelector(".navbar").offsetHeight) + 2) + "px";
-        sideBar.style.top = ((((window.innerHeight - document.querySelector("footer").offsetHeight) - sideBar.children[0].offsetHeight) - document.querySelector(".navbar").offsetHeight) + 2) + "px";
-        zipForm.style.top = ((((window.innerHeight - document.querySelector("footer").offsetHeight) - sideBar.children[0].offsetHeight) - document.querySelector(".navbar").offsetHeight) + 2) + "px";
+        drag.style.top = ((((window.innerHeight - document.querySelector("footer").offsetHeight) - sideBar.children[0].offsetHeight) - document.querySelector(".navbar").offsetHeight) + 80) + "px";
+        sideBar.style.top = ((((window.innerHeight - document.querySelector("footer").offsetHeight) - sideBar.children[0].offsetHeight) - document.querySelector(".navbar").offsetHeight) + 80) + "px";
+        zipForm.style.top = ((((window.innerHeight - document.querySelector("footer").offsetHeight) - sideBar.children[0].offsetHeight) - document.querySelector(".navbar").offsetHeight) + 80) + "px";
     }
 
     //set map to use initial data
