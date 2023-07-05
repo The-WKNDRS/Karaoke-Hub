@@ -21,20 +21,20 @@
                     <h1><span th:text="${user.getUsername()}"></span>'s profile</h1>
                     <form class="update-form" th:action="@{/profile/update}" th:object="${user}" th:method="post">
                         <div class="form-group">
-                            <label for="username">Username</label>
                             <input id="username" name="username" th:field="*{username}">
+                            <label for="username">Username</label>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
                             <input id="email" name="email" th:field="*{email}">
+                            <label for="email">Email</label>
                         </div>
                         <div class="form-group">
+                            <input id="password" name="password" type="password" placeholder=" " th:field="*{password}">
                             <label for="password">Password</label>
-                            <input id="password" name="password" type="password" placeholder="Password" th:field="*{password}">
                         </div>
                         <div class="form-group">
+                            <input id="confirmPassword" name="confirmPassword" type="password" placeholder=" ">
                             <label for="confirmPassword">Confirm Password</label>
-                            <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm Password">
                         </div>
                         <div class="form-group">
                             <input id="id" name="id" th:field="*{id}" type="hidden">

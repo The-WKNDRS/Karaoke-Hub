@@ -67,9 +67,11 @@ body {
 }
 
 .contact-info {
+    display: flex;
+    flex-direction: column;
     position: sticky;
     width: 400px;
-    top: 20px;
+    top: 85px;
     border: 1px solid rgba(255, 255, 255, 0.4);
     margin-top: 20px;
     border-radius: 10px;
@@ -258,10 +260,30 @@ hr {
 
 .form-group > label {
     position: absolute;
-    font-size: 13px;
-    top: 5px;
+    font-size: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    color: rgba(0, 0, 0, 0.4);
+    transition: all .3s ease;
+}
+
+.form-group > input:focus {
+    border: 1px solid orangered;
+}
+
+.form-group > input:focus ~ label {
+    transform: translateY(-24px);
     left: 5px;
     color: rgba(0, 0, 0, 0.6);
+    font-size: 13px;
+}
+
+.form-group > input:not(:placeholder-shown) ~ label {
+    transform: translateY(-24px);
+    left: 5px;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 13px;
 }
 
 .form-group select {

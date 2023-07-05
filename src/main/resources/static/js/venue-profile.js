@@ -31,6 +31,32 @@ const getDay = (day) => {
     }
 }
 
+const getDayClass = (day) => {
+    switch (day) {
+        case 0:
+            return "one"
+            break;
+        case 1:
+            return "two"
+            break;
+        case 2:
+            return "three"
+            break;
+        case 3:
+            return "four"
+            break;
+        case 4:
+            return "five"
+            break;
+        case 5:
+            return "six"
+            break;
+        case 6:
+            return "seven"
+            break;
+    }
+}
+
 async function searchVenue(query, zipcode) {
     try {
         let url = `${window.location.protocol}//${window.location.host}/yelp/${query}?location=${zipcode}`;
@@ -73,10 +99,11 @@ const getVenues = async (query, location) => {
         yelpPhone.innerText = business.display_phone;
     }
     let days = business.hours[0].open;
-    days.forEach(day => {
-        yelpDays.innerHTML += `<p>${getDay(day.day)}</p>`
-        yelpHours.innerHTML += `<p>${addColon(day.start)}   -   ${addColon(day.end)}</p>`
-    })
+    console.log(days[0].day)
+    for(let i = 0; i < days.length; i++) {
+        let el = document.querySelector(`.${getDayClass(days[i].day)}`);
+        el.innerHTML = `<p>${days[i].start} - ${days[i].end}</p>`
+    }
 
     if (business.photos.length < 1) {
         yelpImg.innerHTML = `<img class="yelp-img" src="/img/generic-karaoke.jpeg" alt="logo">
