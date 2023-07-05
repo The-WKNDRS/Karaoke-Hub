@@ -4,58 +4,61 @@
     --tertiary-color: #3B8A47;
 }
 
-.page-wrapper {
-
-}
-
 body {
-    font-family: AppleSystemUIFont, sans-serif;
+    background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(72,61,139,1) 100%);
 }
 
 .row {
+    align-items: center;
     height: 100%;
+    gap: 0;
+}
+
+.column {
+    height: 90%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 35px 45px;
+}
+
+.column.login {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+}
+
+.column.pic {
+    justify-content: end;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
 }
 
 .login-box {
     display: flex;
     flex-direction: column;
     align-items: start;
-    width: 60%;
+    justify-content: center;
     height: 100%;
-    margin-top: 30px;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-}
-
-.logo > h3 {
-    font-size: 40px;
-    color: darkslateblue;
-}
-
-.logo-img {
-    width: 40px;
-    height: 40px;
+    padding: 20px;
 }
 
 h1 {
-    font-size: 50px;
-    margin-top: 50px;
-    margin-bottom: 15px;
+    font-size: 45px;
+    margin-bottom: 35px;
+    color: white;
 }
 
 .login-message {
     position: absolute;
     z-index: 3;
-    top: 266px;
+    top: -40px;
+    left: 3px;
     font-size: 15px;
     color: var(--secondary-color);
     animation: fade-out 1s linear 3s 1 forwards;
 }
 
 .login-form {
+    position: relative;
     display: flex;
     flex-direction: column;
     row-gap: 20px;
@@ -92,10 +95,10 @@ input[type="submit"] {
     width: 310px;
     border: 1px solid black;
     border-radius: 8px;
-    background-color: darkslateblue;
+    background-color: rgba(72, 61, 139, 0.4);
     color: whitesmoke;
-    background-size: 400% 400%;
     transition: all ease .1s;
+    cursor: pointer;
 }
 
 input[type="submit"]:hover {
@@ -104,25 +107,26 @@ input[type="submit"]:hover {
 
 .account {
     margin-top: 15px;
+    color: white;
 }
 
 .account > a {
     color: dimgrey;
+    transition: all .2s ease;
 }
 
-.image-display {
-    height: 100%;
-    width: 100%;
+.account > a:hover {
+    color: orangered;
 }
+
 .karaoke-img {
-    height: 100%;
-    width: 600px
+    width: 450px;
 }
 
 .notes {
     position: absolute;
-    top: 0;
-    left: 57%;
+    top: 90px;
+    left: 59%;
     color: darkslateblue;
 }
 .note-position-1 {
@@ -184,5 +188,42 @@ input[type="submit"]:hover {
     }
     100% {
         opacity: 0;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .row {
+        flex-direction: column;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .column {
+        width: 80%;
+        height: 80%;
+        border-radius: 0;
+    }
+
+    .column.login {
+        border-top-right-radius: 30px;
+        border-top-left-radius: 30px;
+    }
+
+    .column.pic {
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+    }
+
+    .karaoke-img {
+        padding-top: 20px;
+        width: 350px;
+    }
+
+    .notes {
+        position: absolute;
+        top: 420px;
+        left: 20%;
+        color: darkslateblue;
+        pointer-events: none;
     }
 }

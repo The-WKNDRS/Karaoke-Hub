@@ -4,6 +4,8 @@ import com.karaokehub.karaokehub.repository.CommentRepository;
 import com.karaokehub.karaokehub.repository.EventRepository;
 import com.karaokehub.karaokehub.repository.UserRepository;
 import com.karaokehub.karaokehub.repository.VenueRepository;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +41,7 @@ public class VenueController {
     }
 
     @PostMapping("/create-venue")
-    public String createVenue(@ModelAttribute Venue venue) {
+    public String createVenue(@ModelAttribute Venue venue) throws Exception {
         venueDao.save(venue);
         return "redirect:venue/" + venue.getId();
     }
@@ -88,12 +90,19 @@ public class VenueController {
             case "Sunday" -> day = "Sun";
         }
         if (day == "") {
-            event.setDay_of_week(day);
+            day = event.getDay_of_week();
         }
+        event.setDay_of_week(day);
         event.setStart_time(start);
         event.setEnd_time(end);
         event.setDj(dj);
         eventDao.save(event);
+        return "redirect:/venue/" + id;
+    }
+
+    @RequestMapping("/venue/{id}/delete_event/{e_id}")
+    public String deleteEvent(@PathVariable long id, @PathVariable long e_id) {
+        eventDao.delete(eventDao.findById(e_id));
         return "redirect:/venue/" + id;
     }
 

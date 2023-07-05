@@ -1,8 +1,12 @@
-.page-wrapper {
-    animation: fade-in 2s linear;
-    overflow: hidden;
+body {
+    background: radial-gradient(circle at 100% 100%, rgb(0, 0, 0) 0%, rgba(72, 61, 139, 1) 100%) fixed;
+    color: white;
 }
 
+.page-wrapper {
+    overflow: hidden;
+    display: none;
+}
 
 .container {
     row-gap: 10px;
@@ -66,7 +70,7 @@
     position: sticky;
     width: 400px;
     top: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     margin-top: 20px;
     border-radius: 10px;
     padding-inline: 30px;
@@ -78,10 +82,11 @@
 .icon {
     width: 20px;
     cursor: pointer;
+    filter: invert(35%) sepia(0%) saturate(1752%) hue-rotate(169deg) brightness(100%) contrast(77%);
 }
 
 hr {
-    border: .5px solid rgba(0, 0, 0, 0.2);
+    border: .5px solid rgba(255, 255, 255, 0.4);
 }
 
 .business-hours {
@@ -109,6 +114,11 @@ hr {
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 }
+
+.edit:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
 .delete {
     position: absolute;
     top: 15px;
@@ -163,6 +173,8 @@ hr {
     width: 30px;
     display: inline;
     cursor: pointer;
+    filter: invert(35%) sepia(0%) saturate(1752%) hue-rotate(169deg) brightness(100%) contrast(77%);
+
 }
 
 .edit-icon:hover {
@@ -239,7 +251,7 @@ hr {
     margin: 30px 0 30px 0;
 }
 
-.forms-wrapper. {
+.forms-wrapper {
     display: none;
     flex-direction: column;
 }
@@ -312,10 +324,6 @@ hr {
     background-color: rgba(0,0, 0, 0.4);
     color: whitesmoke;
     transition: all ease .1s;
-}
-
-.edit-event-form .submit-edit:hover {
-    scale: 1.2;
 }
 
 .form-group {
@@ -395,9 +403,11 @@ hr {
     cursor: pointer;
     padding-right: 8px;
     transition: all .15s ease;
+    filter: invert(35%) sepia(0%) saturate(1752%) hue-rotate(169deg) brightness(100%) contrast(77%);
 }
 
 .helpful:hover {
+    filter: invert(19%) sepia(56%) saturate(4677%) hue-rotate(360deg) brightness(101%) contrast(94%);
     scale: 1.2;
 }
 
@@ -463,24 +473,16 @@ input[type="submit"]:hover {
     scale: 1.02;
 }
 
-@keyframes fade-in {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+.appear {
+    transition: all 0.7s;
+    opacity: 0;
+    transform: translateY(40px);
 }
 
-@keyframes showSinger {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-
+.appear.inview {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.2s;
 }
 
 @keyframes shake {

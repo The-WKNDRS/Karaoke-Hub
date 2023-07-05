@@ -53,6 +53,7 @@ async function getBusinessData(business_id) {
         console.log('Error:', error);
     }
 }
+
 const getVenues = async (query, location) => {
     let venues = await searchVenue(query, location);
     console.log(venues)
@@ -98,6 +99,8 @@ const getVenues = async (query, location) => {
     } else {
         yelpRating.innerHTML += "<h4 style='color: red'> - Closed</h4>"
     }
+    let pageWrapper = document.querySelector('.page-wrapper');
+    pageWrapper.style.display = 'flex';
 }
 
 
@@ -170,16 +173,20 @@ if (editIcons.length > 0) {
     await getVenues(yelpVal, yelpZipVal);
 })()
 
+
 // shows all comments and rotates arrow on button
 let seeAllBtn = document.querySelector('.see-all');
 let reviewWrapper = document.querySelector('.reviews-wrapper')
 let commentArrow = document.querySelector('.comment-arrow');
-seeAllBtn.onclick = () => {
-    reviewWrapper.classList.toggle('show')
-    reviewWrapper.classList.toggle('reviews-wrapper')
-    commentArrow.classList.toggle('show-less')
-    commentArrow.classList.toggle('comment-arrow')
+if (seeAllBtn) {
+    seeAllBtn.onclick = () => {
+        reviewWrapper.classList.toggle('show')
+        reviewWrapper.classList.toggle('reviews-wrapper')
+        commentArrow.classList.toggle('show-less')
+        commentArrow.classList.toggle('comment-arrow')
+    }
 }
+
 
 window.onclick = (e) => {
     console.log(e.target)
@@ -191,6 +198,17 @@ window.onclick = (e) => {
         eventModal.style.display = "none";
     }
 }
+
+const appear = document.querySelectorAll('.appear');
+const cb = function(entries){
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add('inview');
+        }
+    });
+}
+const io = new IntersectionObserver(cb);
+appear.forEach(el => io.observe(el));
 
 
 

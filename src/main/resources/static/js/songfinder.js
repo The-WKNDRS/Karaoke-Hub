@@ -4,6 +4,7 @@ const form = document.getElementById('song-finder-form');
 const songListContainer = document.querySelector('.song-list');
 const loadingScreen = document.getElementById('loading-screen');
 const songFinderContainer = document.querySelector('.song-finder-container');
+const instructionsContainer = document.querySelector('.instructions-container');
 const songResultsContainer = document.querySelector('.song-results-container');
 
 form.addEventListener('submit', handleSubmit);
@@ -24,6 +25,7 @@ function handleSubmit(event) {
 
     // Hide the song finder container
     songFinderContainer.style.display = 'none';
+    instructionsContainer.style.display = 'none';
 
     // Make a request to your server to fetch the API key
     fetch('/api/get-api-key')

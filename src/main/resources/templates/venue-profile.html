@@ -13,7 +13,7 @@
 <body>
 <div class="page-wrapper">
     <div th:insert="fragments/navbar.html :: navbar"></div>
-    <div class="row images">
+    <div class="row images appear">
         <div class="img-wrapper"></div>
         <div class="name-rating">
             <p th:text="${venue.name}" class="name"></p>
@@ -24,15 +24,15 @@
     <div class="container">
         <div class="row">
             <div class="column left">
-                <h3>Business hours</h3>
-                <div class="business-hours row justify-center">
+                <h3 class="appear">Business hours</h3>
+                <div class="business-hours row justify-center appear">
                     <div class="column shrink days">
 
                     </div>
                     <div class="column hours"></div>
                 </div>
-                <h3>Karaoke event hours</h3>
-                <div class="karaoke-hours">
+                <h3 class="appear">Karaoke event hours</h3>
+                <div class="karaoke-hours appear">
                     <div class="karaoke">
                         <div class="karaoke-event" th:each="event : ${events}">
                             <p class="karaoke-time"><span th:text="${event.day_of_week}"></span><span th:text="${event.start_time}"></span> - <span th:text="${ event.end_time}"></span></p>
@@ -40,9 +40,9 @@
                         </div>
                     </div>
                 </div>
-                <hr>
-                <h3 sec:authorize="isAuthenticated()">Leave a comment</h3>
-                <div class="leave-review" sec:authorize="isAuthenticated()">
+                <hr class="appear">
+                <h3 sec:authorize="isAuthenticated()" class="appear">Leave a comment</h3>
+                <div class="leave-review appear" sec:authorize="isAuthenticated()">
                     <form th:action="@{/venue/comment}" th:method="post">
                         <div class="form-group">
                             <label for="body"></label>
@@ -52,8 +52,8 @@
                         </div>
                     </form>
                 </div>
-                <h3>Comments</h3>
-                <div class="reviews-wrapper">
+                <h3 class="appear">Comments</h3>
+                <div class="reviews-wrapper appear">
                     <div th:if="${numComments} > 0" class="review" th:each="comment : ${comments}">
                         <div class="profile">
                             <h4>@<span th:text="${comment.user.getUsername()}"></span></h4>
@@ -74,12 +74,12 @@
                         <h4 sec:authorize="isAnonymous()">Login to comment</h4>
                     </div>
                 </div>
-                <div class="see-all">
+                <div sec:authorize="isAuthenticated()" th:if="${numComments} > 4" class="see-all appear">
                     <img class="comment-arrow" src="/img/arrow.png" alt="arrow">
                 </div>
             </div>
             <div class="column align-center">
-                <div class="contact-info column shrink">
+                <div class="contact-info column shrink appear">
                     <div class="row justify-space-between align-center">
                         <p th:if="${venue.website.isEmpty()}">No website available</p>
                         <a th:unless="${venue.website == true}" th:href="${venue.website}" target="_blank"><p th:text="${venue.website}" class="website"></p></a>
@@ -210,7 +210,7 @@
                     <label for="dj">Dj name</label>
                     <input id="dj-edit" name="dj" th:value="${event.dj}">
                 </div>
-                <input class="submit-edit" type="submit" value="Create Event">
+                <input class="submit-edit" type="submit" value="Edit Event">
             </form>
         </div>
     </div>

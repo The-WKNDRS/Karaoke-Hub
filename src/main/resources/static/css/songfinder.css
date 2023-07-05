@@ -1,21 +1,31 @@
+body {
+    background: radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 1) 0%, rgba(72, 61, 139, 1) 100%) fixed;
+}
+
+.page-wrapper {
+    overflow: hidden;
+}
+
+.container {
+    height: 100vh;
+}
+
 .instructions-row {
     display: flex;
     justify-content: center;
-    margin-top: 100px;
-    margin-bottom: 50px;
+    width: 70%;
+    border-radius: 30px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 25px 35px;
 }
 
 .instructions-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 60%;
-    background-color: #FFFFFF;
-    border: 8px solid #FF0000;
     border-radius: 10px;
     padding: 15px;
     font-size: 25px;
-    color: #000000;
+    color: white;
     animation: pulsate 5s infinite;
 }
 
@@ -29,16 +39,7 @@
 .song-finder-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border: 2px solid #e82711;
-    border-radius: 10px;
-    background-color: #e82711;
     padding: 30px;
-    margin-right: auto; /* Center the container on the left side of the page */
-    margin-left: auto;
-    max-width: 600px; /* Set a maximum width if desired */
 }
 
 .song-finder-results-container {
@@ -65,49 +66,46 @@
 }
 
 .song-finder-container form label {
-    margin-bottom: 10px;
+    margin-top: 10px;
     color: #f9f9f9;
     font-size: 25px;
 
 }
 
-.song-finder-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    border: 2px solid #e82711;
-    border-radius: 10px;
-    background-color: #e82711;
-    padding: 30px;
-    min-height: 300px; /* Adjust the minimum height as needed */
-}
-
 .song-finder-container form {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%; /* Adjust width as needed */
 }
 
-.song-finder-container form select,
-.song-finder-container form button {
-    margin-bottom: 15px;
-    border: 2px solid #6A0DAD;
-    border-radius: 5px;
-    padding: 10px;
-    width: 200px;
-    box-sizing: border-box; /* Include padding in width calculation */
+.song-finder-container form select {
+    width: 300px;
+    height: 50px;
+    font-size: 20px;
+    border: 1px solid black;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
 }
 
 .song-finder-container form button {
-    background-color: #6A0DAD;
-    color: #FFFFFF;
-    text-size: 25px;
-    animation: pulsate 2s infinite;
-    width: 100%; /* Make the button full width */
-    max-width: 200px; /* Set a maximum width if desired */
+    height: 40px;
+    width: 300px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    border-radius: 8px;
+    background-color: darkslateblue;
+    color: whitesmoke;
+    background-size: 400% 400%;
+    transition: all ease .1s;
+    animation: pulsate 1s infinite;
 }
+
+.song-finder-container form button:hover {
+    scale: 1.02;
+}
+
 
 .song-results-container {
     display: none;

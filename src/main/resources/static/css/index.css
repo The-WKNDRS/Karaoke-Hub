@@ -1,58 +1,174 @@
-.logo {
-    padding-top: 20px;
+body {
+    background: radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 1) 0%, rgba(72, 61, 139, 1) 100%) fixed;
 }
 
 .page-wrapper {
-    background-size: 110%;
-}
-.background-image-wrapper {
-    background-image: url(/static/img/singers2.png);
-    background-position: center;
+    overflow: hidden;
 }
 
-.index-button {
-    background-color: #2971C3;
+.intro {
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.intro h2{
+    font-size: 90px;
+    height: 400px;
+    width: 700px;
+    margin-top: 150px;
+    font-weight: bold;
+    overflow: visible;
     color: white;
-    border-radius: 10px;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    margin-right: 10px;
 }
 
-.logo > h3 {
-    font-size: 40px;
-    color: darkslateblue;
+.intro-img-wrapper {
+    position: relative;
+    height: 650px;
+    width: 650px;
+    margin-left: 50px;
 }
 
-.index-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.intro img {
+    position: absolute;
+    z-index: -1;
+    object-fit: contain;
+    width: auto;
+    height: 650px;
+}
+
+.chatgpt-wrapper {
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 25px 35px;
     padding: 20px;
+    border-radius: 20px;
 }
 
-.song-finder {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.chatgpt-wrapper h2 {
+    font-size: 30px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: .5px solid rgba(255, 255, 255, 0.4);
 }
 
-.song-finder-label {
+.chatgpt-img-wrapper p {
+    width: 350px;
+    font-size: 25px;
+}
+
+.chatgpt-img-wrapper img {
+    width: 120px;
+    aspect-ratio: 1;
+    filter: drop-shadow(.5px .5px .5px #FF0000);
+    animation: spin 25s linear infinite;
+}
+
+.chatgpt-btn {
+    width: 100px;
+    height: 30px;
+    margin-top: 17px;
+    background: orangered;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 15px 25px;
+    font-weight: bold;
+}
+
+.chatgpt-btn:hover {
+    scale: 1.05;
+}
+
+hr {
+    border: .5px solid rgba(255, 255, 255, 0.4);
+    margin: 30px 0;
+    width: 90%;
+}
+
+.row.card {
+    padding: 0;
+    gap: 0;
+}
+
+.cards {
+    font-size: 50px;
     color: white;
-    background-color: #FF0000; /* Replace with your desired background color */
-    padding: 10px;
 }
 
-.song-finder-button {
+.card {
+    padding: 20px;
     color: white;
-    background-color: #2971C3; /* Replace with your desired background color */
-    padding: 10px 20px;
-    border-radius: 10px;
-    text-decoration: none;
+}
+
+.column.left {
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.column.right {
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.card-header {
+    font-size: 30px;
+}
+
+.card-body .caption{
+    margin: 55px 0;
+    font-size: 20px;
+}
+
+.card-body .right {
+    text-align: end;
+}
+
+.card-body a {
+    color: white;
+    margin-right: 20px;
+    transition: all .2s ease;
+}
+
+.card-body a:hover {
+    color: #E52C0B;
+}
+
+.last {
+    margin-bottom: 100px;
+}
+
+.dark {
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.column.left, .column.right {
+    border: 1px solid black;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 35px 45px;
+
+}
+
+.img-wrapper img {
+    object-fit: contain;
+}
+
+.elbow {
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.martini, .camel {
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.appear {
+    transition: all 0.7s;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.appear.inview {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.2s;
 }
 
      /* CSS for the overlay and fading effect */
@@ -82,6 +198,16 @@
     100% {
         opacity: 0;
     }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+
 }
 
 .welcome-message {

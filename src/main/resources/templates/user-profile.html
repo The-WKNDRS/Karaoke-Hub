@@ -17,11 +17,7 @@
         <div class="row grow justify-space-between">
             <div class="column align-center">
                 <div class="register-box">
-                    <div class="logo">
-                        <img class="logo-img" th:src="@{/img/karaoke-icon.png}" alt="microphone">
-                        <h3>Karaoke Hub</h3>
-                    </div>
-                    <h1>Your <br>Profile</h1>
+                    <h1><span th:text="${user.getUsername()}"></span>'s profile</h1>
                     <form class="update-form" th:action="@{/profile/update}" th:object="${user}" th:method="post">
                         <div class="form-group">
                             <label for="username">Username</label>
