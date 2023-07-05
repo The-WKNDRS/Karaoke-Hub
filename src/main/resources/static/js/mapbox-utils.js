@@ -227,10 +227,9 @@ function changeMarkerColor(currentFeature) {
     }
 }
 
-export async function searchVenues(map, zipcodeInput, weekDay, zipValue) {
+export async function searchVenues(map, zipcodeInput, weekDay) {
     try {
-        weekDay = document.querySelector('#weekday').value;
-        zipValue = "";
+        let zipValue = "";
 
         if (zipcodeInput.value != null) {
             zipValue = zipcodeInput.value;
@@ -260,10 +259,16 @@ export async function searchVenues(map, zipcodeInput, weekDay, zipValue) {
                 zoom: 10
             });
         } else {
-            map.flyTo({
-                center: newCenter,
-                zoom: 10
-            });
+            if (geoVenues.features.length === 0) {
+                noVenues();
+                return;
+            } else {
+                newCenter = geoVenues.features[utils.randomNumber(0, geoVenues.features.length - 1)].geometry.coordinates;
+                map.flyTo({
+                    center: newCenter,
+                    zoom: 10
+                });
+            }
         }
         return geoVenues;
     } catch (error) {
