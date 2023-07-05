@@ -1,5 +1,5 @@
 body {
-    font-family: Poppins, sans-serif;
+    font-family: Monsterrat, sans-serif;
 }
 
 .column.left {
@@ -7,11 +7,24 @@ body {
 }
 
 .navbar {
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: darkslateblue;
     height: 65px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
+    box-shadow: rgba(0, 0, 0, 0.7) 0px -50px 36px -28px inset;
+}
+
+#menuToggle {
+    margin-right: 20px;
+}
+
+#menuToggle a {
+    font-size: 18px;
 }
 
 nav ul {
@@ -22,6 +35,16 @@ nav ul {
     margin-right: 30px;
     padding: 0;
     gap: 40px;
+}
+
+.find-karaoke {
+    position: relative;
+    background-color: #E52C0B;
+    padding: 7px 40px 7px 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    color: black;
+    cursor: pointer;
 }
 
 .logo-nav {
@@ -36,8 +59,16 @@ nav ul {
 }
 
 .logo-img-nav {
-    height: 50px;
-    width: 50px;
+    height: 45px;
+    width: 45px;
+}
+
+.logo-img-nav-small {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    height: 35px;
+    width: 35px;
 }
 
 nav ul li {
@@ -48,12 +79,16 @@ nav ul li {
 .home-link {
     color: #fff;
     text-decoration: none;
-    font-size: 44px;
+    font-size: 40px;
 }
 
 .navbar-links {
     text-decoration: none;
-    font-size: 22px;
+}
+
+.right-link {
+    font-size: 20px;
+    color: black;
 }
 
 .dropdown {
@@ -65,9 +100,13 @@ nav ul li {
     transform: translateX(-50%);
     display: none;
     background-color: darkslateblue;
-    min-width: 190px;
+    min-width: 170px;
     padding: 10px;
     border-radius: 5px;
+}
+
+.dropdown.find {
+    top: 45px;
 }
 
 nav ul li:hover .dropdown {
@@ -77,7 +116,6 @@ nav ul li:hover .dropdown {
 .dropdown input,
 .dropdown button {
     display: block;
-    margin-bottom: 25px;
 }
 
 .dropdown p {
@@ -125,10 +163,6 @@ nav ul li:hover .dropdown {
     margin-bottom: 10px;
 }
 
-.navbar {
-    background-color: #483C8A; /* Replace with your desired background color */
-}
-
 .form-entry {
     text-align: center; /* Center the elements horizontally */
     margin-bottom: 10px; /* Add space below the form entry */
@@ -163,7 +197,7 @@ nav ul li:hover .dropdown {
     transition: color 0.2s ease;
 }
 
-@media screen and (max-width: 930px) {
+@media screen and (max-width: 1100px) {
 
     #menuToggle {
         display: block;
@@ -228,7 +262,7 @@ nav ul li:hover .dropdown {
     nav ul {
         flex-direction: column;
         align-items: center;
-        left: 110px;
+        left: 123px;
         top: 146px;
         position: absolute;
         box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
@@ -277,6 +311,15 @@ nav ul li:hover .dropdown {
 
     .dropdown a {
         text-decoration: underline;
+    }
+
+    .logo-img-nav {
+        width: 45px;
+        height: 45px;
+    }
+
+    .home-link {
+        font-size: 40px;
     }
 
 }

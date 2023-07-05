@@ -1,5 +1,6 @@
 body {
-    font-family: AppleSystemUIFont, sans-serif;
+    background: radial-gradient(circle at 100% 100%, rgb(0, 0, 0) 0%, rgba(72, 61, 139, 1) 100%) fixed;
+    color: white;
 }
 
 .row {

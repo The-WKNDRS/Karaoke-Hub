@@ -3,6 +3,7 @@ package com.karaokehub.karaokehub.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,11 +20,9 @@ public class SecurityConfig implements WebMvcConfigurer {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
                 .requestMatchers( "create-venue", "user-profile", "profile", "profile/update", "contact", "contact-success", "song-finder").authenticated()
-                .requestMatchers("register", "login", "/", "index", "logout", "search", "browse-venues", "venue/**", "venue/comment/upvote", "yelp/**", "yelpBusiness/**", "api/**", "search-venue-json", "about", "delete-venue/**").permitAll()
+                .requestMatchers("register", "login", "/", "index", "search", "logout", "browse-venues", "venue/**", "venue/comment/upvote", "yelp/**", "yelpBusiness/**", "api/**", "search-venue-json", "about", "delete-venue/**", "/error").permitAll()
                 .requestMatchers("css/**", "js/**", "img/**").permitAll()
         );
-
-
 
         http.formLogin((form) -> form
                         .loginPage("/login")
@@ -38,6 +37,9 @@ public class SecurityConfig implements WebMvcConfigurer {
                         .permitAll()
         );
         http.httpBasic(withDefaults());
+        http.exceptionHandling((exception) -> exception
+                .accessDeniedPage("/error")
+        );
         return http.build();
     }
 
