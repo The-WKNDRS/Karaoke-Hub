@@ -40,6 +40,7 @@ nav ul {
 .find-karaoke {
     position: relative;
     background-color: #E52C0B;
+    box-shadow: rgba(0, 0, 0, 0.5) 0 5px 15px;
     padding: 7px 40px 7px 10px;
     border: 1px solid black;
     border-radius: 10px;

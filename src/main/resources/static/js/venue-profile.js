@@ -91,6 +91,8 @@ const getVenues = async (query, location) => {
     let yelpPhone = document.querySelector('.phone');
     let yelpDays = document.querySelector('.days');
     let yelpHours = document.querySelector('.hours');
+    let name = document.querySelector('.name');
+    name.innerHTML = `<h3>${business.name}</h3>`
     console.log(business)
     let el = document.createElement('div');
     if (business.display_phone === undefined) {
@@ -99,10 +101,14 @@ const getVenues = async (query, location) => {
         yelpPhone.innerText = business.display_phone;
     }
     let days = business.hours[0].open;
-    console.log(days[0].day)
-    for(let i = 0; i < days.length; i++) {
-        let el = document.querySelector(`.${getDayClass(days[i].day)}`);
-        el.innerHTML = `<p>${days[i].start} - ${days[i].end}</p>`
+    if (days) {
+        for(let i = 0; i < days.length; i++) {
+            let el = document.querySelector(`.${getDayClass(days[i].day)}`);
+            el.innerHTML = `<p>${days[i].start} - ${days[i].end}</p>`
+        }
+    } else {
+        let businessHours = document.querySelector('.business-hours');
+        businessHours.innerHTML = `<p>Hours not available</p>`
     }
 
     if (business.photos.length < 1) {
@@ -145,6 +151,7 @@ let editForm = document.querySelector('.edit-event-form');
 let formsWrapper = document.querySelector('.forms-wrapper');
 let karaoke = document.querySelector('.karaoke');
 let editIcons = document.querySelectorAll('.edit-icon');
+let deleteIcons = document.querySelectorAll('.delete-icon');
 let goBack = document.querySelector('.go-back');
 let x = document.querySelector('.x');
 let editSelect = document.querySelector('.day-select');
@@ -162,6 +169,9 @@ if (editBtn) {
     editEventBtn.onclick = () => {
             x.classList.toggle('hide');
             editIcons.forEach(icon => {
+                icon.classList.toggle('hide');
+            })
+            deleteIcons.forEach(icon => {
                 icon.classList.toggle('hide');
             })
             editEventBtn.classList.toggle('go-back')
