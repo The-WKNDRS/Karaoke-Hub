@@ -234,6 +234,7 @@ hr {
     animation: flicker 1s ease-in-out alternate infinite;
 }
 
+<<<<<<< HEAD
 @media screen and (max-width: 470px) {
 
     .row {
@@ -322,5 +323,15 @@ hr {
     .row.card {
         display: unset;
         margin-bottom: 70px;
+=======
+@media screen and (max-width: 390px) {
+    .welcome-message {
+        font-size: 30px; /* Adjust the font size as needed for smaller screens */
+        display: flex;
+        align-items: center;
+    }
+    .welcome-message-wrapper {
+        width: 75%;
+>>>>>>> b2ef6a11454dc9796efa88d8e64a14f848639e69
     }
 }
