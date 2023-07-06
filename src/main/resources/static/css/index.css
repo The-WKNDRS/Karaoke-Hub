@@ -235,7 +235,12 @@ hr {
 }
 
 @media screen and (max-width: 390px) {
-    .intro h2 {
-
+    .welcome-message {
+        font-size: 30px; /* Adjust the font size as needed for smaller screens */
+        display: flex;
+        align-items: center;
+    }
+    .welcome-message-wrapper {
+        width: 75%;
     }
 }

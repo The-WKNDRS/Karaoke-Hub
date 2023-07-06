@@ -84,6 +84,19 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
     flex-direction: column;
 }
 
+.location-pin{
+    background: url("../img/noun-map-marker-100770.svg") no-repeat;
+    background-size: contain;
+    left: 81%;
+    filter: brightness(0) saturate(100%) invert(20%) sepia(95%) saturate(2781%) hue-rotate(358deg) brightness(97%) contrast(96%);
+}
+
+.zip-pin {
+    background: url("../img/noun-pin-3434352.svg") no-repeat;
+    background-size: contain;
+    filter: brightness(0) saturate(100%) invert(20%) sepia(95%) saturate(2781%) hue-rotate(358deg) brightness(97%) contrast(96%);
+}
+
 .row.toggle {
     padding: unset;
     width: 169px;
@@ -257,6 +270,7 @@ input {
     background-image: url(../img/karaoke-icon.png);
     background-size: contain;
     transition: all .05s linear;
+    filter: drop-shadow(0 0 0.3rem white);
 }
 
 .marker.change {
@@ -318,7 +332,7 @@ input {
 
     .clear-wrapper {
         position: absolute;
-        left: 94%;
+        left: 107%;
         top: 38%;
         background-color: var(--main-color);
         border-radius: 9999px;
@@ -338,24 +352,12 @@ input {
 
     /*form toggle styles*/
 
-    .location-pin{
-        background: url("../img/noun-map-marker-100770.svg") no-repeat;
-        background-size: contain;
-        left: 81%;
-    }
-
     .image-wrapper {
         width: 30px;
         height: 40px;
         position: absolute;
         top: 15px;
     }
-
-    .zip-pin {
-        background: url("../img/noun-pin-3434352.svg") no-repeat;
-        background-size: contain;
-    }
-
 
     /*hides the checkbox*/
     #mic-checkbox {
@@ -393,22 +395,11 @@ input {
         width: 28%;
         position: absolute;
         left: 69%;
-        top: 15%;
+        top: -10%;
         align-items: center;
         justify-content: space-between;
     }
 
-
-    .location-pin{
-        background: url("../img/noun-map-marker-100770.svg") no-repeat;
-        background-size: contain;
-        left: 81%;
-    }
-
-    .zip-pin {
-        background: url("../img/noun-pin-3434352.svg") no-repeat;
-        background-size: contain;
-    }
     /*hides the checkbox*/
     #mic-checkbox {
         display:none;

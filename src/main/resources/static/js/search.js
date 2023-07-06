@@ -1,6 +1,5 @@
 import * as mapboxUtils from "./mapbox-utils.js";
 import * as utils from "./utils.js";
-import {buildLocationList} from "./mapbox-utils.js";
 
 (async () => {
     // Fetch the Mapbox API key from the server
@@ -43,7 +42,7 @@ import {buildLocationList} from "./mapbox-utils.js";
             type: 'geojson',
             data: geoVenues
         });
-        await mapboxUtils.buildLocationList(map, geoVenues);
+        await mapboxUtils.buildLocationList(map, geoVenues, center);
         getLocation(showPosition);
     });
 
@@ -64,7 +63,7 @@ import {buildLocationList} from "./mapbox-utils.js";
     async function distanceFromPosition(position) {
         currentLocationMarker(position);
         if (distance.value === "") {
-            await resetMap();
+            await mapboxUtils.resetMap(map, center, geoVenues);
         } else {
             let filteredVenues = {
                 "type": "FeatureCollection",
@@ -74,13 +73,13 @@ import {buildLocationList} from "./mapbox-utils.js";
                 filteredVenues.features = geoVenues.features.filter(function (venue) {
                     return turf.distance(turf.point(venue.geometry.coordinates), turf.point(center)) <= distance.value;
                 });
-            } else if (data.features.length > 0 && data.features.length < geoVenues.features.length) {
+            } else if (data.features.length > 0 && data.features.length <= geoVenues.features.length) {
                 filteredVenues.features = data.features.filter(function (venue) {
                     return turf.distance(turf.point(venue.geometry.coordinates), turf.point(center)) <= distance.value;
                 });
             }
             map.getSource('venues').setData(filteredVenues);
-            await mapboxUtils.buildLocationList(map, filteredVenues);
+            await mapboxUtils.buildLocationList(map, filteredVenues, center);
         }
     }
 
@@ -142,19 +141,13 @@ import {buildLocationList} from "./mapbox-utils.js";
         zipForm.style.top = ((((window.innerHeight - document.querySelector("footer").offsetHeight) - sideBar.children[0].offsetHeight) - document.querySelector(".navbar").offsetHeight) + 80) + "px";
     }
 
-    //set map to use initial data
-    async function resetMap() {
-        map.getSource('venues').setData(geoVenues);
-        await mapboxUtils.buildLocationList(map, geoVenues);
-    }
-
     //fetch filtered data
     async function filterData(map, zipcodeInput, weekDay) {
         if (clearButton.classList.contains('d-none')) {
             clearButton.classList.toggle('d-none');
         }
         data = await mapboxUtils.searchVenues(map, zipcodeInput, weekDay);
-        mapboxUtils.buildLocationList(map, data);
+        mapboxUtils.buildLocationList(map, data, center);
     }
 
     //current location marker
@@ -176,7 +169,7 @@ import {buildLocationList} from "./mapbox-utils.js";
         //if the form has all default values, don't submit
         if (zipcodeInput.value === "" && weekdayInput.value === "Any" && distance.value === "") {
             event.preventDefault();
-            await resetMap();
+            await mapboxUtils.resetMap(map, center, geoVenues);
         } else {
             await filterData(map, zipcodeInput, weekDay);
         }
@@ -193,6 +186,10 @@ import {buildLocationList} from "./mapbox-utils.js";
     weekdayInput.addEventListener('change', async function (event) {
         weekDay = weekdayInput.value;
         await filterData(map, zipcodeInput, weekDay);
+        if (!searchToggle.checked) {
+            console.log(data);
+            getLocation(distanceFromPosition);
+        }
     });
 
     distance.addEventListener('change', async function (event) {
@@ -205,18 +202,24 @@ import {buildLocationList} from "./mapbox-utils.js";
     //Event listener for zip/distance filter toggle
     searchToggle.addEventListener('click', async function (event) {
         if (searchToggle.checked) {
+            if (!clearButton.classList.contains('d-none')) {
+                clearButton.classList.toggle('d-none');
+            }
+            zipForm.reset();
+            await mapboxUtils.resetMap(map, center, geoVenues);
             zipWrapper.classList.remove('d-none');
             distanceWrapper.classList.add('d-none');
-            distance.value = "";
-            weekdayInput.value = "Any";
-            await mapboxUtils.buildLocationList(map, geoVenues);
+            await mapboxUtils.buildLocationList(map, geoVenues, center);
         } else {
+            if (!clearButton.classList.contains('d-none')) {
+                clearButton.classList.toggle('d-none');
+            }
+            zipForm.reset();
+            await mapboxUtils.resetMap(map, center, geoVenues);
             distanceWrapper.classList.remove('d-none');
             zipWrapper.classList.add('d-none');
-            zipcodeInput.value = "";
-            weekdayInput.value = "Any";
             data = undefined;
-            await mapboxUtils.buildLocationList(map, geoVenues);
+            await mapboxUtils.buildLocationList(map, geoVenues, center);
         }
     });
 
@@ -226,7 +229,10 @@ import {buildLocationList} from "./mapbox-utils.js";
         zipForm.reset();
 
         //reset the map
-        await resetMap();
+        await mapboxUtils.resetMap(map, center, geoVenues);
+
+        //reset the search toggle
+        searchToggle.checked = true;
 
         //remove the clear button
         clearButton.classList.toggle('d-none');
@@ -254,7 +260,6 @@ import {buildLocationList} from "./mapbox-utils.js";
         }
 
     });
-
 
 })();
 
