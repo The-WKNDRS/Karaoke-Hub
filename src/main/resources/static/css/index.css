@@ -234,8 +234,93 @@ hr {
     animation: flicker 1s ease-in-out alternate infinite;
 }
 
-@media screen and (max-width: 390px) {
-    .intro h2 {
+@media screen and (max-width: 470px) {
 
+    .row {
+        padding: 0;
+    }
+
+    .row.intro {
+        flex-direction: column;
+        align-items: center;
+        width: 100vw;
+        height: 750px;
+        margin-bottom: 0;
+        margin-top: 40px;
+    }
+
+    .gap-60 {
+        gap: 0;
+    }
+
+    .intro h2 {
+        width: 100%;
+        height: fit-content;
+        margin-top: 0;
+        font-size: 50px;
+        text-align: center;
+        padding: 0;
+        gap: 0;
+    }
+
+    .intro-img-wrapper {
+        top: -100px;
+        width: unset;
+        height: fit-content;
+        margin-left: 0;
+    }
+
+    .intro img {
+        position: unset;
+        top: -50px;
+    }
+
+    .chatgpt-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .chatgpt-wrapper h2 {
+        text-align: center;
+    }
+
+    .chatgpt-wrapper p {
+        width: 100%;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .chatgpt-img-wrapper {
+        flex-direction: column;
+    }
+
+    .cards {
+        font-size: 45px;
+        margin-bottom: 20px;
+    }
+
+    .column.left {
+        border-radius: 0;
+    }
+
+    .column.right {
+        border-radius: 0;
+    }
+
+    .camel {
+        border-radius: 0;
+    }
+    .elbow {
+        border-radius: 0;
+    }
+
+    .martini {
+        border-radius: 0;
+    }
+
+    .row.card {
+        display: unset;
+        margin-bottom: 70px;
     }
 }

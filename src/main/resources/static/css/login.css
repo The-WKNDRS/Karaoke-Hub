@@ -107,6 +107,13 @@ h1 {
     font-size: 13px;
 }
 
+.form-group > input:-webkit-autofill ~ label {
+    transform: translateY(-24px);
+    left: 5px;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 13px;
+}
+
 input[type="submit"] {
     height: 40px;
     width: 310px;
@@ -223,22 +230,20 @@ input[type="submit"]:hover {
 @media screen and (max-width: 768px){
     .row {
         flex-direction: column;
-        padding-top: 30px;
-        padding-bottom: 30px;
     }
 
     .column {
-        width: 80%;
+        width: 100%;
         height: 80%;
         border-radius: 0;
     }
 
     .column.login {
-        border-radius: 30px 30px 0 0;
+        border-radius: 0;
     }
 
     .column.pic {
-        border-radius: 0 0 30px 30px;
+        border-radius: 0;
     }
 
     .karaoke-img {
@@ -249,7 +254,7 @@ input[type="submit"]:hover {
     .notes {
         position: absolute;
         top: 420px;
-        left: 20%;
+        left: 15%;
         color: darkslateblue;
         pointer-events: none;
     }

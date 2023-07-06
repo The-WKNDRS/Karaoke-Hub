@@ -315,12 +315,12 @@ nav ul li:hover .dropdown {
     }
 
     .logo-img-nav {
-        width: 45px;
-        height: 45px;
+        width: 40px;
+        height: 40px;
     }
 
     .home-link {
-        font-size: 40px;
+        font-size: 35px;
     }
 
 }
