@@ -49,7 +49,7 @@ export const formatVenues = async function (zipValue, weekDay) {
                     address: venue.address,
                     city: venue.city,
                     state: venue.state,
-                    zip: venue.zip,
+                    zip: venue.zipcode,
                     events: venue.events
                 }
             };
@@ -75,7 +75,7 @@ export const formatVenues = async function (zipValue, weekDay) {
     }
 };
 
-export function addMarkers(map, geoVenues) {
+export function addMarkers(map, geoVenues, center) {
     clearMarkers();
     /* For each feature in the GeoJSON object above: */
     for (const marker of geoVenues.features) {
@@ -92,7 +92,7 @@ export function addMarkers(map, geoVenues) {
             /* Fly to the point */
             flyToVenue(map, marker);
             /* Close all other popups and display popup for clicked store */
-            createPopUp(map, marker);
+            createPopUp(map, marker, center);
             /* Highlight listing in sidebar */
             const activeItem = document.getElementsByClassName('active');
             e.stopPropagation();
@@ -105,12 +105,12 @@ export function addMarkers(map, geoVenues) {
     }
 }
 
-export function buildLocationList(map, geoVenues) {
+export function buildLocationList(map, geoVenues, center) {
     try {
         // Clear the listings
         listings.innerHTML = '';
         // Clear and add markers
-        addMarkers(map, geoVenues);
+        addMarkers(map, geoVenues, center);
         //Display the venues in the sidebar
         for (const venue of geoVenues.features) {
             /* Add a new listing section to the sidebar. */
@@ -202,7 +202,7 @@ export function noVenues() {
 
     /* Add the message */
     const noDetailsTitle = document.createElement('h3');
-    noDetailsTitle.innerHTML = 'No venues found for that zip code. Please try again.';
+    noDetailsTitle.innerHTML = 'No venues found. Please try again.';
     noVenues.appendChild(noDetailsTitle);
 }
 
@@ -220,15 +220,32 @@ function flyToVenue(map, currentFeature) {
     });
 }
 
-function createPopUp(map, currentFeature) {
+//set map to use initial data
+export async function resetMap(map, center, geoVenues) {
+    map.getSource('venues').setData(geoVenues);
+    await buildLocationList(map, geoVenues, center);
+    map.flyTo({
+        center: center,
+        zoom: 10
+    });
+}
+
+function createPopUp(map, currentFeature, center) {
     const popUps = document.getElementsByClassName('mapboxgl-popup');
     /** Check if there is already a popup on the map and if so, remove it */
     if (popUps[0]) popUps[0].remove();
 
-    const popup = new mapboxgl.Popup({ closeOnClick: false })
+    const popup = new mapboxgl.Popup({ closeOnClick: true })
         .setLngLat(currentFeature.geometry.coordinates)
         .setHTML(`<h3>${currentFeature.properties.name}</h3><h4>${currentFeature.properties.address}</h4><h5><a href="/venue/${currentFeature.properties.id}" class="popup-link">Go to venue page</a></h5>`)
         .addTo(map);
+
+    popup.on('close', function() {
+        map.flyTo({
+            center: center,
+            zoom: 10
+        });
+    });
 }
 
 function changeMarkerColor(currentFeature) {
