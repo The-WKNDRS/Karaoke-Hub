@@ -491,8 +491,9 @@ input[type="submit"]:hover {
 }
 
 .events {
-    position: sticky;
-    top: 350px;
+    display: flex;
+    justify-content: space-between;
+    width: 76%;
     margin-top: 30px;
 }
 
@@ -520,6 +521,10 @@ input[type="submit"]:hover {
     transition-delay: 0.2s;
 }
 
+textarea {
+    display: block;
+}
+
 @keyframes shake {
     0% {
         transform: rotate(0);
@@ -535,5 +540,38 @@ input[type="submit"]:hover {
     }
     100% {
         transform: rotate(0);
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .row.content {
+        flex-direction: column-reverse;
+    }
+
+    .column.left {
+        padding-left: 20px;
+    }
+
+    .contact-info {
+        width: 300px;
+    }
+
+    .events {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        width: 90%;
+    }
+
+    .events button {
+        width: 160px;
+    }
+
+    .edit {
+        width: 290px;
+    }
+
+    .name {
+        font-size: 30px;
     }
 }
