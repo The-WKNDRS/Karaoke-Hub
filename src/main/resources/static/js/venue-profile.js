@@ -95,13 +95,13 @@ const getVenues = async (query, location) => {
     name.innerHTML = `<h3>${business.name}</h3>`
     console.log(business)
     let el = document.createElement('div');
-    if (business.display_phone === undefined) {
+    if (business.hasOwnProperty('display_phone')) {
         yelpPhone.innerText = "No phone number available";
     } else {
         yelpPhone.innerText = business.display_phone;
     }
-    let days = business.hours[0].open;
-    if (days) {
+    if (business.hasOwnProperty('hours')) {
+        let days = business.hours[0].open;
         for(let i = 0; i < days.length; i++) {
             let el = document.querySelector(`.${getDayClass(days[i].day)}`);
             el.innerHTML = `<p>${days[i].start} - ${days[i].end}</p>`
@@ -111,15 +111,18 @@ const getVenues = async (query, location) => {
         businessHours.innerHTML = `<p>Hours not available</p>`
     }
 
-    if (business.photos.length < 1) {
-        yelpImg.innerHTML = `<img class="yelp-img" src="/img/generic-karaoke.jpeg" alt="logo">
+    if (business.hasOwnProperty('photos')) {
+        if (business.photos.length < 1) {
+            yelpImg.innerHTML = `<img class="yelp-img" src="/img/generic-karaoke.jpeg" alt="logo">
                              <img class="yelp-img" src="/img/generic-karaoke.jpeg" alt="logo">
                              <img class="yelp-img" src="/img/generic-karaoke.jpeg" alt="logo">`
-    } else {
-        business.photos.forEach(photo => {
-            yelpImg.innerHTML += `<img class="yelp-img" src=${photo} alt="logo">`
-        })
+        } else {
+            business.photos.forEach(photo => {
+                yelpImg.innerHTML += `<img class="yelp-img" src=${photo} alt="logo">`
+            })
+        }
     }
+
     for(let i = 1; i <= business.rating; i++) {
         yelpRating.innerHTML += `<img class="star" src="/img/star.png" alt="star">`
     }
@@ -206,7 +209,9 @@ if (editIcons.length > 0) {
     let yelpName = document.querySelector('.venueName');
     let yelpZip = document.querySelector('.venueZip');
     let yelpVal = yelpName.value;
+    console.log(yelpVal)
     let yelpZipVal = yelpZip.value;
+    console.log(yelpZipVal)
     await getVenues(yelpVal, yelpZipVal);
 })()
 
@@ -226,7 +231,6 @@ if (seeAllBtn) {
 
 
 window.onclick = (e) => {
-    console.log(e.target)
     if (e.target == editModal) {
         editModal.style.display = "none";
     } else if (e.target == createEventModal) {

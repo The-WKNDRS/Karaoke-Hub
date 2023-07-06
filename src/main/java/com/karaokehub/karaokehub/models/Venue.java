@@ -23,7 +23,7 @@ public class Venue {
     @Column(length = 4)
     private String state;
 
-    @Column(nullable = false, length = 6)
+    @Column(nullable = false, length = 8)
     private String zip_code;
 
     @Column(length = 100)
