@@ -203,13 +203,13 @@ ul.events-list li hr {
 }
 
 .filter-buttons button {
-    background-color: #E72711;
+    background-color: #241E44;
     color: white;
     border: none;
-    border-radius: 20px;
+    border-radius: 8px;
     padding: 10px 20px;
     font-size: 16px;
-    animation: pulse 1.5s ease-in-out infinite;
+    /*animation: pulse 1.5s ease-in-out infinite;*/
 }
 
 .notes {
