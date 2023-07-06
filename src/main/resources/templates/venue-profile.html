@@ -23,7 +23,7 @@
                 <ul class="categories"></ul>
             </div>
         </div>
-        <div class="row">
+        <div class="row content">
             <div class="column left">
                 <h3 class="appear">Business hours</h3>
                 <div class="business-hours row appear">
@@ -65,7 +65,7 @@
                     <form th:action="@{/venue/comment}" th:method="post">
                         <div class="form-group">
                             <label for="body"></label>
-                            <textarea cols="50" rows="3" name="body" id="body"></textarea>
+                            <textarea cols="40" rows="3" name="body" id="body"></textarea>
                             <button class="review-btn">Post comment</button>
                             <input type="hidden" th:value="${venue.id}" name="venue_id">
                         </div>
@@ -123,7 +123,7 @@
                         <img class="edit-img" src="/img/edit1.png">
                     </div>
                 </div>
-                <div sec:authorize="isAuthenticated()" class="events">
+                <div sec:authorize="isAuthenticated()" class="events appear">
                     <a class="create-event"><button>Create event</button></a>
                     <a><button class="edit-event">Edit events</button><img class="x hide" src="/img/x.png"></a>
                 </div>

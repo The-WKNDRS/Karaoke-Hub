@@ -44,14 +44,14 @@ img {
 }
 
 .contact-form-container button {
-    width: 84%;
-    padding: 10px;
-    background-color: #e82711;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 24px;
-    transition: all .2s ease;
+    height: 45px;
+    width: 86%;
+    border: 1px solid black;
+    border-radius: 8px;
+    background-color: rgba(72, 61, 139, 0.4);
+    color: whitesmoke;
+    transition: all ease .1s;
+    cursor: pointer;
 }
 
 .contact-form-container button:hover {
@@ -100,4 +100,23 @@ img {
     color: white;
     width: 400px;
     text-align: center;
+}
+
+@media screen and (max-width: 450px) {
+    .contact-form-container {
+        flex-direction: column;
+        width: 100%;
+        margin: 20px 0;
+        box-shadow: none;
+        border: none;
+    }
+
+    .right {
+        width: unset;
+    }
+
+    img {
+        height: 400px;
+    }
+
 }

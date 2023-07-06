@@ -1,13 +1,4 @@
-@keyframes transitionIn {
-    from {
-        opacity: 0;
-        transform: rotateX(-10deg);
-    }
-    to {
-        opacity: 1;
-        transform: rotateX(0);
-    }
-}
+
 
 .column {
     animation: transitionIn 0.75s;
@@ -253,16 +244,42 @@ h1 {
     color: darkslateblue;
 }
 
-@media (max-width: 768px) {
+.appear {
+    transition: all 0.7s;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.appear.inview {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.2s;
+}
+
+@media (max-width: 450px) {
     .container {
         display: flex;
         flex-direction: column;
         /*flex-wrap: wrap;*/
     }
+
+    .row {
+        padding: 0;
+    }
     .row.content, .row.grow.pics{
         flex-direction: column;
     }
+
+    .about {
+        text-align: center;
+    }
     .column {
         align-items: center;
+    }
+
+    .row.grow.pics {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
     }
 }
