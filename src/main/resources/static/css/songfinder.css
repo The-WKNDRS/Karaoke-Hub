@@ -34,7 +34,7 @@ body {
     z-index: 1;
     width: 70%;
     border-radius: 30px;
-    background: rgba(53, 45, 110, 0.6);
+    background: rgba(53, 45, 110, 0.7);
     box-shadow: rgba(0, 0, 0, 0.35) 0 25px 35px;
 }
 
@@ -276,14 +276,26 @@ body {
 }
 
 /* Media query for iPhones */
-@media only screen and (max-width: 375px) {
+@media screen and (max-width: 450px) {
     .container-group {
-        flex-direction: column-reverse;
         align-items: center;
     }
 
     .instructions-container {
         margin-bottom: 20px;
+    }
+
+    .instructions-container p {
+        font-size: 20px;
+        width: 90%;
+    }
+
+    .instructions-row {
+        width: 90%;
+    }
+
+    .song-finder-container {
+        padding-bottom: 10px;
     }
 }
 
