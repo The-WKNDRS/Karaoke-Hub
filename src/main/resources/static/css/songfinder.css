@@ -42,12 +42,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     border-radius: 10px;
     padding: 15px;
     font-size: 25px;
     color: white;
     animation: pulsate 5s infinite;
 }
+
 
 .song-finder-row {
     display: flex;
@@ -267,3 +269,22 @@ body {
         transform: rotate(405deg);
     }
 }
+
+.container-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Media query for iPhones */
+@media only screen and (max-width: 375px) {
+    .container-group {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .instructions-container {
+        margin-bottom: 20px;
+    }
+}
+
+
