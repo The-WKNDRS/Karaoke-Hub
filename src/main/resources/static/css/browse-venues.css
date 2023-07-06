@@ -203,8 +203,9 @@ ul.events-list li hr {
 }
 
 .filter-buttons button {
-    background-color: #241E44;
+    background-color: #363063;
     color: white;
+    outline: 1px solid #d2d2d2;
     border: none;
     border-radius: 8px;
     padding: 10px 20px;
