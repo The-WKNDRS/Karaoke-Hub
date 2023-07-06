@@ -323,7 +323,7 @@ hr {
         display: unset;
         margin-bottom: 70px;
     }
-@media screen and (max-width: 390px) {
+@media screen and (max-width: 450px) {
     .welcome-message {
         font-size: 30px; /* Adjust the font size as needed for smaller screens */
         display: flex;
