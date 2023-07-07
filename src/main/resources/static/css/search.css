@@ -539,6 +539,33 @@ input {
     }
 }
 
+@media only screen and (max-width: 390px) {
+    .search-form {
+        padding: 0 3vw;
+    }
+
+    .search-form-input {
+        width: 86px;
+    }
+    .image-wrapper {
+        width: 30px;
+        height: 30px;
+    }
+
+    input[type=checkbox]:checked + label .mic-head {
+        margin-left: calc(100% - 107px);
+    }
+    input[type=checkbox]:checked + label .mic-body {
+        margin-left: calc(100% - 141px);
+    }
+    .mic-head{
+        left: 35px;
+    }
+    .mic-body {
+        margin-left: 18px;
+    }
+}
+
 @keyframes shake {
     0% {
         rotate: 2deg;

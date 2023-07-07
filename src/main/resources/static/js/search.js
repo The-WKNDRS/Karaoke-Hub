@@ -89,7 +89,10 @@ import * as utils from "./utils.js";
     function dragElement(elmnt) {
         let pos1 = 0, pos2 = 0;
 
-        document.querySelector(".drag").onmousedown = dragMouseDown;
+        elmnt.addEventListener("mousedown", dragMouseDown);
+        elmnt.addEventListener("touchstart", dragMouseDown);
+        elmnt.addEventListener("touchmove", elementDrag);
+        elmnt.addEventListener("touchend", snapDragElement);
 
         function dragMouseDown(e) {
             e = e || window.event;
@@ -97,8 +100,10 @@ import * as utils from "./utils.js";
             // get the mouse cursor position at startup:
             pos2 = e.clientY;
             document.onmouseup = snapDragElement;
+            document.ontouchend = snapDragElement;
             // call a function whenever the cursor moves:
             document.onmousemove = elementDrag;
+            document.ontouchmove = elementDrag;
         }
 
         function elementDrag(e) {
@@ -117,6 +122,8 @@ import * as utils from "./utils.js";
             // stop moving when mouse button is released:
             document.onmouseup = null;
             document.onmousemove = null;
+            document.ontouchend = null;
+            document.ontouchmove = null;
 
             //snap to position based on current position
             if (elmnt.offsetTop <= (window.innerHeight * .3)) {
